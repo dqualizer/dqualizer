@@ -1,0 +1,36 @@
+[[section-quality-scenarios]]
+== Qualitätsanforderungen
+
+Dieses Kapitel enthält alle Qualitätsanforderungen als Qualitätsbaum mit Szenarien. Die wichtigsten wurden bereits in Abschnitt 1.2. beschrieben (Qualitätsziele).
+
+An dieser Stelle können auch Qualitätsanforderungen des dqualizer mit geringerer Priorität festhalten, die bei Nichterfüllung keine hohen Risiken verursachen.
+
+Motivation: Da Qualitätsanforderungenfootnote:[https://docs.arc42.org/section-10/] einen großen Einfluss auf Architekturentscheidungen haben werden, sollten Sie für jeden Stakeholder wissen, was für ihn wirklich wichtig, konkret und messbar ist.
+
+=== Qualitätsbaum
+
+Inhalt: Der Qualitätsbaum (wie in ATAM - Architecture Tradeoff Analysis Method - definiert) mit Qualitäts-/Bewertungsszenarien als Blätter.
+
+Motivation: Die Baumstruktur mit Prioritäten gibt einen Überblick über eine manchmal große Anzahl von Qualitätsanforderungen.
+
+Der Form nach ist ein Qualitätsbaum eine High-Level-Übersicht über die Qualitätsziele und -anforderungen:
+
+* Baumartige Verfeinerung des Begriffs "Qualität". Verwendung von "Qualität" oder "Nützlichkeit" als Wurzel
+* Eine Mindmap mit Qualitätskategorien als Hauptästen
+
+In jedem Fall sollte der Baum Links zu den Szenarien des hier folgenden Abschnitts enthalten.
+
+=== Qualitätsszenarien
+
+Inhalt: Konkretisierung der (manchmal vagen oder impliziten) Qualitätsanforderungen durch (Qualitäts-)Szenarien. Diese Szenarien beschreiben, was passieren soll, wenn ein Stimulus am System ankommt.
+
+Für Architekten sind zwei Arten von Szenarien wichtig:
+
+* Nutzungsszenarien (auch Anwendungsszenarien oder Use-Case-Szenarien genannt) beschreiben die Reaktion des Systems zur Laufzeit auf einen bestimmten Stimulus. Dazu gehören auch Szenarien, die die Effizienz oder Leistung des Systems beschreiben. Beispiel: Das System reagiert auf die Anfrage eines Benutzers innerhalb einer Sekunde.
+* Änderungsszenarien beschreiben eine Modifikation des Systems oder seiner unmittelbaren Umgebung. Beispiel: Zusätzliche Funktionalität wird implementiert oder die Anforderungen an ein Qualitätsmerkmal ändern sich.
+
+Die Motivation hierfür lässt sich dabei wie folgt beschreiben:  Szenarien machen Qualitätsanforderungen konkret und erlauben es, leichter zu messen oder zu entscheiden, ob sie erfüllt werden.
+
+Insbesondere wenn Sie Ihre Architektur mit Methoden wie ATAM bewerten wollen, müssen Sie Ihre Qualitätsziele (aus Abschnitt 1.2) bis auf eine Ebene von Szenarien präzisieren, die diskutiert und bewertet werden können.
+
+Form: Tabellarisch oder als Freitext.

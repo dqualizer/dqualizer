@@ -1,0 +1,128 @@
+[[section-introduction-and-goals]]
+==	Einführung und Ziele
+
+Dieses Kapitel ist unterteilt in eine kurze Beschreibung der Requirements im Abschnitt <<1.1. Aufgabenstellung (Requirements Overview)>>, sowie einer Aufzählung der relevantesten Qualitätsziele für die Architektur in <<1.2. Qualitätsziele (Quality goals)>>, deren Erreichung für die wichtigsten Stakeholder kritisch ist. Zuletzt erfolgt in <<1.3. Stakeholder>> eine Übersicht über die wichtigsten Stakeholder mit deren Erwartungen bezüglich der Architektur.
+
+=== 1.1. Aufgabenstellung (Requirements Overview)
+
+Um die Aufgabenstellung für dqualizer zu erläutern wird im Folgenden die Vorhabenskurzbeschreibungfootnote:[Dokument: "Domänenzentrierte Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme"] zitiert:
+
+"Das Forschungsvorhaben dqualizer [...] hat
+das Ziel, [die] Kluft zwischen der Fachlichkeit der Anwendungssysteme und den (technischen) Maßnahmen
+und Erkenntnissen der Qualitätssicherung durch einen domänenzentrierten Ansatz zu schließen.
+
+Hierzu sollen Möglichkeiten zur Modellierung und Überwachung von Belangen der Laufzeitqualität in Domain-driven Design basierte
+Techniken integriert werden. Aus fachlicher Perspektive lassen sich durch dqualizer automatisiert aussagekräftige Last- und Resilienztests erzeugen und interpretieren sowie die Verbindungen zum technischen Monitoring herstellen.
+
+Die entwickelten innovativen Konzepte sollen in einem Open-Source-Werkzeug umgesetzt
+und in Anbindung an existierende Werkzeuge verfügbar und nutzbar gemacht werden."
+
+User Stories als gelbe Zettel auf Miro: https://miro.com/app/board/uXjVP_qJ4rU=/
+
+=== 1.2. Qualitätsziele (Quality goals)
+
+Dieser Abschnitt erläutert die Qualitätsziele der Architektur des dqualizer Projektvorhabens.
+Das arc42 Template empfiehlt, an dieser Stelle die drei bis max. fünf wichtigsten Qualitätsziele für die Architektur zu listen, deren Erfüllung für die wichtigsten Stakeholder von größter Bedeutung ist.
+
+Qualitätsziele der Architektur sind dabei nicht mit den Projektzielen zu verwechseln oder gleichzusetzen. 
+
+In unserem Kontext ist die Unterscheidung in dqualizer als Projekt und als Werkzeug zu beachten. 
+
+* Das Projekt dqualizer zielt darauf, die zuvor motivierte Lücke zwischen Fachlichkeit und Technik durch
+einen innovativen Ansatz zur domänenzentrierten Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme
+zu schließen. 
+
+* Das dqualizer Werkzeug ist das softwaretechnische Ergebnisartefakt der Forschungsarbeit, welches unter einer Open-
+Source-Lizenz veröffentlicht wird. 
+
+Als Einsteig in die Architektur des dqualizer Werkzeuges dient die Abbildung 1b in der Vorhabenskurzbeschreibungfootnote:[Dokument: "Domänenzentrierte Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme"], welche die dqualizer-Architektur mit den dq-Teilkomponenten
+und die Anbindung existierender Laufzeitqualitätsanalysewerkzeuge darstellt.
+
+[cols="1,2" options="header"]
+|===
+|Qualitätsziel |Beschreibung
+
+|dq-Teilkomponenten als interagierende Subsysteme
+|Qualitätsziel 1 formuliert als Text
+
+|Anbindung existierender Laufzeitqualitätsanalysewerkzeuge
+|Qualitätsziel 2 formuliert als Text
+
+|Erweiterbarkeit 
+|Qualitätsziel 3 formuliert als Text
+
+|===
+
+Als Referenz für (weitere) denkbare Qualitätsziele bietet sich der ISO 25010 Standard an, welcher die folgenden Themen für Qualitätsziele nennt:
+
+* Functional Suitability
+* Performance Efficiency
+* Compatibility
+* Usability
+* Reliability
+* Security
+* Maintainability
+* Portability
+
+
+=== 1.3. Stakeholder
+
+//Kommentar: Assoziierte Anwendungs- und Transferpartner. Die DATEV eG und die VHV solutions GmbH.
+Es folgt eine Übersicht über die wichtigsten Stakeholder mit deren Erwartungen bezüglich der Architektur. Die Stakeholder sind dabei einem Workshop Miro Board.footnote:[https://miro.com/app/board/uXjVOAAmeeo=/] entnommen.
+
+
+Es erfolgt eine Übersicht über fachliche und (IT-) technische Stakeholder, sowie eine Beschreibung der jeweiligen Erwartungshaltung.
+
+Fachliche Stakeholder
+
+[cols="1,2" options="header"]
+|===
+|Rolle |Erwartungshaltung
+|Manager | Als Manager, möchte ich wissen
+
+a) welche Auswirkungen sich eine ändernde Kundenanzahl auf IT Ressourcen hat, um die Kosten besser abschätzen zu können.
+
+b) welche Auswirkungen technische Ausfälle auf fachliche Prozesse haben, um mögliche SLA Verletzungen abzuschätzen.
+
+c) wie ich IT Ressourcen einsparen kann, um mein System effizienter zu machen. d) wie viel mich einzelne Domänen (oder Prozesse) kosten.
+
+d) wie hoch die Kosten für die Verbesserung einer Qualitätseigenschaft wären, um die Qualität des Systems zu steigern.
+
+|Fach Product Owner | Als Fach Product Owner möchte ich
+
+a) mit wenig Aufwand die Qualitätsanforderungen des Fachexperten erfassen und bewerten.
+
+b) mit wenig Übersetzungsaufwand dem Fachexperten Auswirkungen von fachlichen Fragestellungen auf die IT Ressourcen kommunizieren.
+
+|Fachexperte | Als Fachexperte möchte ich
+
+a) Qualitätsanforderungen und -szenarien anhand meiner modellierten Prozesse definieren.
+
+b) Qualitätsanalysen anhand meiner modellierten Prozesse durchführen.
+
+c) immer einen Einblick in die historische Entwicklung bzw. dem aktuellen Zustand der Qualität meiner modellierten Prozesse haben.
+|===
+
+IT (-technische) Stakeholder
+
+[cols="1,2" options="header"]
+|===
+|Rolle |Erwartungshaltung
+| DevOps Fachkraft | Als DevOps Fachkraft bzw. DevOps'ler möchte ich
+
+a) prüfen, welche Auswirkung ein Ausfall von X% meiner Services auf die Endnutzer hat.
+
+b) wissen, wie ich mein System konfigurieren muss, um kostenoptimiert einen fehlerfreien Betrieb zu gewährleisten.
+
+c) wissen, ob mein System die zu erwartende Last aushält, um frühzeitig reagieren zu können.
+
+| Operations Fachkraft | Als Operations Fachkraft bzw. Operator möchte ich 100 % Funktionalität mit minimalem Ressourcenaufwand.
+| Development Fachkraft | Als Development Fachkraft bzw. Entwickler möchte ich wissen, bei welchen Code-Stellen es sich lohnt, sie zu optimieren, um meine Zeit sinnvoll einzusetzen.
+| Software Architekt | Als Software Architekt möchte ich
+
+a) die Ist-Architektur mit dem DDD-Modell (Soll) abgleichen.
+
+b) wissen welche Qualitätseigenschaft für meinen Service wichtig ist, um die passenden Resilienz-Mechanismen auswählen zu können.
+| Fachlicher Tester | Als fachlicher Tester möchte ich mit meinen Tests die User Stories des Fachbereiches abdecken.
+|===
+

@@ -1,0 +1,55 @@
+[[section-technical-risks]]
+== Risiken und technische Schulden
+
+
+Für den Inhalt empfiehlt das arc42 Template eine nach Priorität geordnete Liste der identifizierten technischen Risiken oder technischen Schulden.
+
+    "Risikomanagement ist Projektmanagement für Erwachsene" (Tim Lister, Atlantic Systems Guild.)
+
+Dies sollte Ihre Devise für die systematische Erkennung und Bewertung von Risiken und technischen Schulden in der Architektur sein, die von Managementbeteiligten (z.B. Projektmanagern, Produktverantwortlichen) als Teil der allgemeinen Risikoanalyse und Messplanung benötigt werden.
+
+Form nach arc42: Auflistung der Risiken und/oder technischen Schulden, wahrscheinlich einschließlich vorgeschlagener Maßnahmen zur Minimierung, Abschwächung oder Vermeidung von Risiken oder zur Verringerung technischer Schulden.
+
+Notiz: Evtl. lassen sich techn. Risiken aus dem Projektvorhaben ableiten. Angesprochen wird u.a. das Scheitern durch Komplexität der Aufgabe (hinsichtlich nicht eingehaltener Deadlines).
+
+//<insert list or table of known problems, risks or technical debt >
+
+// Table of known problems
+Bekannte Probleme
+
+[options="header"]
+|===
+|Bekannte Probleme | Beschreibung |Link zu Details
+
+|<Text> |<Text> |<Text>
+
+|<Text> |<Text> |<Text>
+
+|===
+
+// Table of known risks
+Bekannte Risiken
+
+[options="header"]
+|===
+|Bekannte Risiken | Beschreibung |Link zu Details
+
+|<Text> |<Text> |<Text>
+
+|<Text> |<Text> |<Text>
+
+|===
+
+// Table of known risks
+Technische Schulden
+
+[options="header"]
+|===
+|Technische Schulden | Beschreibung |Link zu Details
+
+|<Text> |<Text> |<Text>
+
+|<Text> |<Text> |<Text>
+
+|===
+

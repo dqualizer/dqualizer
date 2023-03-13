@@ -1,0 +1,49 @@
+[[section-glossary]]
+== Glossar
+
+[cols="e,2e" options="header"]
+|===
+|Begriff |Definition
+
+| Runtime Quality Analysis (RQA)
+| We refer to RQA as the general process of analyzing a software system to evaluate its runtime qualities, e.g., performance or resilience. The term does not imply how the RQA is specified (format) or executed.
+
+| Runtime Quality Analysis Test (RQA Test)
+| An RQA test is a concrete specification of an RQA, meaning that it contains all the information to be executed. It can either be described on the domain or technical levels, i.e., it subsumes the terms RQA definition and RQA configuration.
+
+| Runtime Quality Analysis Definition (RQA Definition)
+| The RQA definition is a dqualizer-specific term. The RQA definition is an RQA test described on the domain level in the dqualizer-specific format.
+
+| Runtime Quality Analysis Configuration (RQA Configuration)
+| The RQA configuration is a dqualizer-specific term. The RQA configuration is an RQA test described on the technical level in the dqualizer-specific format. It is the translation of an RQA definition. It can still be abstract and does not have to be tool-specific.
+
+| Runtime Quality Analysis Results (RQA Results)
+| The result of running an RQA, i.e., (technical) metrics and traces collected during monitoring or experiment execution.
+
+| Runtime Quality Analysis Domain Results (RQA Domain Results)
+| These RQA results have been post-processed and translated to the domain-level to answer a question by a domain expert associated with the RQA.
+
+| Domain-Architecture-Mapping (DAM)
+| Describes how DDD elements - e.g., actors, work objects, and activities - are mapped to (technical) architecture elements - e.g., servers and endpoints - and vice versa.
+
+| Domain Expert
+| Persons that are familiar with the business domain that is handled by the software system (under test), e.g., product owners and users,
+
+| Technical Expert
+| Persons that are familiar with the technical details of the software system (under test), e.g., architects and DevOps engineers.
+
+| DST File
+| A file format for Domain Stories exported from the state-of-the-art domain story modeler https://egon.io/.
+
+|Stress Testing
+|Stress testing exercises software at the maximum
+design load, as well as beyond it, with the goal
+of determining the behavioral limits, and to test
+defense mechanisms in critical systems. (vgl. SWEBOK-V3)
+
+|Technische Schulden
+| Der Begriff sei hier verstanden als die gebräuchliche Metapher für die möglichen Konsequenzen schlechter technischer Umsetzung von Software. Das Aufschieben von Maßnahmen zur Sicherung und Erhöhung technischer Qualität (sprich technische Schulden) in Softwareprojekten beschleunigt die Softwareentwicklung nicht, sondern verlangsamt und erschwert diese.
+
+|Begriff 3
+|<Definition-3>
+|===

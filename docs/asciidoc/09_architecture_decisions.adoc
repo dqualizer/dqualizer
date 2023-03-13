@@ -1,0 +1,81 @@
+[[section-design-decisions]]
+== Architekturentscheidungen
+
+Dieses Kapitel erläutert wichtige, kostspielige, groß angelegte oder riskante Architekturentscheidungen einschließlich der Begründungen. Mit "Entscheidungen" meinen wir die Auswahl einer Alternative auf der Grundlage bestimmter Kriterien.
+
+Das arc42 Template empfiehlt an dieser Stelle nach eigenem Ermessen zu entscheiden, ob eine Architekturentscheidung hier in diesem zentralen Abschnitt dokumentiert werden sollte oder ob Projektteilnehmer sie besser lokal dokumentieren (z.B. innerhalb der White-Box-Vorlage eines Bausteins). Redundante Texte sind weitestgehend zu vermeiden. Verweisen Sie auf Abschnitt 4, wo Sie bereits die wichtigsten Entscheidungen Ihrer Architektur festgehalten haben.
+
+Motivation: Die Stakeholder des Systems sollen Ihre Entscheidungen nachvollziehen und nachvollziehbar machen können.
+
+In der Form kann
+
+* eine ADR (Architecture Decision Record) für jede wichtige Entscheidung,
+* Liste oder Tabelle, geordnet nach Wichtigkeit und Konsequenzen oder
+* detaillierter in Form von separaten Abschnitten pro Entscheidung
+
+genutzt werden.
+
+Grundlage hierfür ist der Unterpunkt "ADR" in Miro.
+
+=== Entwurfsentscheidung No. 1
+
+Kontext: ContextMap von YML laden für MVP?
+
+Entscheidung:
+
+Status:
+
+Konsequenzen:
+
+=== Entwurfsentscheidung No. 2
+
+Kontext: Domain Story in DqDomainModeller bezieht sich immer auf einen Bounded Context
+
+Entscheidung:
+
+Status:
+
+Konsequenzen:
+
+=== Entwurfsentscheidung No. 3
+
+Kontext: Use CQRS, e.g. abhängig Microservice dqWorkbench und dqContextMap
+
+Entscheidung:
+
+Status:
+
+Konsequenzen:
+
+
+=== Entwurfsentscheidung No. 4
+
+Kontext: Dqedit adaptiert / transformiert, dass DST File Format auf Dqlang
+
+Entscheidung:
+
+Status:
+
+Konsequenzen:
+
+
+=== Entwurfsentscheidung No. 5
+
+Kontext: Wer triggert dqExec?
+
+Entscheidung:
+
+Status:
+
+Konsequenzen:
+
+
+=== Entwurfsentscheidung No. 6
+
+Kontext: DqMissionControl Backend hat eine Dqlang Published Language, die über die API exponiert wird.
+
+Entscheidung:
+
+Status:
+
+Konsequenzen:
