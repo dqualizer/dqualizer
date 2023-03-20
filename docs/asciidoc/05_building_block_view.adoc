@@ -1,11 +1,154 @@
 [[section-building-block-view]]
 == Bausteinsicht
 
-= Ebene 1
+= dqualizer
 
-Siehe Miro Board->Bausteinsicht Ebene 1 Iteration 2-> in PlantUML
+=== White Box Diagram
+image:../images/dqualizer-overview.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
-= Ebene 2
+= Komponenten
+
+== dqcockpit
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|Dqcockpit offers a (readonly) dashboard visualizing the results of executed RQAs and a management overview dashboard that displays the current system state based on automatically extracted analysis data which is translated to the domain level.
+
+| Wichtige ADRs
+|tbd
+
+|Qualitätsattribute
+|tbd
+
+|Fehlerverhalten
+|tbd
+
+|Deployment
+|tbd
+|===
+
+Diagramm:
+-
+
+== dqanalyzer
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqanalyzer component enables domain experts to specify and perform RQA without profound knowledge of the underlying technical infrastructure and analysis tools, e.g., by annotating elements in domain stories.
+The dqanalyzer does not necessarily provide the functionality to model a domain story. It starts with a provided domain story and its responsibility is in annotating the domain story with tests.
+
+| Wichtige ADRs
+|tbd
+
+|Qualitätsattribute
+|tbd
+
+|Fehlerverhalten
+|tbd
+
+|Deployment
+|tbd
+|===
+
+Diagramm:
+-
+
+== dqedit
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqedit component is the editor for the mapping necessary to translate domain questions / RQA definitions to technical RQA configurations. The editor can be used by domain and technical experts during DDD-based workshops, e.g., for event storming or DST, where the domain elements are identified and defined.
+
+| Wichtige ADRs
+|tbd
+
+|Qualitätsattribute
+|tbd
+
+|Fehlerverhalten
+|tbd
+
+|Deployment
+|tbd
+|===
+
+Diagramm:
+-
+
+== dqlang
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqlang is a collection of languages utilized by dqualizer e.g., the DST extension for domain-level RQA specification or the language for defining mappings in dqedit.
+
+| Wichtige ADRs
+|tbd
+
+|Qualitätsattribute
+|tbd
+
+|Fehlerverhalten
+|tbd
+
+|Deployment
+|tbd
+|===
+
+Diagramm:
+-
+
+== dqtranslator
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|Dqtranslator maps (domain) RQA definitions to technical RQA configurations that can be executed by dqexec. It also maps the technical results (metrics) back to the domain level, i.e., domain experts can understand the results.
+
+| Wichtige ADRs
+|tbd
+
+|Qualitätsattribute
+|tbd
+
+|Fehlerverhalten
+|tbd
+
+|Deployment
+|tbd
+|===
+
+Diagramm:
+-
+
+== dqexec
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqexec component executes the RQA configuration by utilizing state-of-the-art monitoring, load testing, and resilience testing tooling. The specification is received in a generic format and then mapped to the input models of the external analysis tooling. Besides delegating the RQA execution, dqexec is also responsible for choosing the most appropriate analysis tool, repeating tests to reach a certain accuracy, and enriching the tests with tool-specific default values.
+
+| Wichtige ADRs
+|tbd
+
+|Qualitätsattribute
+|tbd
+
+|Fehlerverhalten
+|tbd
+
+|Deployment
+|tbd
+|===
+
+Diagramm:
+-
+
+= THIS IS OLD
 
 Notizen von mbe:
 
