@@ -1,6 +1,212 @@
 [[section-design-decisions]]
 == Architekturentscheidungen
 
+We use component prefixes when ADRs are closely related to one component (dq##a##nalyzer, dq##c##ockpit, dq##ed##it, dq##t##ranslator, dq##l##ang, dq##ex##ec).
+
+[[c1]]
+=== C1: dqcockpit is read-only
+[cols="1h,3a"]
+|===
+| Status
+| Accepted
+
+| Context
+| We need to know whether dqcockpit does (interactively) modify the results to design the interfaces between dqcockpit and other components.
+
+| Decision
+| dqcockpit does not modify the results - at least not in a way that is relevant to other components. dqcockpit still allows to modify the layout / presentation of the results.
+
+| Consequences
+| The amount of external required functionality for dqcockpit is low resulting in a reduced coupling of the component. The drawback is that users have to create or modify a RQA to get new results
+
+| Alternatives
+| Users can modify the RQA results or the RQA in dqcockpit - we do not allow that since dqanalyzer is responsible for defining RQAs and the responsibilities of the components need to be separated.
+|===
+
+[[c2]]
+=== C2: dqcockpit polls results
+[cols="1h,3a"]
+|===
+| Status
+| Proposed
+
+| Context
+| The dqcockpit has to obtain the RQA results in some way. We need to know which component is responsible for updating the results in the cockpit.
+
+| Decision
+| The dqcockpit decides when to poll results.
+
+| Consequences
+| This requires a notification mechanism to publish the status of the analysis (more effort) or dqcockpit has to poll frequently (inefficient). However, other components (dqanalyzer) could be notified as well and poll the same results. Furthermore, the status could be interesting for other functionalities as well to keep the user posted on the current progress.
+
+| Alternatives
+| Another component dqexec / dqtranslator could directly send the results to the dqcockpit, although it could not be available. Furthermore, changes to the sender will be necessary if other components are interested in receiving the state / results which increases coupling.
+|===
+
+[[c3]]
+=== C3: results for dqcockpit are provided by dqtranslator
+[cols="1h,3a"]
+|===
+| Status
+| Proposed
+
+| Context
+| To model the overall architecture, the dependencies of the dq-components need to be defined. Dqcockpit has to get the results and it must be clear which component is responsible for translating the technical RQA results to the domain RQA results.
+
+| Decision
+| dqtranslator is the component that delivers the domain RQA results directly to dqcockpit (after being requested to do so).
+
+| Consequences
+| dqcockpit never speaks to dqexec so the coupling between these two components is low. However, there is probably more implementation overhead in dqtranslator.
+
+| Alternatives
+| dqexec could send the results directly to dqcockpit and dqcockpit could then use the dqtranslator to map them to the domain level. However, that would create more complex communication between several components leading to lower maintainability.
+|===
+
+[[a1]]
+=== A1: dqanalyzer does not necessarily provide functionality to model a domain story
+[cols="1h,3a"]
+|===
+| Status
+| Accepted
+
+| Context
+| The question is whether modeling domain stories is part of dqualizer. If yes, a key decision would be to develop an own modeler (big effort) or use an existing, established one (high dependency on that tool and its development). The second case is particularly relevant since there are not many DST modelers and the WPS modeler is hard to extend.
+
+| Decision
+| dqedit does not need to be able to model domain stories.
+
+| Consequences
+| Modifying domain stories is less convenient for the user since it has to be done in another tool. On the other hand, dqedit is easier to develop and maintain with a weaker dependency on the domain story modeller(s). In theory, dqedit could import different domain story description formats of different modelers.
+
+| Alternatives
+| Dqedit must be integrated in a domain story modeler. Modeling and annotating are usually two quite separate use cases (there is often no reason to change the domain story when defining an RQA). Thus, the usability in this rare use case can be neglected in favor of significantly reducing the implied constraints on the development of dqedit and probably lower usability in the core use cases.
+|===
+
+[[a2]]
+=== A2: dqanalyzer kann neben dqcockpit ebenfalls Ergebnisse anzeigen
+[cols="1h,3a"]
+|===
+| Status
+| Proposed
+
+| Context
+| The initial dqanalyzer created by Dominik shows the results of RQA inside of the dqanalyzer. The question is whether we want a clear separation of specifying RQA definitions and investigating the results.
+
+| Decision
+| dqedit can also show (partially) the same or different results but should keep it on a high level
+
+| Consequences
+| Seeing the results in the dqedit makes it easier for users to get an answer to their domain question since they have everything in one place. In particular, users can relate metrics to domain elements. However, additional care is necessary to not develop duplicated functionality in dqedit and dqcockpit.
+
+| Alternatives
+| dqcockpit could be the sole source for the RQA results. However, in Dominik's evaluation participants explicitly stated that they liked "to have everything in one place".
+|===
+
+[[a3]]
+=== A3: dqanalyzer kann Ergebnisse vom dqtranslator abrufen (analog zu dqcockpit)
+[cols="1h,3a"]
+|===
+| Status
+| Proposed
+
+| Context
+| The main component for investigating the RQA results is dqcockpit. Thus, we need to define where dqanalyzer gets the results from, i.e., whether the source is dqcockpit or another component.
+
+| Decision
+| dqedit can obtain results from dqtranslator similarly than dqcockpit
+
+| Consequences
+| dqtranslator is the central source of domain RQA results for the front-end components, keeping its cohesion high.
+
+| Alternatives
+| dqedit could obtain (reduced) results from dqexec or dqcockpit which would probably be more efficient but reduce maintainability. We do not want to maintain several ways of obtaining results.
+|===
+
+[[a4]]
+=== A4: RQA Definitionen werden in dqanalyzer persistiert
+[cols="1h,3a"]
+|===
+| Status
+| Proposed
+
+| Context
+| RQA definitions should be persisted, but not every component needs access to them.
+
+| Decision
+| dqanalyzer (internally) persists the RQA definitions.
+
+| Consequences
+| Other components can not get the RQA definitions without contacting dqanalyzer
+
+| Alternatives
+| There could be a global database but dqanalyzer (and other components) would have external dependencies with increased effort for maintaining and accessing the data. However, in theory, there is no need for other components to persist the RQA definitions since dquanalyzer provides them if necessary.
+|===
+
+[[l1]]
+=== L1: Schema Versioning is based on and performed by Git(Hub)
+[cols="1h,3a"]
+|===
+| Status
+| Proposed
+
+| Context
+| Schemas for the mapping, RQA definitions, etc. ... can change and should have a version to be compatible with one another and with the models.
+
+| Decision
+| We use the functionality provided by Git(Hub) that is actually designed for file versioning.
+
+| Consequences
+| The effort for providing versioning functionality is significantly reduced. However, implementation is also restricted to the provided functionality by Git(Hub).
+
+| Alternatives
+| Own implementation, but versioning is not one of our key functionalities and competencies.
+|===
+
+[[l2]]
+=== L2:  Different dqlang schemas can use different meta models
+[cols="1h,3a"]
+|===
+| Status
+| Proposed
+
+| Context
+| Do the existing dqlang schemas have to be unified? In the future, this would require different dqualizer members have to learn the use of this meta model.
+
+| Decision
+| The dqlang schemas can be defined using different meta models
+
+| Consequences
+| This makes it easier for dqualizer members to use the techniques they are familiar with. Furthermore, the used meta model is (ideally) always the most suitable for the schema. The drawback is potentially low compatibility between the different schemata.
+
+| Alternatives
+| Every dqualizer member uses the same meta model. We do not want to enforce that - everyone should use his/her expertize best.
+|===
+
+=== ADR Template
+
+=== Temp1: A brief and descriptive title for the decision.
+[cols="1h,3a"]
+|===
+| Status
+| What is the status, such as proposed, accepted, rejected, deprecated, superseded, etc.?
+
+| Context
+| What is the issue that we're seeing that is motivating this decision?
+
+| Decision
+| What is the decision that we're proposing and/or doing?
+
+| Consequences
+| What becomes easier or more difficult to do because of this decision?
+
+| Alternatives
+| What are alternative options considered, along with the reasons they were not selected?
+|===
+
+
+=== OLD
+
 Dieses Kapitel erläutert wichtige, kostspielige, groß angelegte oder riskante Architekturentscheidungen einschließlich der Begründungen. Mit "Entscheidungen" meinen wir die Auswahl einer Alternative auf der Grundlage bestimmter Kriterien.
 
 Das arc42 Template empfiehlt an dieser Stelle nach eigenem Ermessen zu entscheiden, ob eine Architekturentscheidung hier in diesem zentralen Abschnitt dokumentiert werden sollte oder ob Projektteilnehmer sie besser lokal dokumentieren (z.B. innerhalb der White-Box-Vorlage eines Bausteins). Redundante Texte sind weitestgehend zu vermeiden. Verweisen Sie auf Abschnitt 4, wo Sie bereits die wichtigsten Entscheidungen Ihrer Architektur festgehalten haben.
