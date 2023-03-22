@@ -1,6 +1,27 @@
 [[section-runtime-view]]
 == Laufzeitsicht
 
+=== _Define and Execute RQA_
+image:../images/runtime-execute-RQA-configuration.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+* Annahmen:
+** Eine Domain Story-File ist vorhanden
+** D-A-Mapping ist vorhanden
+
+
+=== _Collect and Show Results_
+image:../images/runtime-collect-and-show-results.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+* Annahmen:
+** RQA Test ist durchgelaufen
+** D-A-Mapping ist vorhanden
+
+
+
+=== OLD
+
 Die Laufzeitsicht beschreibt das konkrete Verhalten und die Interaktionen der Systembausteine in Form von Szenarien aus den folgenden Bereichen:
 
    * wichtige Anwendungsfälle oder Funktionen: wie werden sie von den Bausteinen ausgeführt?
