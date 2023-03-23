@@ -8,8 +8,9 @@ A more detailed description of this component's architecture is provided in the 
 
 
 ## How to use the Antora Docs
-The official docs is triggered and build by a GitHub action, just push to this branch, and it gets updated.
 
-The [antora-playbook.yml](./antora-playbook.yml) is using the documentation which is uploaded in our Repos
+For using a local directory you need to clone the repo with the documentation locally into the [local-repos](./local-repos) folder and edit the [antora-local-playbook.yml](antora-local-playbook.yml) like in the example
 
-For using a local directory 
+
+If you finished development add the repo url and the branch, if needed default is main, to the [antora-playbook.yml](antora-playbook.yml) and push to the docs branch of the dqualizer main repo
+
