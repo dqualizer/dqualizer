@@ -3,6 +3,7 @@ on:
   push:
     branches: 
       - "docs"
+      - "main"
     
 jobs:
   build:
