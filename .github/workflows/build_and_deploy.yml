@@ -17,8 +17,6 @@ jobs:
       run: npm i antora @antora/lunr-extension
     - name: Generate Site
       run: npx antora antora-playbook.yml
-    - name: rename folder
-      run: mv build/site
       
   deploy:
       # Add a dependency to the build job
