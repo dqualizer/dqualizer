@@ -21,6 +21,8 @@ jobs:
       run: npm i antora @antora/lunr-extension
     - name: Generate Site
       run: npx antora antora-playbook.yml
+    - name: list dirs
+      run: ls -la || ls -la build/
       
   deploy:
       # Add a dependency to the build job
