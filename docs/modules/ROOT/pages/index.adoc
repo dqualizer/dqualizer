@@ -22,7 +22,7 @@ ifdef::backend-html5[]
 ++++
 endif::backend-html5[]
 
-// configure DE settings for asciidoc
+// configure DE settings for pages
 include::./config.adoc[]
 
 
