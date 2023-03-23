@@ -1,7 +1,7 @@
 name: Publish to GitHub Pages with Lunr Search Extension
 on:
   push:
-    branches: [main]
+    branches: [docs]
     
 jobs:
   build:
@@ -9,8 +9,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with: 
-        ref: docu
+      with:
+        ref: docs
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
