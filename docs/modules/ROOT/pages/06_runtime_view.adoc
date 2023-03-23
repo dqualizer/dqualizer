@@ -2,7 +2,7 @@
 == Laufzeitsicht
 
 === _Define and Execute RQA_
-image:../images/runtime-execute-RQA-configuration.jpg[]
+image:runtime-execute-RQA-configuration.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 * Annahmen:
@@ -11,7 +11,7 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 
 
 === _Collect and Show Results_
-image:../images/runtime-collect-and-show-results.jpg[]
+image:runtime-collect-and-show-results.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 * Annahmen:

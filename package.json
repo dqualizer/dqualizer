@@ -1,0 +1,14 @@
+{
+  "name": "antora-doc",
+  "version": "0.1.0",
+  "private": false,
+  "dependencies": {
+    "@antora/cli": "3.1.2",
+    "@antora/site-generator": "3.1.2"
+  },
+  "scripts": {
+    "build": "npx antora antora-playbook.yml",
+    "build local": "npx antora antora-local-playbook.yml",
+    "preview": "npx antora antora-playbook.yml && http-server build/site -c-1"
+  }
+}

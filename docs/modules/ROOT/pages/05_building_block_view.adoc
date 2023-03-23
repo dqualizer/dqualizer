@@ -4,7 +4,7 @@
 === dqualizer
 
 ==== White Box Diagram
-image:../images/dqualizer-overview.jpg[]
+image:dqualizer-overview.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 === dqualizer Komponenten
@@ -48,7 +48,7 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 |===
 
 Diagramm:
-image:../images/dqcockpit-black-box.jpg[]
+image:dqcockpit-black-box.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 ==== dqanalyzer
@@ -84,7 +84,7 @@ The dqanalyzer does not necessarily provide the functionality to model a domain 
 |===
 
 Diagramm:
-image:../images/dqanalyzer-black-box.jpg[]
+image:dqanalyzer-black-box.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 ==== dqedit
@@ -118,7 +118,7 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 |===
 
 Diagramm:
-image:../images/dqedit-black-box.jpg[]
+image:dqedit-black-box.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 ==== dqlang
@@ -152,7 +152,7 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 |===
 
 Diagramm:
-image:../images/dqlang-black-box.jpg[]
+image:dqlang-black-box.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 ==== dqtranslator
@@ -186,7 +186,7 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 |===
 
 Diagramm:
-image:../images/dqtranslator-black-box.jpg[]
+image:dqtranslator-black-box.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 ==== dqexec
@@ -219,7 +219,7 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 |===
 
 Diagramm:
-image:../images/dqexec-black-box.jpg[]
+image:dqexec-black-box.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
 ==== Weitere Building Blocks
