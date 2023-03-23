@@ -1,3 +1,6 @@
 # Hello World
 
 TODO write a landingpage
+
+
+The https://dqualizer.github.io/dqlang/[DQlang] Docu can you find here
