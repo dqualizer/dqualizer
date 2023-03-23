@@ -16,6 +16,6 @@ For using a local directory you need to clone the repo with the documentation lo
 the [local-repos](./local-repos) folder and edit the [antora-local-playbook.yml](antora-local-playbook.yml) like in the
 example
 
-If you finished development add the repo url and the branch, if needed default is main, to
+If you finished development, push the docs into the corresponding repo and add the url and the branch, if needed default is main, to
 the [antora-playbook.yml](antora-playbook.yml) and push to the docs branch of the dqualizer main repo
 
