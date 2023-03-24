@@ -8,7 +8,11 @@ content:
     #url = path to the main dir of the repo
     - url: ./local-repos/dqualizer
       branches: docs
-      #start_path in which folder you can find the antora.yml (only for one repo...)
+      #start_path in which folder you can find the antora.yml (for each repo...)
+      start_path: docs
+    # just an example on how to do it, doc does not exist! :)
+    - url: ./local-repos/dqlang
+      branches: docs
       start_path: docs
 ui:
   bundle:
