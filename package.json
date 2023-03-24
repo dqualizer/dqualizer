@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "npx antora antora-playbook.yml",
-    "build local": "npx antora antora-local-playbook.yml",
+    "build locally": "npx antora antora-local-playbook.yml",
     "preview": "npx antora antora-playbook.yml && http-server build/site -c-1"
   }
 }
