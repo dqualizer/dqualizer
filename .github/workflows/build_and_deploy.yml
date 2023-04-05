@@ -3,8 +3,12 @@ on:
   push:
     branches: [ docs ]
 jobs:
-  build-docu:
+  build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docu-stuff/
+        
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -14,10 +18,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - name: npm install
+        run: npm i
       - name: Install Antora and the Antora Lunr Extension
         run: npm i antora @antora/lunr-extension
       - name: Bundle-UI
-        run: npm build-ui
+        run: gulp
       - name: Generate Site
         run: npx antora antora-playbook.yml
       - name: Upload GitHub Pages artifact
