@@ -5,6 +5,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docu-stuff/
+        
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -14,8 +18,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: goto Directory
-        run: cd docu-stuff/
       - name: npm install
         run: npm i
       - name: Install Antora and the Antora Lunr Extension
