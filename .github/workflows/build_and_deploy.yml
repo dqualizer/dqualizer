@@ -18,6 +18,8 @@ jobs:
         run: cd docu-stuff/
       - name: Install Antora and the Antora Lunr Extension
         run: npm i antora @antora/lunr-extension
+      - name: Install gulp
+        run: npm i -g gulp-cli
       - name: Bundle-UI
         run: npm build-ui
       - name: Generate Site
