@@ -16,6 +16,8 @@ jobs:
           node-version: '16'
       - name: goto Directory
         run: cd docu-stuff/
+      - name: npm install
+        run: npm i
       - name: Install Antora and the Antora Lunr Extension
         run: npm i antora @antora/lunr-extension
       - name: Bundle-UI
