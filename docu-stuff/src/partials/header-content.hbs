@@ -1,0 +1,44 @@
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="{{{or site.url siteRootPath}}}">{{site.title}}</a>
+      {{#if env.SITE_SEARCH_PROVIDER}}
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs"{{#if page.home}} autofocus{{/if}}>
+          </div>
+        </div>
+      {{/if}}
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqualizer-main/1/landingpage.html">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">dqualizer components</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqanalyzer/1/">dqanalyzer</a>
+            <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqcockpit/1/">dqcockpit</a>
+            <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqedit/1/">dqedit</a>
+            <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqtranslator/1/">dqtranslator</a>
+            <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqexec/1/">dqexec</a>
+            <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqlang/1/">dqlang</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Papers</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">link me</a>
+            <a class="navbar-item" href="#">link me</a>
+            <a class="navbar-item" href="#">link me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
