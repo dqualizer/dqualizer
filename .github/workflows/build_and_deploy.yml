@@ -21,7 +21,7 @@ jobs:
       - name: Install gulp
         run: npm i -g gulp-cli
       - name: Bundle-UI
-        run: npm build-ui
+        run: gulp bundle
       - name: Generate Site
         run: npx antora antora-playbook.yml
       - name: Upload GitHub Pages artifact
