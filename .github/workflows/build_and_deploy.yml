@@ -1,9 +1,9 @@
 name: Publish to GitHub Pages with Lunr Search Extension
 on:
   push:
-    branches: [docs]
+    branches: [ docs ]
 jobs:
-  build:
+  build-docu:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -16,12 +16,14 @@ jobs:
           node-version: '16'
       - name: Install Antora and the Antora Lunr Extension
         run: npm i antora @antora/lunr-extension
+      - name: Bundle-UI
+        run: npm build-ui
       - name: Generate Site
         run: npx antora antora-playbook.yml
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.7
         with:
-          path:  build/site/
+          path: build/site/
 
   # Deploy job
   deploy:
