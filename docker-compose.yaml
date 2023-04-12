@@ -1,0 +1,100 @@
+version: "3.9"
+services:
+  ddd-autohaus:
+    image: maeddes/dqsamples-ddd-autohaus
+    ports:
+      - "9000:9000"
+
+  #Translator
+  modeler-mock:
+    image: maeddes/dqanalyzer-modeler 
+    ports:
+      - "8070:8070"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+      - MODELING_FILE=modeling-werkstatt.json
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      loadtest-translator:
+        condition: service_started
+      ddd-autohaus:
+        condition: service_started
+
+  loadtest-translator:
+    image: maeddes/dqtranslator
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+    depends_on:
+      rabbit:
+        condition: service_healthy
+
+  k6-adapter:
+    image: maeddes/dqexec-k6-adapter
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+    depends_on:
+      rabbit:
+        condition: service_healthy
+
+  config-runner:
+    image: maeddes/dqexec-k6-configuration-runner
+    volumes:
+      - ./docker-output/logging:/app/poc/logging
+      - ./docker-output/scripts:/app/poc/scripts
+      - ./docker-config/grafana/my-dashboards:/docker-config/grafana/my-dashboards
+    ports:
+      - "9010:9010"
+    env_file:
+      - ./env/.env
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+      - INFLUX_HOST=influxdb
+      - API_HOST=ddd-autohaus
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      influxdb:
+        condition: service_started
+      ddd-autohaus:
+        condition: service_started
+
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 2s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+  influxdb:
+    image: influxdb:latest
+    container_name: "thesis-influx"
+    ports:
+      - "8086:8086"
+    env_file:
+      - ./env/.env
+
+  grafana:
+    image: maeddes/dqcockpit-grafana
+    volumes:
+      - ./docker-config/grafana/provisioning:/usr/share/grafana/custom/
+      - ./docker-config/grafana/my-dashboards:/usr/share/grafana/public/dashboards
+    ports:
+      - "3030:3000"
+    env_file:
+      - ./env/.env
+    environment:
+      - GF_PANELS_DISABLE_SANITIZE_HTML=TRUE
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_PATHS_PROVISIONING=/usr/share/grafana/custom/
+    depends_on:
+      - influxdb
