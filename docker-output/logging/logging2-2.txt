@@ -1,0 +1,104 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: app/poc/scripts/createdScript2.js
+     output: InfluxDBv2 (http://influxdb:8086)
+
+  scenarios: (100.00%) 1 scenario, 90 max VUs, 50s max duration (incl. graceful stop):
+           * scenario: Up to 90 looping VUs for 20s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (00.9s), 01/90 VUs, 0 complete and 0 interrupted iterations
+scenario   [   5% ] 01/90 VUs  00.9s/20.0s
+
+running (01.9s), 03/90 VUs, 0 complete and 0 interrupted iterations
+scenario   [  10% ] 03/90 VUs  01.9s/20.0s
+
+running (02.9s), 05/90 VUs, 1 complete and 0 interrupted iterations
+scenario   [  15% ] 05/90 VUs  02.9s/20.0s
+
+running (03.9s), 07/90 VUs, 3 complete and 0 interrupted iterations
+scenario   [  20% ] 07/90 VUs  03.9s/20.0s
+
+running (04.9s), 09/90 VUs, 6 complete and 0 interrupted iterations
+scenario   [  25% ] 09/90 VUs  04.9s/20.0s
+
+running (05.9s), 15/90 VUs, 10 complete and 0 interrupted iterations
+scenario   [  30% ] 15/90 VUs  05.9s/20.0s
+
+running (06.9s), 21/90 VUs, 15 complete and 0 interrupted iterations
+scenario   [  35% ] 21/90 VUs  06.9s/20.0s
+
+running (07.9s), 27/90 VUs, 25 complete and 0 interrupted iterations
+scenario   [  40% ] 27/90 VUs  07.9s/20.0s
+
+running (08.9s), 33/90 VUs, 36 complete and 0 interrupted iterations
+scenario   [  45% ] 33/90 VUs  08.9s/20.0s
+
+running (09.9s), 39/90 VUs, 52 complete and 0 interrupted iterations
+scenario   [  50% ] 39/90 VUs  09.9s/20.0s
+
+running (10.9s), 49/90 VUs, 69 complete and 0 interrupted iterations
+scenario   [  55% ] 49/90 VUs  10.9s/20.0s
+
+running (11.9s), 59/90 VUs, 91 complete and 0 interrupted iterations
+scenario   [  60% ] 59/90 VUs  11.9s/20.0s
+
+running (12.9s), 69/90 VUs, 118 complete and 0 interrupted iterations
+scenario   [  65% ] 69/90 VUs  12.9s/20.0s
+
+running (13.9s), 79/90 VUs, 150 complete and 0 interrupted iterations
+scenario   [  70% ] 79/90 VUs  13.9s/20.0s
+
+running (14.9s), 89/90 VUs, 187 complete and 0 interrupted iterations
+scenario   [  75% ] 89/90 VUs  14.9s/20.0s
+
+running (15.9s), 88/90 VUs, 229 complete and 0 interrupted iterations
+scenario   [  80% ] 88/90 VUs  15.9s/20.0s
+
+running (16.9s), 73/90 VUs, 276 complete and 0 interrupted iterations
+scenario   [  85% ] 73/90 VUs  16.9s/20.0s
+
+running (17.9s), 56/90 VUs, 317 complete and 0 interrupted iterations
+scenario   [  90% ] 56/90 VUs  17.9s/20.0s
+
+running (18.9s), 38/90 VUs, 349 complete and 0 interrupted iterations
+scenario   [  95% ] 38/90 VUs  18.9s/20.0s
+
+running (19.9s), 21/90 VUs, 373 complete and 0 interrupted iterations
+scenario   [ 100% ] 21/90 VUs  19.9s/20.0s
+
+running (20.9s), 07/90 VUs, 387 complete and 0 interrupted iterations
+scenario ↓ [ 100% ] 21/90 VUs  20s
+
+     ✓ Duration < 1200
+     ✓ POST status was expected
+
+     checks.........................: 100.00% ✓ 788         ✗ 0   
+     data_received..................: 172 kB  8.0 kB/s
+     data_received_endpoint.........: 146776  6820.980268/s
+     data_sent......................: 76 kB   3.5 kB/s
+     data_sent_endpoint.............: 27394   1273.055087/s
+     http_req_blocked...............: avg=82.01µs  min=2.6µs    med=4.47µs   max=735.73µs p(90)=343.75µs p(95)=370.66µs
+     http_req_connecting............: avg=57.57µs  min=0s       med=0s       max=427.31µs p(90)=256.1µs  p(95)=276.16µs
+     http_req_duration..............: avg=979.88µs min=442.35µs med=746.55µs max=25.98ms  p(90)=1.25ms   p(95)=1.4ms   
+       { expected_response:true }...: avg=979.88µs min=442.35µs med=746.55µs max=25.98ms  p(90)=1.25ms   p(95)=1.4ms   
+     http_req_failed................: 0.00%   ✓ 0           ✗ 394 
+     http_req_receiving.............: avg=85.38µs  min=26.36µs  med=73.61µs  max=291.22µs p(90)=146.64µs p(95)=173.21µs
+     http_req_sending...............: avg=32.8µs   min=10.07µs  med=19.89µs  max=194.66µs p(90)=71.06µs  p(95)=89.13µs 
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s      
+     http_req_waiting...............: avg=861.69µs min=376.45µs med=641.43µs max=25.84ms  p(90)=1.04ms   p(95)=1.18ms  
+     http_reqs......................: 394     18.309984/s
+     iteration_duration.............: avg=2s       min=2s       med=2s       max=2.02s    p(90)=2s       p(95)=2s      
+     iterations.....................: 394     18.309984/s
+     vus............................: 7       min=1         max=89
+     vus_max........................: 90      min=90        max=90
+
+
+running (21.5s), 00/90 VUs, 394 complete and 0 interrupted iterations
+scenario ✓ [ 100% ] 00/90 VUs  20s

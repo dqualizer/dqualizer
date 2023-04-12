@@ -1,0 +1,59 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: app/poc/scripts/createdScript3.js
+     output: InfluxDBv2 (http://influxdb:8086)
+
+  scenarios: (100.00%) 1 scenario, 20 max VUs, 36s max duration (incl. graceful stop):
+           * scenario: 20 looping VUs for 6s (gracefulStop: 30s)
+
+
+running (01.0s), 20/20 VUs, 0 complete and 0 interrupted iterations
+scenario   [  17% ] 20 VUs  1.0s/6s
+
+running (02.0s), 20/20 VUs, 0 complete and 0 interrupted iterations
+scenario   [  33% ] 20 VUs  2.0s/6s
+
+running (03.0s), 20/20 VUs, 0 complete and 0 interrupted iterations
+scenario   [  50% ] 20 VUs  3.0s/6s
+
+running (04.0s), 20/20 VUs, 20 complete and 0 interrupted iterations
+scenario   [  67% ] 20 VUs  4.0s/6s
+
+running (05.0s), 20/20 VUs, 20 complete and 0 interrupted iterations
+scenario   [  83% ] 20 VUs  5.0s/6s
+
+running (06.0s), 20/20 VUs, 20 complete and 0 interrupted iterations
+scenario   [ 100% ] 20 VUs  6.0s/6s
+
+     ✓ Duration < 2400
+     ✓ PUT status was expected
+
+     checks.........................: 100.00% ✓ 80        ✗ 0   
+     data_received..................: 6.2 kB  1.0 kB/s
+     data_received_endpoint.........: 5042    838.6675/s
+     data_sent......................: 6.7 kB  1.1 kB/s
+     data_sent_endpoint.............: 1882    313.04487/s
+     http_req_blocked...............: avg=451.52µs min=4.12µs  med=261.84µs max=1.47ms   p(90)=1.15ms   p(95)=1.27ms  
+     http_req_connecting............: avg=122.19µs min=0s      med=74.86µs  max=364.47µs p(90)=300.38µs p(95)=319.65µs
+     http_req_duration..............: avg=4ms      min=2.6ms   med=4ms      max=5.39ms   p(90)=5.28ms   p(95)=5.32ms  
+       { expected_response:true }...: avg=4ms      min=2.6ms   med=4ms      max=5.39ms   p(90)=5.28ms   p(95)=5.32ms  
+     http_req_failed................: 0.00%   ✓ 0         ✗ 40  
+     http_req_receiving.............: avg=40.2µs   min=15.51µs med=34.76µs  max=109.86µs p(90)=66.33µs  p(95)=83.7µs  
+     http_req_sending...............: avg=76.17µs  min=16.93µs med=37.36µs  max=355.24µs p(90)=206.88µs p(95)=227.52µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s      
+     http_req_waiting...............: avg=3.88ms   min=2.49ms  med=3.88ms   max=5.24ms   p(90)=5.09ms   p(95)=5.19ms  
+     http_reqs......................: 40      6.653451/s
+     iteration_duration.............: avg=3s       min=3s      med=3s       max=3s       p(90)=3s       p(95)=3s      
+     iterations.....................: 40      6.653451/s
+     vus............................: 20      min=20      max=20
+     vus_max........................: 20      min=20      max=20
+
+
+running (06.0s), 00/20 VUs, 40 complete and 0 interrupted iterations
+scenario ✓ [ 100% ] 20 VUs  6s

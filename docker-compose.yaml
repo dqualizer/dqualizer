@@ -1,13 +1,13 @@
 version: "3.9"
 services:
   ddd-autohaus:
-    image: maeddes/dqsamples-ddd-autohaus
+    image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
     ports:
       - "9000:9000"
 
   #Translator
   modeler-mock:
-    image: maeddes/dqanalyzer-modeler 
+    image: ghcr.io/dqualizer/dqanalyzer-modeler 
     ports:
       - "8070:8070"
     environment:
@@ -22,7 +22,7 @@ services:
         condition: service_started
 
   loadtest-translator:
-    image: maeddes/dqtranslator
+    image: ghcr.io/dqualizer/dqtranslator
     ports:
       - "8080:8080"
     environment:
@@ -32,7 +32,7 @@ services:
         condition: service_healthy
 
   k6-adapter:
-    image: maeddes/dqexec-k6-adapter
+    image: ghcr.io/dqualizer/dqexec-k6-adapter
     ports:
       - "8090:8090"
     environment:
@@ -42,7 +42,7 @@ services:
         condition: service_healthy
 
   config-runner:
-    image: maeddes/dqexec-config-runner
+    image: ghcr.io/dqualizer/dqexec-k6-config-runner
     volumes:
       - ./docker-output/logging:/app/poc/logging
       - ./docker-output/scripts:/app/poc/scripts
@@ -78,17 +78,13 @@ services:
 
   influxdb:
     image: influxdb:latest
-    container_name: "thesis-influx"
     ports:
       - "8086:8086"
     env_file:
       - ./env/.env
 
   grafana:
-    image: maeddes/dqcockpit-grafana
-    volumes:
-      - ./docker-config/grafana/provisioning:/usr/share/grafana/custom/
-      - ./docker-config/grafana/my-dashboards:/usr/share/grafana/public/dashboards
+    image: ghcr.io/dqualizer/dqcockpit-grafana
     ports:
       - "3030:3000"
     env_file:
