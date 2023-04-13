@@ -22,7 +22,7 @@ services:
         condition: service_started
 
   loadtest-translator:
-    image: ghcr.io/dqualizer/dqtranslator-kotlin
+    image: ghcr.io/dqualizer/dqtranslator-kotlin:hackathon
     ports:
       - "8080:8080"
     environment:
