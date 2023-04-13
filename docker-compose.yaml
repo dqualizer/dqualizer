@@ -5,9 +5,13 @@ services:
     ports:
       - "9000:9000"
 
+  dqanalyzer-frontend:
+    image: ghcr.io/dqualizer/dqanalyzer-frontend:hackathon
+    ports:
+    - "9080:80"
   #Translator
-  modeler-mock:
-    image: ghcr.io/dqualizer/dqanalyzer-modeler 
+  dqanalyzer-backend:
+    image: ghcr.io/dqualizer/dqanalyzer-backend:hackathon
     ports:
       - "8070:8070"
     environment:
@@ -32,14 +36,24 @@ services:
       rabbit:
         condition: service_healthy
 
-  dqexec:
-    image: ghcr.io/dqualizer/dqexec-kotlin:springprojectinitialization
+  k6-adapter:
+    image: ghcr.io/dqualizer/dqexec-k6-adapter
     ports:
       - "8090:8090"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+    depends_on:
+      rabbit:
+        condition: service_healthy
+
+  config-runner:
+    image: ghcr.io/dqualizer/dqexec-k6-config-runner
     volumes:
       - ./docker-output/logging:/app/poc/logging
       - ./docker-output/scripts:/app/poc/scripts
       - ./docker-config/grafana/my-dashboards:/docker-config/grafana/my-dashboards
+    ports:
+      - "9010:9010"
     env_file:
       - ./env/.env
     environment:
