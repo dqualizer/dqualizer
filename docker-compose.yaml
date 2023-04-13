@@ -22,7 +22,8 @@ services:
         condition: service_started
 
   loadtest-translator:
-    image: ghcr.io/dqualizer/dqtranslator-kotlin:hackathon
+    image: ghcr.io/dqualizer/dqtranslator
+    #image: ghcr.io/dqualizer/dqtranslator-kotlin:hackathon
     ports:
       - "8080:8080"
     environment:
@@ -31,24 +32,14 @@ services:
       rabbit:
         condition: service_healthy
 
-  k6-adapter:
-    image: ghcr.io/dqualizer/dqexec-k6-adapter
+  dqexec:
+    image: ghcr.io/dqualizer/dqexec-kotlin:springprojectinitialization
     ports:
       - "8090:8090"
-    environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-    depends_on:
-      rabbit:
-        condition: service_healthy
-
-  config-runner:
-    image: ghcr.io/dqualizer/dqexec-k6-config-runner
     volumes:
       - ./docker-output/logging:/app/poc/logging
       - ./docker-output/scripts:/app/poc/scripts
       - ./docker-config/grafana/my-dashboards:/docker-config/grafana/my-dashboards
-    ports:
-      - "9010:9010"
     env_file:
       - ./env/.env
     environment:
