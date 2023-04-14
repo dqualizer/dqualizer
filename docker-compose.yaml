@@ -1,5 +1,14 @@
 version: "3.9"
 services:
+  dashboard:
+    image: louislam/uptime-kuma:1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./uptime-kuma-data:/app/data
+    ports:
+      - 3001:3001
+    restart: unless-stopped
+
   ddd-autohaus:
     image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
     ports:
