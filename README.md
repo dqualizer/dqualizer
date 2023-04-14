@@ -9,4 +9,4 @@ A more detailed description of this component's architecture is provided in the 
 ## Services
 ### Dashboard
 
-Uptime Kuma is configured as a [dashboard](http://localhost:3001). Click on the respective service to see details such as the IP Address. Everything is hardcoded, so it needs to be updated when services are updated. 
+Uptime Kuma is configured as a [dashboard](http://localhost:3001). Click on the respective service to see details such as the URL. Everything is hardcoded, so it needs to be updated when services are updated. 
