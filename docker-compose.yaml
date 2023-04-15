@@ -33,7 +33,7 @@ services:
         condition: service_healthy
 
   dqexec:
-    image: ghcr.io/dqualizer/dqexec-kotlin:springprojectinitialization
+    image: ghcr.io/dqualizer/dqexec-kotlin:hackathon
     ports:
       - "8090:8090"
     volumes:
