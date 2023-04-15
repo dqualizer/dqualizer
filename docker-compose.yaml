@@ -36,30 +36,19 @@ services:
       rabbit:
         condition: service_healthy
 
-  k6-adapter:
-    image: ghcr.io/dqualizer/dqexec-k6-adapter
+  dqexec:
+    image: ghcr.io/dqualizer/dqexec-kotlin:hackathon
     ports:
       - "8090:8090"
-    environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-    depends_on:
-      rabbit:
-        condition: service_healthy
-
-  config-runner:
-    image: ghcr.io/dqualizer/dqexec-k6-config-runner
     volumes:
-      - ./docker-output/logging:/app/poc/logging
-      - ./docker-output/scripts:/app/poc/scripts
-      - ./docker-config/grafana/my-dashboards:/docker-config/grafana/my-dashboards
-    ports:
-      - "9010:9010"
+      - ./docker-output/logging:/app/logging
+      - ./docker-output/scripts:/app/scripts
     env_file:
       - ./env/.env
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
-      - INFLUX_HOST=influxdb
-      - API_HOST=ddd-autohaus
+      - dqualizer.dqexec.influx.host=influxdb
+      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
     depends_on:
       rabbit:
         condition: service_healthy
