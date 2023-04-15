@@ -37,15 +37,14 @@ services:
     ports:
       - "8090:8090"
     volumes:
-      - ./docker-output/logging:/app/poc/logging
-      - ./docker-output/scripts:/app/poc/scripts
-      - ./docker-config/grafana/my-dashboards:/docker-config/grafana/my-dashboards
+      - ./docker-output/logging:/app/logging
+      - ./docker-output/scripts:/app/scripts
     env_file:
       - ./env/.env
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
-      - INFLUX_HOST=influxdb
-      - API_HOST=ddd-autohaus
+      - dqualizer.dqexec.influx.host=influxdb
+      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
     depends_on:
       rabbit:
         condition: service_healthy
