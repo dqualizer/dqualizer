@@ -6,7 +6,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./uptime-kuma-data:/app/data
     ports:
-      - 3001:3001
+      - "3001:3001"
     restart: unless-stopped
 
   ddd-autohaus:
@@ -17,8 +17,8 @@ services:
   dqanalyzer-frontend:
     image: ghcr.io/dqualizer/dqanalyzer-frontend
     ports:
-    - "9080:80"
-  #Translator
+      - "9080:80"
+
   dqanalyzer-backend:
     image: ghcr.io/dqualizer/dqanalyzer-backend
     ports:
@@ -34,7 +34,7 @@ services:
       ddd-autohaus:
         condition: service_started
 
-  loadtest-translator:    
+  loadtest-translator:
     image: ghcr.io/dqualizer/dqtranslator
     ports:
       - "8080:8080"
@@ -51,8 +51,6 @@ services:
     volumes:
       - ./docker-output/logging:/app/logging
       - ./docker-output/scripts:/app/scripts
-    env_file:
-      - ./env/.env
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
       - dqualizer.dqexec.influx.host=influxdb
@@ -82,15 +80,11 @@ services:
     image: influxdb:latest
     ports:
       - "8086:8086"
-    env_file:
-      - ./env/.env
 
   grafana:
-    image: ghcr.io/dqualizer/dqcockpit-grafana
+    image: ghcr.io/dqualizer/dqcockpit
     ports:
       - "3030:3000"
-    env_file:
-      - ./env/.env
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=TRUE
       - GF_SECURITY_ADMIN_PASSWORD=admin
