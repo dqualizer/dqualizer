@@ -15,12 +15,12 @@ services:
       - "9000:9000"
 
   dqanalyzer-frontend:
-    image: ghcr.io/dqualizer/dqanalyzer-frontend:hackathon
+    image: ghcr.io/dqualizer/dqanalyzer-frontend
     ports:
     - "9080:80"
   #Translator
   dqanalyzer-backend:
-    image: ghcr.io/dqualizer/dqanalyzer-backend:hackathon
+    image: ghcr.io/dqualizer/dqanalyzer-backend
     ports:
       - "8070:8070"
     environment:
@@ -35,7 +35,7 @@ services:
         condition: service_started
 
   loadtest-translator:    
-    image: ghcr.io/dqualizer/dqtranslator-kotlin:hackathon
+    image: ghcr.io/dqualizer/dqtranslator
     ports:
       - "8080:8080"
     environment:
@@ -45,7 +45,7 @@ services:
         condition: service_healthy
 
   dqexec:
-    image: ghcr.io/dqualizer/dqexec-kotlin:hackathon
+    image: ghcr.io/dqualizer/dqexec
     ports:
       - "8090:8090"
     volumes:
