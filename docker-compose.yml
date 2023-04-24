@@ -1,0 +1,93 @@
+version: "3.9"
+services:
+  dashboard:
+    image: louislam/uptime-kuma:1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./uptime-kuma-data:/app/data
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+
+  ddd-autohaus:
+    image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
+    ports:
+      - "9000:9000"
+
+  dqanalyzer-frontend:
+    image: ghcr.io/dqualizer/dqanalyzer-frontend
+    ports:
+      - "9080:80"
+
+  dqanalyzer-backend:
+    image: ghcr.io/dqualizer/dqanalyzer-backend
+    ports:
+      - "8070:8070"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+      - MODELING_FILE=modeling-werkstatt.json
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      loadtest-translator:
+        condition: service_started
+      ddd-autohaus:
+        condition: service_started
+
+  loadtest-translator:
+    image: ghcr.io/dqualizer/dqtranslator
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+    depends_on:
+      rabbit:
+        condition: service_healthy
+
+  dqexec:
+    image: ghcr.io/dqualizer/dqexec
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./docker-output/logging:/app/logging
+      - ./docker-output/scripts:/app/scripts
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbit
+      - dqualizer.dqexec.influx.host=influxdb
+      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+    depends_on:
+      rabbit:
+        condition: service_healthy
+      influxdb:
+        condition: service_started
+      ddd-autohaus:
+        condition: service_started
+
+  rabbit:
+    image: rabbitmq:3-management
+    user: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 2s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - "8086:8086"
+
+  grafana:
+    image: ghcr.io/dqualizer/dqcockpit
+    ports:
+      - "3030:3000"
+    environment:
+      - GF_PANELS_DISABLE_SANITIZE_HTML=TRUE
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_PATHS_PROVISIONING=/usr/share/grafana/custom/
+    depends_on:
+      - influxdb
