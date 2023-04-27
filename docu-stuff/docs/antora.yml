@@ -1,0 +1,7 @@
+name: dqualizer-main
+title: dqualizer
+version: 1
+nav:
+  - modules/ROOT/nav.adoc
+
+start_page: modules/ROOT/pages/landingpage.adoc

@@ -1,0 +1,491 @@
+[[section-building-block-view]]
+== Bausteinsicht
+
+=== dqualizer
+
+==== White Box Diagram
+image:dqualizer-overview.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+=== dqualizer Komponenten
+
+==== dqcockpit
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|Dqcockpit offers a (readonly) dashboard visualizing the results of executed RQAs and a management overview dashboard that displays the current system state based on automatically extracted analysis data which is translated to the domain level.
+
+| Wichtige ADRs
+| * <<c1>>
+* <<c2>>
+*  <<c3>>
+
+| Weitere Klarstellungen
+| * Wer macht das translaten? ist das dqtranslator oder cockpit?
+-> dqtranslator
+* Machen wir die Meldung für neue Resultate synchron (Nofification) oder asynchron (MessageQueueing)?
+-> in der ersten Iteration reicht synchron, aber langfristig gehen wir in Richtung asynchron
+
+|Variabilität
+| * Das Pollen kann vorerst ohne Message Queue direkt von dqtranslator erfolgen und später dahingehend erweitert werden.
+
+|Qualitätsattribute
+| * Useability
+
+|Fehlerverhalten
+| -
+
+|Deployment
+|* Frontend deployed über Vercel/Vite
+* Backend als Webservice (k8s)
+
+
+|Offene Fragen
+|* Wo werden kurze Zusammenfassungen der Ergebnisse in der Domain Story angezeigt? -> Im dqanalyzer oder dqcockpit?
+* Ist der dqanalyzer Teil des dqcockpit?
+* Was wird im Frontend generiert und was wird vom Backend bereitgestellt? Z.B: wer zieht Grafana hoch? Unser Backend und wir deployen das Dashboard rein? Oder kriegen wir nur einen Link zu einem Grafana Dashboard?
+|===
+
+Diagramm:
+image:dqcockpit-black-box.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+==== dqanalyzer
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqanalyzer component enables domain experts to specify and perform RQA without profound knowledge of the underlying technical infrastructure and analysis tools, e.g., by annotating elements in domain stories.
+The dqanalyzer does not necessarily provide the functionality to model a domain story. It starts with a provided domain story and its responsibility is in annotating the domain story with tests.
+
+|Wichtige ADRs
+| * <<a1>>
+* <<a2>>
+* <<a3>>
+* <<a4>>
+
+
+| Weitere Klarstellungen
+|* Was ist zuerst? dqanalyzer oder dqedit? Wenn z.B. in dqedit das Mapping bereits vorliegt (und somit teils die Architektur bekannt ist), dann können wir im dqanalyzer die Auswahl der Elemente entsprechend beschränken -> Vorerst können wir vereinfacht annehmen, dass Mapping vorhanden, aber mittelfristig sollte es auch ohne funktionieren (evtl. mit eingeschränkter Funktionalität)
+* Das Interface DSTLoader kann intern (Nutzer über GUI) oder auch extern (Button in WPS Modeler) angesprochen werden.
+
+|Qualitätsattribute
+| * Useability
+
+|Fehlerverhalten
+| -
+
+|Deployment
+| -
+
+|Offene Fragen
+| -
+|===
+
+Diagramm:
+image:dqanalyzer-black-box.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+==== dqedit
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqedit component is the editor for the mapping necessary to translate domain questions / RQA definitions to technical RQA configurations. The editor can be used by domain and technical experts during DDD-based workshops, e.g., for event storming or DST, where the domain elements are identified and defined.
+
+| Wichtige ADRs
+| -
+
+| Weitere Klarstellungen
+| -
+
+|Variabilität
+|* Wo kommen DST und API-Beschreibung der Applikation her?
+-> vorläufig nehmen wir an vom Nutzer, später können wir es schöner machen und sie von anderen dqualizer-Komponenten ziehen
+
+|Qualitätsattribute
+| -
+
+|Fehlerverhalten
+|* Datenbank könnte nicht erreichbar sein, wenn gespeichert wird. (Was soll passieren?)
+
+|Deployment
+|Web-App (mit UI & REST, Browserbasiert)
+
+|Offene Fragen
+|* Wo können wir API/DST am besten herbekommen?
+|===
+
+Diagramm:
+image:dqedit-black-box.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+==== dqlang
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqlang is a collection of languages utilized by dqualizer e.g., the DST extension for domain-level RQA specification or the language for defining mappings in dqedit.
+
+| Wichtige ADRs
+| * <<l1>>
+* <<l2>>
+
+| Weitere Klarstellungen
+| -
+
+|Variabilität
+| -
+
+|Qualitätsattribute
+|* Traceability (Welche Spezifikationsversion wird verwendet?)
+
+|Fehlerverhalten
+| -
+
+|Deployment
+|GIT Repository (Release mit GitHub Actions; Schema-Files mit dateibasiertem Versioning)
+
+|Offene Fragen
+| -
+|===
+
+Diagramm:
+image:dqlang-black-box.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+==== dqtranslator
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|Dqtranslator maps (domain) RQA definitions to technical RQA configurations that can be executed by dqexec. It also maps the technical results (metrics) back to the domain level, i.e., domain experts can understand the results.
+
+| Wichtige ADRs
+| * <<c3>>
+* <<a3>>
+
+| Weitere Klarstellungen
+| -
+
+|Variabilität
+| -
+
+|Qualitätsattribute
+| -
+
+|Fehlerverhalten
+| -
+
+|Deployment
+| -
+
+|Offene Fragen
+| * dqlang-Abhängigkeiten nicht aufgezeigt.
+|===
+
+Diagramm:
+image:dqtranslator-black-box.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+==== dqexec
+
+[cols="1h,3a"]
+|===
+|Zweck / Zuständigkeit
+|The dqexec component executes the RQA configuration by utilizing state-of-the-art monitoring, load testing, and resilience testing tooling. The specification is received in a generic format and then mapped to the input models of the external analysis tooling. Besides delegating the RQA execution, dqexec is also responsible for choosing the most appropriate analysis tool, repeating tests to reach a certain accuracy, and enriching the tests with tool-specific default values.
+
+| Wichtige ADRs
+| -
+
+| Weitere Klarstellungen
+| -
+
+|Variabilität
+| -
+
+|Qualitätsattribute
+| -
+
+|Fehlerverhalten
+| -
+
+|Deployment
+| -
+
+|Offene Fragen
+| * Interfaces of external tools are currently just displayed in a very abstract manner.
+|===
+
+Diagramm:
+image:dqexec-black-box.jpg[]
+Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
+
+==== Weitere Building Blocks
+
+* Test Status Queue
+* Mapping Database
+* TechnicalResultStoreController
+
+=== THIS IS OLD
+
+Notizen von mbe:
+
+IMPORTANT: Die vollständige Abbildung der fachlichen Module ergibt
+sich durch die Paketstruktur in der Hexagonal bzw. Clean Architecture.
+Hier liegt der Fokus auf dem Domänenmodell abgebildet anhand
+von Aggregates, Entites und Value Objects.
+
+Aufbauend auf der Context Map aus dem Kapitel Systemkontextsicht, wird im folgenden die Subdomäne Werkstatt beschrieben.
+
+
+
+
+IMPORTANT: Die vollständige Abbildung der fachlichen Module ergibt
+sich durch die Paketstruktur in der Hexagonal bzw. Clean Architecture.
+Hier liegt der Fokus auf dem Domänenmodell abgebildet anhand
+von Aggregates, Entites und Value Objects.
+
+Aufbauend auf der Context Map aus dem Kapitel Systemkontextsicht, wird im folgenden die Subdomäne Werkstatt beschrieben.
+
+=== Whitebox Subdomäne Werkstatt
+
+[plantuml,target=bs-ebene1,format=png]
+....
+
+package "Werkstatt" as werkstatt <<subdomain>> {
+
+    package "Werkstattplanung" as werkstattplanung <<bounded context>> {
+
+    }
+
+    package "Werkstattservice" as werkstattservice <<bounded context>> {
+
+    }
+
+    werkstattplanung --> werkstattservice
+
+}
+....
+
+Enthaltene Blackbox Bausteine::
+
+[cols="1,2" options="header"]
+|===
+|Bounded Context |Beschreibung
+|Werkstattplanung|Organisation der Werkstattabläufe und Dienstleistungsprozesse der Werkstatt.
+|Werkstattservice|Planung des Dienstleistungsangebots gegenüber Privat- und Firmenkunden.
+|===
+
+
+=== Whitebox Bounded Context Werkstattplanung
+
+[plantuml,target=bs-ebene2_2,format=png]
+....
+
+package "Werkstattplanung" as werkstattplanung <<bounded context>> {
+
+    package "Werkstattplan" as werkstattplan <<aggregate>> {
+
+    }
+
+    package "Werkstattauftrag" as werkstattauftrag <<aggregate>> {
+
+    }
+
+    werkstattplan --> werkstattauftrag
+
+}
+....
+
+Enthaltene Blackbox Bausteine::
+
+[cols="1,2" options="header"]
+|===
+|Aggregate|Beschreibung
+|Werkstattplan|Planung der Werkstattauslastung unter Berücksichtigung der Verfügbarkeit und Kompetenz
+|Werkstattauftrag|Rechtlich bindende Vereinbarung zur Durchführung von Dienstleistungen (Services) am Fahrzeug
+|===
+
+=== Wichtige Schnittstellen
+
+[cols="1,1,2" options="header"]
+|===
+|Aggregate|Eingehend|Aussgehend
+|Werkstattplan|Werkstattauftrag planen, Backend for Frontend REST API|
+|Werkstattauftrag|Originalteil verfügbar, Backend for Frontend REST API|Werkstattauftrag planen
+|===
+
+=== Whitebox Bounded Context Werkstattservice
+
+[plantuml,target=bs-ebene2_1,format=png]
+....
+
+package "Werkstattservice" as werkstattservice <<bounded context>> {
+
+    package "Werkstattservice"" as werkstattserviceAggregate <<aggregate>> {
+
+    }
+
+    package "WerkstattserviceGruppe" as werkstattserviceGruppe <<aggregate>> {
+
+    }
+
+    werkstattserviceAggregate --> werkstattserviceGruppe
+
+}
+....
+
+Enthaltene Blackbox Bausteine::
+
+[cols="1,2" options="header"]
+|===
+|Aggregate|Beschreibung
+|Werkstattservice|  Ein Werkstattservice beschreibt
+eine Dienstleistung am Fahrzeug. Dies beinhaltet Arbeitszeit,
+Originalteile und sonstigen Materialverbrauch.
+|WerkstattserviceGruppe|  Ein WerkstattserviceGruppe gruppiert
+Werkstattservices gleicher Art und beschreibt für die Gruppe den Kostensatz für ein
+Arbeitswert. Gruppen sind Karroserie, Mechanik und Elektronik.
+|===
+
+Wichtige Schnittstellen::
+Bisher keine
+
+=== Whitebox Aggregate Werkstattplan
+
+[plantuml,target=bs-ebene4-1,format=png]
+....
+
+package "Werkstattplan" as wplan <<aggregate>> {
+
+    class WerkstattplanService <<service>>
+    class WerkstattplanRepository <<repository>>
+
+    package "domain.model" as model {
+        class "Werkstattplan" as theAggregateRoot <<aggregate root>>
+        class "Werkstattplanstatus" as status <<value object>>>
+        class "Tagesplan" as tagesplan <<entity>>
+        class "Tagesplanstatus" as tagesplanstatus <<value object>>
+        class "Werkstatttermin" as termin <<entity>>
+        class "Start" as start <<value object>>
+        class "Ende" as ende <<value object>>
+        class "Bearbeiter" as bearbeiter <<value object>>
+        class "WerkstattauftragRef" as werkstattauftragRef <<value object>>
+        theAggregateRoot --> status
+        theAggregateRoot --> tagesplan
+        tagesplan --> tagesplanstatus
+        tagesplan --> termin
+        termin --> start
+        termin --> ende
+        termin --> bearbeiter
+        termin --> werkstattauftragRef
+    }
+
+    WerkstattplanService --> theAggregateRoot
+    WerkstattplanService --> WerkstattplanRepository
+}
+....
+
+=== Whitebox Aggregate Werkstattauftrag
+
+[plantuml,target=bs-ebene4_2,format=png]
+....
+
+package "Werkstattauftrag" as werkstattauftragModul <<aggregate>> {
+
+    class WerkstattauftragService
+    class WerkstattauftragRepository
+
+    package "domain.model" as domainModel {
+        class Werkstattauftrag <<aggregate root>>
+        class Fahrzeugkennzeichen <<value object>>
+        class Bearbeiter <<value object>>
+        class Werkstattauftragstatus <<value object>>
+        class Auftragsposition <<entity>>
+        class Werkstattservice <<entity>>
+        class Material <<value object>>
+        class MaterialRef <<value object>>
+
+        Werkstattauftrag --> Fahrzeugkennzeichen
+        Werkstattauftrag --> Bearbeiter
+        Werkstattauftrag --> Werkstattauftragstatus
+        Werkstattauftrag --> Auftragsposition
+        Auftragsposition --> Werkstattservice
+        Werkstattservice --> Material
+        Material --> MaterialRef
+
+    }
+
+    WerkstattauftragService --> WerkstattauftragRepository
+    WerkstattauftragService --> Werkstattauftrag
+}
+....
+
+=== Whitebox Aggregate Werkstattservice
+
+[plantuml,target=bs-ebene4_3,format=png]
+....
+
+package "Werkstattservice" as werkstattserviceModul <<aggregate>> {
+
+    class WerkstattserviceService <<service>>
+    class WerkstattserviceRepository <<repository>>
+
+    package "domain.model" as domainModel  {
+        class Werkstattservice <<aggregate root>>
+        class Bezeichnung <<value object>>
+        class WerkstattserviceKennung <<value object>>
+        class WerkstattserviceGruppeRef <<value object>>
+        class Material <<value object>>
+        class Materialpreis <<value object>>
+        class Menge <<value object>>
+        class Arbeitswert <<value object>>
+        class MaterialRef <<value object>>
+
+        Werkstattservice --> Bezeichnung
+        Werkstattservice --> WerkstattserviceKennung
+        Werkstattservice --> WerkstattserviceGruppeRef
+        Werkstattservice -->"*" Material
+        Werkstattservice --> Arbeitswert
+        Material --> Menge
+        Material --> Materialpreis
+        Material --> MaterialRef
+    }
+
+    WerkstattserviceService --> WerkstattserviceRepository
+    WerkstattserviceService --> Werkstattservice
+
+}
+....
+
+=== Whitebox Aggregate WerkstattserviceGruppe
+
+[plantuml,target=bs-ebene4_4,format=png]
+....
+
+package "WerkstattserviceGruppe" as werkstattserviceGruppe <<aggregate>> {
+
+    class WerkstattserviceGruppeService <<service>>
+    class WerkstattserviceGruppeRepository <<repository>>
+
+
+    package "domain.model" as domainModel {
+        class WerkstattserviceGruppe <<aggregate root>>
+        class WerkstattserviceGruppeBezeichung <<value object>>
+        class ArbeitswertKostensatz <<entity>>
+        class Kostensatz <<value object>>
+        class Waehrung <<value object>>
+
+        WerkstattserviceGruppe --> WerkstattserviceGruppeBezeichung
+        WerkstattserviceGruppe --> ArbeitswertKostensatz
+        ArbeitswertKostensatz --> Kostensatz
+        ArbeitswertKostensatz --> Waehrung
+    }
+
+    WerkstattserviceGruppeService --> WerkstattserviceGruppe
+    WerkstattserviceGruppeService --> WerkstattserviceGruppeRepository
+
+}
+....
