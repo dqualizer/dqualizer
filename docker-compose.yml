@@ -15,9 +15,11 @@ services:
       - "9000:9000"
 
   dqanalyzer-frontend:
-    image: ghcr.io/dqualizer/dqanalyzer-frontend
+    image: ghcr.io/dqualizer/dqanalyzer-frontend:29-bug-analyzer-fails-to-forward-rqa
     ports:
       - "9080:80"
+    environment:
+      - VITE_BACKEND_URL=http://localhost:8070
 
   dqanalyzer-backend:
     image: ghcr.io/dqualizer/dqanalyzer-backend
@@ -45,7 +47,7 @@ services:
         condition: service_healthy
 
   dqexec:
-    image: ghcr.io/dqualizer/dqexec
+    image: ghcr.io/dqualizer/dqexec:high-load-tests
     ports:
       - "8090:8090"
     volumes:
@@ -92,7 +94,7 @@ services:
       - "8086:8086"
 
   grafana:
-    image: ghcr.io/dqualizer/dqcockpit
+    image: ghcr.io/dqualizer/dqcockpit:new-dashboard
     ports:
       - "3030:3000"
     environment:
