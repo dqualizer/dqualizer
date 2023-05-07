@@ -5,6 +5,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[c1]]
 === C1: dqcockpit is read-only
+
 [cols="1h,3a"]
 |===
 | Status
@@ -25,6 +26,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[c2]]
 === C2: dqcockpit polls results
+
 [cols="1h,3a"]
 |===
 | Status
@@ -45,6 +47,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[c3]]
 === C3: results for dqcockpit are provided by dqtranslator
+
 [cols="1h,3a"]
 |===
 | Status
@@ -65,6 +68,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[a1]]
 === A1: dqanalyzer does not necessarily provide functionality to model a domain story
+
 [cols="1h,3a"]
 |===
 | Status
@@ -85,6 +89,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[a2]]
 === A2: dqanalyzer kann neben dqcockpit ebenfalls Ergebnisse anzeigen
+
 [cols="1h,3a"]
 |===
 | Status
@@ -105,6 +110,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[a3]]
 === A3: dqanalyzer kann Ergebnisse vom dqtranslator abrufen (analog zu dqcockpit)
+
 [cols="1h,3a"]
 |===
 | Status
@@ -125,6 +131,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[a4]]
 === A4: RQA Definitionen werden in dqanalyzer persistiert
+
 [cols="1h,3a"]
 |===
 | Status
@@ -145,6 +152,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[l1]]
 === L1: Schema Versioning is based on and performed by Git(Hub)
+
 [cols="1h,3a"]
 |===
 | Status
@@ -165,6 +173,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 
 [[l2]]
 === L2:  Different dqlang schemas can use different meta models
+
 [cols="1h,3a"]
 |===
 | Status
@@ -186,6 +195,7 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 === ADR Template
 
 === Temp1: A brief and descriptive title for the decision.
+
 [cols="1h,3a"]
 |===
 | Status
@@ -204,12 +214,14 @@ We use component prefixes when ADRs are closely related to one component (dq##a#
 | What are alternative options considered, along with the reasons they were not selected?
 |===
 
-
 === OLD
 
-Dieses Kapitel erläutert wichtige, kostspielige, groß angelegte oder riskante Architekturentscheidungen einschließlich der Begründungen. Mit "Entscheidungen" meinen wir die Auswahl einer Alternative auf der Grundlage bestimmter Kriterien.
+Dieses Kapitel erläutert wichtige, kostspielige, groß angelegte oder riskante Architekturentscheidungen einschließlich der Begründungen.
+Mit "Entscheidungen" meinen wir die Auswahl einer Alternative auf der Grundlage bestimmter Kriterien.
 
-Das arc42 Template empfiehlt an dieser Stelle nach eigenem Ermessen zu entscheiden, ob eine Architekturentscheidung hier in diesem zentralen Abschnitt dokumentiert werden sollte oder ob Projektteilnehmer sie besser lokal dokumentieren (z.B. innerhalb der White-Box-Vorlage eines Bausteins). Redundante Texte sind weitestgehend zu vermeiden. Verweisen Sie auf Abschnitt 4, wo Sie bereits die wichtigsten Entscheidungen Ihrer Architektur festgehalten haben.
+Das arc42 Template empfiehlt an dieser Stelle nach eigenem Ermessen zu entscheiden, ob eine Architekturentscheidung hier in diesem zentralen Abschnitt dokumentiert werden sollte oder ob Projektteilnehmer sie besser lokal dokumentieren (z.B. innerhalb der White-Box-Vorlage eines Bausteins).
+Redundante Texte sind weitestgehend zu vermeiden.
+Verweisen Sie auf Abschnitt 4, wo Sie bereits die wichtigsten Entscheidungen Ihrer Architektur festgehalten haben.
 
 Motivation: Die Stakeholder des Systems sollen Ihre Entscheidungen nachvollziehen und nachvollziehbar machen können.
 
@@ -253,7 +265,6 @@ Status:
 
 Konsequenzen:
 
-
 === Entwurfsentscheidung No. 4
 
 Kontext: Dqedit adaptiert / transformiert, dass DST File Format auf Dqlang
@@ -264,7 +275,6 @@ Status:
 
 Konsequenzen:
 
-
 === Entwurfsentscheidung No. 5
 
 Kontext: Wer triggert dqExec?
@@ -274,7 +284,6 @@ Entscheidung:
 Status:
 
 Konsequenzen:
-
 
 === Entwurfsentscheidung No. 6
 

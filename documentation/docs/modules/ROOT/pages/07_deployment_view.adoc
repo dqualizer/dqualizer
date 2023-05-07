@@ -8,17 +8,23 @@ Die Verteilungssicht beschreibt:
 * die technische Infrastruktur, die zur Ausführung Ihres Systems verwendet wird, mit Infrastrukturelementen wie geografischen Standorten, Umgebungen, Computern, Prozessoren, Kanälen und Netz-Topologien sowie anderen Infrastrukturelementen und
 * die Zuordnung von (Software-)Bausteinen zu diesen Infrastrukturelementen.
 
-Oft werden Systeme in verschiedenen Umgebungen ausgeführt, z. B. Entwicklungsumgebung, Testumgebung, Produktionsumgebung. In solchen Fällen sollten Sie alle relevanten Umgebungen dokumentieren.
+Oft werden Systeme in verschiedenen Umgebungen ausgeführt, z. B. Entwicklungsumgebung, Testumgebung, Produktionsumgebung.
+In solchen Fällen sollten Sie alle relevanten Umgebungen dokumentieren.
 
 Dokumentieren Sie insbesondere die Deployment-Sicht, wenn Ihre Software als verteiltes System mit mehreren Computern, Prozessoren, Servern oder Containern ausgeführt wird oder wenn Sie Ihre eigenen Hardware-Prozessoren und Chips entwerfen und konstruieren.
 
-Aus der Software-Perspektive reicht es aus, die Elemente der Infrastruktur zu erfassen, die erforderlich sind, um den Einsatz Ihrer Bausteine darzustellen. Hardware-Architekten können darüber hinausgehen und die Infrastruktur bis zu einem beliebigen Detaillierungsgrad beschreiben, den sie benötigen.
+Aus der Software-Perspektive reicht es aus, die Elemente der Infrastruktur zu erfassen, die erforderlich sind, um den Einsatz Ihrer Bausteine darzustellen.
+Hardware-Architekten können darüber hinausgehen und die Infrastruktur bis zu einem beliebigen Detaillierungsgrad beschreiben, den sie benötigen.
 
-Motivation: Software läuft nicht ohne Hardware. Die zugrunde liegende Infrastruktur kann und wird Ihr System und/oder einige übergreifende Konzepte beeinflussen. Daher müssen Sie die Infrastruktur kennen.
+Motivation: Software läuft nicht ohne Hardware.
+Die zugrunde liegende Infrastruktur kann und wird Ihr System und/oder einige übergreifende Konzepte beeinflussen.
+Daher müssen Sie die Infrastruktur kennen.
 
-Form: Das Deployment-Diagramm auf höchster Ebene ist vielleicht schon in Abschnitt 3.2. als technischer Kontext mit Ihrer eigenen Infrastruktur als EINE Blackbox enthalten. In diesem Abschnitt werden Sie in diese Blackbox hineinzoomen, indem Sie zusätzliche Deployment-Diagramme verwenden.
+Form: Das Deployment-Diagramm auf höchster Ebene ist vielleicht schon in Abschnitt 3.2. als technischer Kontext mit Ihrer eigenen Infrastruktur als EINE Blackbox enthalten.
+In diesem Abschnitt werden Sie in diese Blackbox hineinzoomen, indem Sie zusätzliche Deployment-Diagramme verwenden.
 
-* Die UML bietet Deployment-Diagramme, um diese Sichtweise auszudrücken. Verwenden Sie diese, wahrscheinlich mit verschachtelten Diagrammen, wenn Ihre Infrastruktur komplexer ist.
+* Die UML bietet Deployment-Diagramme, um diese Sichtweise auszudrücken.
+Verwenden Sie diese, wahrscheinlich mit verschachtelten Diagrammen, wenn Ihre Infrastruktur komplexer ist.
 * Wenn Ihre (Hardware-)Stakeholder andere Diagrammtypen als UML-Deployment-Diagramme bevorzugen, lassen Sie sie jede Art von Diagramm verwenden, das die Knoten und Kanäle der Infrastruktur darstellen kann.
 
 === Infrastruktur Ebene 1

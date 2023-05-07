@@ -1,7 +1,9 @@
 [[section-concepts]]
 == Querschnittliche Konzepte
 
-In diesem Kapitel werden übergreifende, grundsätzliche Regelungen und Lösungsideen beschrieben, welche in mehreren Teilen (→ Querschnitt) des Systems relevant sind. Solche Konzepte sind oft mit mehreren Bausteinen verbunden. Sie umfassen viele verschiedene Themen, wie z. B.
+In diesem Kapitel werden übergreifende, grundsätzliche Regelungen und Lösungsideen beschrieben, welche in mehreren Teilen (→ Querschnitt) des Systems relevant sind.
+Solche Konzepte sind oft mit mehreren Bausteinen verbunden.
+Sie umfassen viele verschiedene Themen, wie z. B.
 
 * Domänenmodelle
 * Architekturmuster oder Entwurfsmuster
@@ -11,9 +13,11 @@ In diesem Kapitel werden übergreifende, grundsätzliche Regelungen und Lösungs
 
 Begründung
 
-Konzepte bilden die Grundlage für die konzeptionelle Integrität (Konsistenz, Homogenität) der Architektur. Sie sind somit ein wichtiger Beitrag zur Erreichung innerer Qualitäten Ihres Systems.
+Konzepte bilden die Grundlage für die konzeptionelle Integrität (Konsistenz, Homogenität) der Architektur.
+Sie sind somit ein wichtiger Beitrag zur Erreichung innerer Qualitäten Ihres Systems.
 
-Einige dieser Konzepte lassen sich nicht einzelnen Bausteinen zuordnen (z.B. Security oder Safety). Dies ist der Platz in der Vorlage, den wir für eine kohärente Spezifikation solcher Konzepte vorgesehen haben.
+Einige dieser Konzepte lassen sich nicht einzelnen Bausteinen zuordnen (z.B. Security oder Safety).
+Dies ist der Platz in der Vorlage, den wir für eine kohärente Spezifikation solcher Konzepte vorgesehen haben.
 Formular
 
 Die Form kann variiert werden:
@@ -35,7 +39,6 @@ _<Erklärung>_
 === _<Konzept n>_
 
 _<Erklärung>_
-
 
 == Fachliche Struktur und Modelle
 

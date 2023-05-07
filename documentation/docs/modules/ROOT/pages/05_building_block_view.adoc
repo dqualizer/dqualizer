@@ -4,6 +4,7 @@
 === dqualizer
 
 ==== White Box Diagram
+
 image:dqualizer-overview.jpg[]
 Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Architecture Board]
 
@@ -19,7 +20,7 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 | Wichtige ADRs
 | * <<c1>>
 * <<c2>>
-*  <<c3>>
+* <<c3>>
 
 | Weitere Klarstellungen
 | * Wer macht das translaten? ist das dqtranslator oder cockpit?
@@ -232,20 +233,15 @@ Source: https://miro.com/app/board/uXjVOhezoJ8=/?share_link_id=16681409030[Archi
 
 Notizen von mbe:
 
-IMPORTANT: Die vollständige Abbildung der fachlichen Module ergibt
-sich durch die Paketstruktur in der Hexagonal bzw. Clean Architecture.
-Hier liegt der Fokus auf dem Domänenmodell abgebildet anhand
-von Aggregates, Entites und Value Objects.
+IMPORTANT: Die vollständige Abbildung der fachlichen Module ergibt sich durch die Paketstruktur in der Hexagonal bzw.
+Clean Architecture.
+Hier liegt der Fokus auf dem Domänenmodell abgebildet anhand von Aggregates, Entites und Value Objects.
 
 Aufbauend auf der Context Map aus dem Kapitel Systemkontextsicht, wird im folgenden die Subdomäne Werkstatt beschrieben.
 
-
-
-
-IMPORTANT: Die vollständige Abbildung der fachlichen Module ergibt
-sich durch die Paketstruktur in der Hexagonal bzw. Clean Architecture.
-Hier liegt der Fokus auf dem Domänenmodell abgebildet anhand
-von Aggregates, Entites und Value Objects.
+IMPORTANT: Die vollständige Abbildung der fachlichen Module ergibt sich durch die Paketstruktur in der Hexagonal bzw.
+Clean Architecture.
+Hier liegt der Fokus auf dem Domänenmodell abgebildet anhand von Aggregates, Entites und Value Objects.
 
 Aufbauend auf der Context Map aus dem Kapitel Systemkontextsicht, wird im folgenden die Subdomäne Werkstatt beschrieben.
 
@@ -277,7 +273,6 @@ Enthaltene Blackbox Bausteine::
 |Werkstattplanung|Organisation der Werkstattabläufe und Dienstleistungsprozesse der Werkstatt.
 |Werkstattservice|Planung des Dienstleistungsangebots gegenüber Privat- und Firmenkunden.
 |===
-
 
 === Whitebox Bounded Context Werkstattplanung
 
