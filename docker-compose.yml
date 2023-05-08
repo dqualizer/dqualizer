@@ -18,11 +18,13 @@ services:
     image: ghcr.io/dqualizer/dqanalyzer-frontend
     ports:
       - "9080:80"
+    environment:
+      - VITE_BACKEND_URL=http://localhost:${ANALYZER_BACKEND_PORT}
 
   dqanalyzer-backend:
     image: ghcr.io/dqualizer/dqanalyzer-backend
     ports:
-      - "8070:8070"
+      - "8070:${ANALYZER_BACKEND_PORT}"
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
       - MODELING_FILE=modeling-werkstatt.json
