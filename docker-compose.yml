@@ -15,7 +15,7 @@ services:
       - "9000:9000"
 
   dqanalyzer-frontend:
-    image: ghcr.io/dqualizer/dqanalyzer-frontend:29-bug-analyzer-fails-to-forward-rqa
+    image: ghcr.io/dqualizer/dqanalyzer-frontend
     ports:
       - "9080:80"
     environment:
@@ -47,7 +47,7 @@ services:
         condition: service_healthy
 
   dqexec:
-    image: ghcr.io/dqualizer/dqexec:high-load-tests
+    image: ghcr.io/dqualizer/dqexec
     ports:
       - "8090:8090"
     volumes:
@@ -94,7 +94,7 @@ services:
       - "8086:8086"
 
   grafana:
-    image: ghcr.io/dqualizer/dqcockpit:new-dashboard
+    image: ghcr.io/dqualizer/dqcockpit
     ports:
       - "3030:3000"
     environment:
