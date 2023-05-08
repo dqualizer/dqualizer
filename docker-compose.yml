@@ -20,6 +20,7 @@ services:
       - "9080:80"
     environment:
       - VITE_BACKEND_URL=http://localhost:${ANALYZER_BACKEND_PORT}
+      - GRAFANA_RESULT_DASHBOARD=http://localhost:${GRAFANA_PORT}
 
   dqanalyzer-backend:
     image: ghcr.io/dqualizer/dqanalyzer-backend
@@ -96,7 +97,7 @@ services:
   grafana:
     image: ghcr.io/dqualizer/dqcockpit
     ports:
-      - "3030:3000"
+      - "${GRAFANA_PORT}:3000"
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=TRUE
       - GF_SECURITY_ADMIN_PASSWORD=admin
