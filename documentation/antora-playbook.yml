@@ -7,7 +7,7 @@ content:
   sources:
     - url: https://github.com/dqualizer/dqualizer.git
       branches: docs
-      start_path: docu-stuff/docs
+      start_path: documentation/docs
 ui:
   bundle:
 #    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
