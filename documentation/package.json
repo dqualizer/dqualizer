@@ -10,7 +10,7 @@
     "build-ui": "gulp bundle",
     "build": "npx antora antora-playbook.yml",
     "build locally": "npx antora antora-local-playbook.yml",
-    "build all": "gulp bundle && npx antora antora-playbook.yml",
+    "build_all": "npm i && gulp bundle && npx antora antora-playbook.yml",
     "build locally all": "gulp bundle && npx antora antora-local-playbook.yml",
     "preview": "npx antora antora-playbook.yml && http-server build/site -c-1"
   },
