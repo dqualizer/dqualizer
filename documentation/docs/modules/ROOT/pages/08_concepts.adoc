@@ -1,0 +1,49 @@
+[[section-concepts]]
+== Querschnittliche Konzepte
+
+In diesem Kapitel werden übergreifende, grundsätzliche Regelungen und Lösungsideen beschrieben, welche in mehreren Teilen (→ Querschnitt) des Systems relevant sind.
+Solche Konzepte sind oft mit mehreren Bausteinen verbunden.
+Sie umfassen viele verschiedene Themen, wie z. B.
+
+* Domänenmodelle
+* Architekturmuster oder Entwurfsmuster
+* Regeln für den Einsatz bestimmter Technologien
+* prinzipielle, oft technische Entscheidungen von Gesamtentscheidungen
+* Implementierungsregeln
+
+Begründung
+
+Konzepte bilden die Grundlage für die konzeptionelle Integrität (Konsistenz, Homogenität) der Architektur.
+Sie sind somit ein wichtiger Beitrag zur Erreichung innerer Qualitäten Ihres Systems.
+
+Einige dieser Konzepte lassen sich nicht einzelnen Bausteinen zuordnen (z.B. Security oder Safety).
+Dies ist der Platz in der Vorlage, den wir für eine kohärente Spezifikation solcher Konzepte vorgesehen haben.
+Formular
+
+Die Form kann variiert werden:
+
+    Konzeptpapiere mit beliebiger Struktur
+    übergreifende Modellauszüge oder Szenarien unter Verwendung von Notationen der Architektursichten
+    Beispielimplementierungen, insbesondere für technische Konzepte
+    Hinweise auf die typische Verwendung von Standard-Frameworks (z.B. Verwendung von Hibernate für Objekt/Relational Mapping)
+
+=== _<Konzept 1>_
+
+_<Erklärung>_
+
+=== _<Konzept 2>_
+
+_<Erklärung>_
+
+...
+=== _<Konzept n>_
+
+_<Erklärung>_
+
+== Fachliche Struktur und Modelle
+
+== Architektur- und Entwurfsmuster
+
+== Unter-der-Haube
+
+== User Experience
