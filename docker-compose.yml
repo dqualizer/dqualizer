@@ -22,6 +22,13 @@ services:
       - VITE_BACKEND_URL=http://localhost:${ANALYZER_BACKEND_PORT}
       - GRAFANA_RESULT_DASHBOARD=http://localhost:${GRAFANA_PORT}
 
+  dqanalyzer-react:
+    image: ghcr.io/dqualizer/dqanalyzer-react:add-image-deployment
+    ports:
+      - "9090:80"
+    environment:
+      - VITE_BACKEND_URL=http://localhost:${ANALYZER_BACKEND_PORT}
+
   dqanalyzer-backend:
     image: ghcr.io/dqualizer/dqanalyzer-backend
     ports:
@@ -95,7 +102,7 @@ services:
       - "8086:8086"
 
   grafana:
-    image: ghcr.io/dqualizer/dqcockpit
+    image: ghcr.io/dqualizer/dqcockpit:new-dashboard
     ports:
       - "${GRAFANA_PORT}:3000"
     environment:
