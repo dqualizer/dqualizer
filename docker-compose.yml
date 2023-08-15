@@ -20,6 +20,9 @@ services:
       - "9090:80"
     environment:
       - VITE_BACKEND_URL=http://localhost:8099
+    depends_on:
+      dqApi:
+        condition: service_healthy
 
   dqanalyzer-backend:
     image: ghcr.io/dqualizer/dqanalyzer-backend
@@ -47,6 +50,12 @@ services:
       - SPRING_DATA_MONGODB_USERNAME=root
       - SPRING_DATA_MONGODB_PASSWORD=example
       - SPRING_DATA_MONGODB_DATABASE=dqualizer
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider localhost:8099/actuator/health || exit 1
+      interval: 60s
+      start_period: 5s
+      retries: 5
+      timeout: 10s
 
   mongo:
     image: mongo
