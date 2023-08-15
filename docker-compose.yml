@@ -143,7 +143,7 @@ services:
       - "${GRAFANA_PORT}:3000"
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=TRUE
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=demo
       - GF_PATHS_PROVISIONING=/usr/share/grafana/custom/
       - DOCKER_INFLUXDB_INIT_ORG
       - DOCKER_INFLUXDB_INIT_BUCKET
