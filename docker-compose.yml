@@ -14,20 +14,12 @@ services:
     ports:
       - "9000:9000"
 
-  dqanalyzer-frontend:
-    image: ghcr.io/dqualizer/dqanalyzer-frontend
-    ports:
-      - "9080:80"
-    environment:
-      - VITE_BACKEND_URL=http://localhost:${ANALYZER_BACKEND_PORT}
-      - GRAFANA_RESULT_DASHBOARD=http://localhost:${GRAFANA_PORT}
-
   dqanalyzer-react:
-    image: ghcr.io/dqualizer/dqanalyzer-react:add-image-deployment
+    image: ghcr.io/dqualizer/dqanalyzer-react
     ports:
       - "9090:80"
     environment:
-      - VITE_BACKEND_URL=http://localhost:${ANALYZER_BACKEND_PORT}
+      - VITE_BACKEND_URL=http://localhost:8099
 
   dqanalyzer-backend:
     image: ghcr.io/dqualizer/dqanalyzer-backend
@@ -43,6 +35,41 @@ services:
         condition: service_started
       ddd-autohaus:
         condition: service_started
+
+  dqApi:
+    image: ghcr.io/dqualizer/dqapi:add_docker_build
+    ports:
+      - "8099:8099"
+    environment:
+      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_USERNAME=root
+      - SPRING_DATA_MONGODB_PASSWORD=example
+      - SPRING_DATA_MONGODB_DATABASE=dqualizer
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+      - ME_CONFIG_MONGODB_URL=mongodb://root:example@mongo:27017/
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_SERVER=mongo
 
   loadtest-translator:
     image: ghcr.io/dqualizer/dqtranslator
@@ -114,3 +141,6 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     depends_on:
       - influxdb
+
+volumes:
+  data: {}
