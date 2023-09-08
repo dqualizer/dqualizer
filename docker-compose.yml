@@ -1,51 +1,50 @@
 version: "3.9"
 services:
-  dashboard:
-    image: louislam/uptime-kuma:1
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./uptime-kuma-data:/app/data
-    ports:
-      - "3001:3001"
-    restart: unless-stopped
-
   ddd-autohaus:
     image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
     ports:
       - "9000:9000"
 
-  dqanalyzer-frontend:
-    image: ghcr.io/dqualizer/dqanalyzer-frontend
+  dqApi:
+    image: ghcr.io/dqualizer/dqapi:move_to_dqlang
     ports:
-      - "9080:80"
+      - "8099:8099"
     environment:
-      - VITE_BACKEND_URL=http://localhost:${ANALYZER_BACKEND_PORT}
-      - GRAFANA_RESULT_DASHBOARD=http://localhost:${GRAFANA_PORT}
+      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_USERNAME=root
+      - SPRING_DATA_MONGODB_PASSWORD=example
+      - SPRING_DATA_MONGODB_DATABASE=dqualizer
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider localhost:8099/actuator/health || exit 1
+      interval: 60s
+      start_period: 5s
+      retries: 5
+      timeout: 10s
 
-  dqanalyzer-backend:
-    image: ghcr.io/dqualizer/dqanalyzer-backend
-    ports:
-      - "8070:${ANALYZER_BACKEND_PORT}"
+  mongo:
+    image: mongo
+    restart: always
     environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-      - MODELING_FILE=modeling-werkstatt.json
-    depends_on:
-      rabbit:
-        condition: service_healthy
-      loadtest-translator:
-        condition: service_started
-      ddd-autohaus:
-        condition: service_started
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data
 
-  loadtest-translator:
-    image: ghcr.io/dqualizer/dqtranslator
+  mongo-express:
+    image: mongo-express
+    restart: always
     ports:
-      - "8080:8080"
+      - 8081:8081
     environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-    depends_on:
-      rabbit:
-        condition: service_healthy
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+      - ME_CONFIG_MONGODB_URL=mongodb://root:example@mongo:27017/
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_SERVER=mongo
 
   dqexec:
     image: ghcr.io/dqualizer/dqexec
