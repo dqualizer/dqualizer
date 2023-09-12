@@ -5,13 +5,24 @@ services:
     ports:
       - "9000:9000"
 
+  dqAnalyzer:
+    image: ghcr.io/dqualizer/dqanalyzer-react:ak-ms-devops
+    ports:
+      - "9090:80"
+    environment:
+      - VITE_BACKEND_URL=http://localhost:8099
+    depends_on:
+      dqApi:
+        condition: service_healthy
+
   dqApi:
-    image: ghcr.io/dqualizer/dqapi:move_to_dqlang
+    image: ghcr.io/dqualizer/dqapi:dqlang2.14
     ports:
       - "8099:8099"
     environment:
+      - SPRING_RABBITMQ_HOST=rabbit
       - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
-      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_DATA_MONGODB_HOST=dqDatabase
       - SPRING_DATA_MONGODB_PORT=27017
       - SPRING_DATA_MONGODB_USERNAME=root
       - SPRING_DATA_MONGODB_PASSWORD=example
@@ -23,31 +34,20 @@ services:
       retries: 5
       timeout: 10s
 
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+  dqTranslator:
+    image: ghcr.io/dqualizer/dqtranslator:rqa-definition-api
     ports:
-      - 27017:27017
-    volumes:
-      - ./data:/data
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
+      - "8080:8080"
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
-      - ME_CONFIG_MONGODB_URL=mongodb://root:example@mongo:27017/
-      - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_MONGODB_SERVER=mongo
+      - SPRING_RABBITMQ_HOST=rabbit
+      - DQUALIZER_DQAPI_HOST=dqApi
+      - DQUALIZER_DQAPI_PORT=8099
+    depends_on:
+      rabbit:
+        condition: service_healthy
 
-  dqexec:
-    image: ghcr.io/dqualizer/dqexec
+  dqExec:
+    image: ghcr.io/dqualizer/dqexec:switching_to_dqlang
     ports:
       - "8090:8090"
     volumes:
@@ -67,6 +67,29 @@ services:
         condition: service_started
       ddd-autohaus:
         condition: service_started
+
+  dqDatabase:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+      - ME_CONFIG_MONGODB_URL=mongodb://root:example@dqDatabase:27017/
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_SERVER=dqDatabase
 
   rabbit:
     image: rabbitmq:3-management
