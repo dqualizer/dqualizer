@@ -6,7 +6,7 @@ services:
       - "9000:9000"
 
   dqAnalyzer:
-    image: ghcr.io/dqualizer/dqanalyzer-react:ak-ms-devops
+    image: ghcr.io/dqualizer/dqanalyzer-react
     ports:
       - "9090:80"
     environment:
