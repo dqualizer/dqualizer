@@ -6,13 +6,15 @@ For more information, please visit our https://dqualizer.github.io/[website].
 
 ## Overview
 
-https://user-images.githubusercontent.com/18191871/224370639-2b793379-6727-465a-bbd6-fd46a9326c11.png[dqarchitecture-en3-1]
+.dqualizer component overview
+[#img-dqualizer-component-overview,link=https://user-images.githubusercontent.com/18191871/224370639-2b793379-6727-465a-bbd6-fd46a9326c11.png]
+image::https://user-images.githubusercontent.com/18191871/224370639-2b793379-6727-465a-bbd6-fd46a9326c11.png[dqualizer component overview]
 
 The dqualizer approach consists of six components with different responsibilities:
 
-[%autowidth]
+[cols="1,4"]
 |===
-|**Component** |**Short Description**
+|Component |Short Description
 
 |https://github.com/dqualizer/dqualizer[dqualizer]
 |The main repository contains elements that are related to all components, e.g., documentation.
