@@ -41,8 +41,8 @@ design load, as well as beyond it, with the goal
 of determining the behavioral limits, and to test
 defense mechanisms in critical systems. (vgl. SWEBOK-V3)
 
-|Technische Schulden
-| Der Begriff sei hier verstanden als die gebräuchliche Metapher für die möglichen Konsequenzen schlechter technischer Umsetzung von Software. Das Aufschieben von Maßnahmen zur Sicherung und Erhöhung technischer Qualität (sprich technische Schulden) in Softwareprojekten beschleunigt die Softwareentwicklung nicht, sondern verlangsamt und erschwert diese.
+|Technical debt
+| The term is understood here as a common metaphor for the possible consequences of poor technical implementation of software. Postponing measures to ensure and increase technical quality (i.e. technical debt) in software projects does not accelerate software development, but slows it down and makes it more difficult.
 
 |Begriff 3
 |<Definition-3>
