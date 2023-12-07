@@ -1,24 +1,109 @@
 [[section-introduction-and-goals]]
 ==	Introduction and Goals
 
-This chapter is divided into three sections. Firstly, a brief description of the requirements in section <<1.1 Requirements overview>>. 
+The "dqualizer" project is an example of the promotion of innovative SMEs. The sponsor of the initiative called "KMU-innovativ" is the Federal Ministry of Education and Research (BMBF).
+With the "KMU-innovativ" initiative, the BMBF has set up a "fast lane" for small and medium-sized enterprises (SMEs). 
+SMEs can submit their project ideas in the field of information and communication technologies at any time and receive preferential support through simplified funding and accelerated approval procedures. 
+
+The aim is to cushion innovation risks for SMEs and to support SMEs with top performance in the high-tech sector.
+
+////
+A multi-line comment.
+
+Orginaltext:
+Das Vorhaben „dqualizer“ ist ein Beispiel für die Förderung des innovativen Mittelstandes. Der Träger der Initiative mit dem Namen „KMU-innovativ“ ist das Bundesministerium für Bildung und Forschung (BMBF) Mit der Initiative „KMU-innovativ“ hat das BMBF eine „Überholspur“ für kleine und mittlere Unternehmen (KMU) eingerichtet. 
+KMU können ihre Projektideen im Bereich der Informations- und Kommunikationstechnologien jederzeit einreichen und werden durch vereinfachte Förder- und beschleunigte Bewilligungsverfahren bevorzugt gefördert. 
+
+Ziel ist es, Innovationsrisiken für die KMU abzufedern und KMU mit Spitzenleistungen im Hightech-Bereich zu unterstützen.
+
+////
+
+_How does dqualizer intend to be a driver of innovation for SMEs?_
+
+In order to outline the objective of dqualizer, the project specification document (german: Vorhabenskurzbeschreibung) footnote:[Document: "Domain-centered runtime quality analysis of business-critical application systems"] is quoted and commented below:
+
+"The runtime quality of a given application system - e.g. in terms of performance, reliability and resilience - plays a critical role on the usage and usability of said application. 
+Runtime quality therefore has a direct impact on a company's business success. This applies to companies in a wide variety of technical domains. To put it more poetic, one could state that running software is the lifeblood of a running business.
+
+Given this premise it becomes critical to analyse the runtime quality of a given application, e.g. with regards to resiliency. 
+To analyse aspects of runtime quality it is vital to continuously monitor, evaluate and, if necessary, improve runtime quality through analysis measures.   
+In recent years, such suitable analysis measures like load tests or monitoring have become widespread in in the field of IT. 
+
+At the same time, sophisticated commercial and open source tools have been developed. 
+However, these measures are all based on a technical level or perspective. 
+They are not being interpreted at a functional domain level or perspective. 
+
+At the same time, software architecture and software development approaches such as Domain-Driven Design (DDD) are becoming increasingly widespread. 
+However these do not essentially consider the issues of runtime quality, despite the topics criticality. 
+
+So practicioners in the field lack access to 
+a) sophisticated commercial and / or open source tools to analyze runtime quality of an application system without a strictly technical perspective
+b) software architecture and software development approaches that essentially consider the issues of runtime quality. 
+
+The dqualizer research project aims to close this gap between the domain expertise of the application systems and the (technical) measures and findings of quality assurance. 
+The focus is on a domain-centered solution approach."
+
+////
+Orginaltext: 
+Um die Aufgabenstellung für dqualizer zu erläutern wird im Folgenden die Vorhabenskurzbeschreibungfootnote:[Dokument: "Domänenzentrierte Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme"] zitiert:
+
+Die Laufzeitqualität von Anwendungssystemen – z.B. bezüglich Performanz, Zuverlässigkeitund Resilienz – hat einen direkten Einfluss auf den geschäftlichen Erfolg von Unternehmen inunterschiedlichsten fachlichen Domänen. 
+Infolgedessen ist es wichtig, die Laufzeitqualität durchAnalysemaßnahmen kontinuierlich zu überwachen, zu bewerten und ggf. zu verbessern. 
+Im Laufe der letzten Jahre haben sich entsprechende Analysemaßnahmen wie Lasttests oderMonitoring in der Praxis verbreitet und ausgereifte kommerzielle und quelloffene Werkzeugewurden entwickelt. 
+Allerdings sind diese Maßnahmen allesamt auf technischer Ebeneangesiedelt und werden nicht auf fachlicher Domänenebene interpretiert. 
+Gleichzeitig werden bei Softwarearchitektur- und Softwareentwicklungsansätzen wie Domain-Driven Design (DDD),die zunehmend Verbreitung finden, Belange der Laufzeitqualität trotz ihrer Kritikalität im Wesentlichen nicht betrachtet.
+
+Das Forschungvorhaben dqualizer hat das Ziel, diese Kluft zwischen der Fachlichkeit der Anwendungssysteme und den (technischen) Maßnahmen und Erkenntnissen der Qualitätssicherung durch einen domänenzentrierten Ansatz zu schließen. 
+
+////
+
+_How does dqualizer intend to assist practitioners in SMEs?_
+
+To this end, possibilities for modeling and monitoring runtime quality issues are to be integrated into DDD-based techniques. 
+From a technical perspective, dqualizer can be used to automatically generate and interpret meaningful load and resilience tests and establish links to technical monitoring. 
+
+The innovative concepts developed are to be implemented in an open source tool and made available and accessible in connection with existing tools.
+
+The practical applicability of the dqualizer approach will be evaluated in real case studies. 
+Those will take place in the complex technical domains of insurance and payroll/tax accounting as well as the corresponding technical environments. 
+
+The case studies are provided by the two associated application partners, DATEV eG and VHV Solutions GmbH. 
+
+As a result, employees with responsibilities in the specialist departments and employees with management responsibilities can be involved in the quality management of a company's software. 
+
+This can take place throughout the entire software life cycle, from requirements gathering to the operation and maintenance of the running software. 
+
+This means a higher level of software quality in terms of non-functional properties, which is particularly beneficial for business-critical applications in Germany.
+
+////
+Orginaltext: 
+
+Hierzu sollen Möglichkeiten zur Modellierung und Überwachung von Belangen der Laufzeitqualität in DDD basierte Techniken integriert werden. 
+Aus fachlicher Perspektive lassen sich durch dqualizer automatisiert aussagekräftige Last- und Resilienztests erzeugen und interpretieren sowie die Verbindungen zum technischen Monitoring herstellen. 
+Die entwickelten innovativen Konzepte sollen in einem Open-Source-Werkzeug umgesetzt und in Anbindung an existierende Werkzeuge verfügbar und nutzbar gemacht werden.
+Die praktische Anwendbarkeit des dqualizer-Ansatzes werden in realen Fallstudien in denkomplexen fachlichen Domänen Versicherungen und Lohn-/Steuerabrechnung sowie denentsprechenden technischen Umgebungen evaluiert. 
+
+Die Fallstudien werden von den beiden assoziierten Anwendungspartnern, DATEV eG und VHV Solutions GmbH, bereitgestellt. 
+Im Ergebnis können die Fachbereiche und das Management in das Qualitätsmanagement einerUnternehmenssoftware während des gesamten Lebenszyklus eingebunden werden, von der Anforderungserhebung bis zu Betrieb und Wartung der laufenden Software. 
+
+Dies bedeutet ein höheres Maß an Softwarequalität hinsichtlich nicht-funktionaler Eigenschaften, was sich insbesondere für geschäftskritische Anwendungen am Standort Deutschland auszahlt.
+////
+
+The rest of this chapter is divided into three sections. Firstly, a brief description of the requirements in section <<1.1 Requirements overview>>. 
 
 Secondly a list of the most relevant quality goals for the architecture in <<1.2 Quality goals>>, the achievement of which is critical for the most important stakeholders.
 
 Thirdly and finally, <<1.3. Stakeholders>> provides an overview of the most important stakeholders and their expectations regarding the architecture.
 
+
+
 === 1.1. Requirements Overview
 
-Um die Aufgabenstellung für dqualizer zu erläutern wird im Folgenden die Vorhabenskurzbeschreibungfootnote:[Dokument: "Domänenzentrierte Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme"] zitiert:
+To gather and refine user stories and requirements for a potential dqualizer tool, the team conducted a workshop. The results of said workshop will be documented in this section. 
 
-"Das Forschungsvorhaben dqualizer [...] hat das Ziel, [die] Kluft zwischen der Fachlichkeit der Anwendungssysteme und den (technischen) Maßnahmen und Erkenntnissen der Qualitätssicherung durch einen domänenzentrierten Ansatz zu schließen.
+// -> User Stories als gelbe Zettel auf Miro: https://miro.com/app/board/uXjVP_qJ4rU=/
 
-Hierzu sollen Möglichkeiten zur Modellierung und Überwachung von Belangen der Laufzeitqualität in Domain-driven Design basierte Techniken integriert werden.
-Aus fachlicher Perspektive lassen sich durch dqualizer automatisiert aussagekräftige Last- und Resilienztests erzeugen und interpretieren sowie die Verbindungen zum technischen Monitoring herstellen.
 
-Die entwickelten innovativen Konzepte sollen in einem Open-Source-Werkzeug umgesetzt und in Anbindung an existierende Werkzeuge verfügbar und nutzbar gemacht werden."
-
-User Stories als gelbe Zettel auf Miro: https://miro.com/app/board/uXjVP_qJ4rU=/
 
 === 1.2. Quality goals
 
