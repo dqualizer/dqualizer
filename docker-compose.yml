@@ -1,46 +1,46 @@
 version: "3.9"
 services:
-  dashboard:
-    image: louislam/uptime-kuma:1
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./uptime-kuma-data:/app/data
-    ports:
-      - "3001:3001"
-    restart: unless-stopped
+#  dashboard:
+#    image: louislam/uptime-kuma:1
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - ./uptime-kuma-data:/app/data
+#    ports:
+#      - "3001:3001"
+#    restart: unless-stopped
 
-  ddd-autohaus:
-    image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
-    ports:
-      - "9000:9000"
+#  ddd-autohaus:
+#    image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
+#    ports:
+#      - "9000:9000"
 
-  dqanalyzer-react:
-    image: ghcr.io/dqualizer/dqanalyzer-react
-    ports:
-      - "9090:80"
-    environment:
-      - VITE_BACKEND_URL=http://localhost:8099
-    depends_on:
-      dqApi:
-        condition: service_healthy
+#  dqanalyzer-react:
+#    image: ghcr.io/dqualizer/dqanalyzer-react
+#    ports:
+#      - "9090:80"
+#    environment:
+#      - VITE_BACKEND_URL=http://localhost:8099
+#    depends_on:
+#      dqApi:
+#        condition: service_healthy
 
-  dqanalyzer-backend:
-    image: ghcr.io/dqualizer/dqanalyzer-backend
-    ports:
-      - "8070:${ANALYZER_BACKEND_PORT}"
-    environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-      - MODELING_FILE=modeling-werkstatt.json
-    depends_on:
-      rabbit:
-        condition: service_healthy
-      loadtest-translator:
-        condition: service_started
-      ddd-autohaus:
-        condition: service_started
+#  dqanalyzer-backend:
+#    image: ghcr.io/dqualizer/dqanalyzer-backend
+#    ports:
+#      - "8070:${ANALYZER_BACKEND_PORT}"
+#    environment:
+#      - SPRING_RABBITMQ_HOST=rabbit
+#      - MODELING_FILE=modeling-werkstatt.json
+#    depends_on:
+#      rabbit:
+#        condition: service_healthy
+#      dqtranslator:
+#        condition: service_started
+#      ddd-autohaus:
+#        condition: service_started
 
   dqApi:
-    image: ghcr.io/dqualizer/dqapi:add_docker_build
+    image: ghcr.io/dqualizer/dqapi:resilience-api
     ports:
       - "8099:8099"
     environment:
@@ -80,18 +80,19 @@ services:
       - ME_CONFIG_MONGODB_PORT=27017
       - ME_CONFIG_MONGODB_SERVER=mongo
 
-  loadtest-translator:
-    image: ghcr.io/dqualizer/dqtranslator
+  dqtranslator:
+    image: ghcr.io/dqualizer/dqtranslator:resilience-translation
     ports:
       - "8080:8080"
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
+      - DQAPI_HOST=dqApi
     depends_on:
       rabbit:
         condition: service_healthy
 
   dqexec:
-    image: ghcr.io/dqualizer/dqexec
+    image: ghcr.io/dqualizer/dqexec:resilience-exec
     ports:
       - "8090:8090"
     volumes:
@@ -109,8 +110,8 @@ services:
         condition: service_healthy
       influxdb:
         condition: service_started
-      ddd-autohaus:
-        condition: service_started
+#      ddd-autohaus:
+#        condition: service_started
 
   rabbit:
     image: rabbitmq:3-management
