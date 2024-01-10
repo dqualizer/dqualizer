@@ -6,7 +6,7 @@ services:
       - "9000:9000"
 
   dqAnalyzer:
-    image: ghcr.io/dqualizer/dqanalyzer-react:ak-ms-devops
+    image: ghcr.io/dqualizer/dqanalyzer2:main
     ports:
       - "9090:80"
     environment:
@@ -16,7 +16,7 @@ services:
         condition: service_healthy
 
   dqApi:
-    image: ghcr.io/dqualizer/dqapi:dqlang2.14
+    image: ghcr.io/dqualizer/dqapi:main
     ports:
       - "8099:8099"
     environment:
@@ -35,7 +35,7 @@ services:
       timeout: 10s
 
   dqTranslator:
-    image: ghcr.io/dqualizer/dqtranslator:rqa-definition-api
+    image: ghcr.io/dqualizer/dqtranslator:main
     ports:
       - "8080:8080"
     environment:
@@ -47,7 +47,7 @@ services:
         condition: service_healthy
 
   dqExec:
-    image: ghcr.io/dqualizer/dqexec:switching_to_dqlang
+    image: ghcr.io/dqualizer/dqexec:main
     ports:
       - "8090:8090"
     volumes:
@@ -105,7 +105,7 @@ services:
       start_period: 5s
 
   influxdb:
-    image: influxdb:latest
+    image: influxdb:2.7.5
     environment:
       - DOCKER_INFLUXDB_INIT_MODE
       - DOCKER_INFLUXDB_INIT_USERNAME
