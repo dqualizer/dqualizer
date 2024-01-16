@@ -152,36 +152,42 @@ Als Referenz für (weitere) denkbare Qualitätsziele bietet sich der ISO 25010 S
 Es folgt eine Übersicht über die wichtigsten Stakeholder mit deren Erwartungen bezüglich der Architektur.
 Die Stakeholder sind dabei einem Workshop Miro Board.footnote:[https://miro.com/app/board/uXjVOAAmeeo=/] entnommen.
 
-Es erfolgt eine Übersicht über fachliche und (IT-) technische Stakeholder, sowie eine Beschreibung der jeweiligen Erwartungshaltung.
+An overview of business and (IT) technological stakeholders is provided, as well as a description of the respective expectations regarding the architecture.
 
-Fachliche Stakeholder
+// Fachliche Stakeholder
+
+Business stakeholders
 
 [cols="1,2" options="header"]
 |===
-|Rolle |Erwartungshaltung
-|Manager | Als Manager, möchte ich wissen
+|Role |Expectations
+| Manager | As a manager, I would like to know
 
-a) welche Auswirkungen sich eine ändernde Kundenanzahl auf IT Ressourcen hat, um die Kosten besser abschätzen zu können.
+a) what impact a changing number of customers has on IT resources in order to better estimate costs.
 
-b) welche Auswirkungen technische Ausfälle auf fachliche Prozesse haben, um mögliche SLA Verletzungen abzuschätzen.
+b) what effects technical failures have on business processes in order to estimate possible SLA violations.
 
-c) wie ich IT Ressourcen einsparen kann, um mein System effizienter zu machen. d) wie viel mich einzelne Domänen (oder Prozesse) kosten.
+c) how I can save IT resources to make my system more efficient. 
 
-d) wie hoch die Kosten für die Verbesserung einer Qualitätseigenschaft wären, um die Qualität des Systems zu steigern.
+d) how much individual domains (or processes) cost me.
 
-|Fach Product Owner | Als Fach Product Owner möchte ich
+e) how much it would cost to improve a quality property in order to increase the quality of the system.
 
-a) mit wenig Aufwand die Qualitätsanforderungen des Fachexperten erfassen und bewerten.
 
-b) mit wenig Übersetzungsaufwand dem Fachexperten Auswirkungen von fachlichen Fragestellungen auf die IT Ressourcen kommunizieren.
+|(Domain) Product Owner | As a specialist product owner, I would like to
 
-|Fachexperte | Als Fachexperte möchte ich
+a) record and evaluate the quality requirements of the business expert with little effort.
 
-a) Qualitätsanforderungen und -szenarien anhand meiner modellierten Prozesse definieren.
+b) communicate the effects of technical issues on IT resources to the technical expert with little translation effort.
 
-b) Qualitätsanalysen anhand meiner modellierten Prozesse durchführen.
 
-c) immer einen Einblick in die historische Entwicklung bzw. dem aktuellen Zustand der Qualität meiner modellierten Prozesse haben.
+|Domain expert | As a domain expert, I would like to
+
+a) define quality requirements and scenarios based on my modeled processes.
+
+b) perform quality analyses based on my modeled processes.
+
+c) always have an insight into the historical development or the current state of the quality of my modeled processes.
 |===
 
 IT (-technische) Stakeholder
