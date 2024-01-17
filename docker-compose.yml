@@ -89,7 +89,6 @@ services:
       - "27017"
     volumes:
       - ./data:/data
-    attach: false
 
   mongo-express:
     image: mongo-express
@@ -103,7 +102,6 @@ services:
       - ME_CONFIG_MONGODB_URL=mongodb://${DATABASE_USER}:${DATABASE_PASS}@dqDatabase:27017/
       - ME_CONFIG_MONGODB_PORT=27017
       - ME_CONFIG_MONGODB_SERVER=dqDatabase
-    attach: false
 
   rabbit:
     image: rabbitmq:3-management
@@ -120,7 +118,6 @@ services:
       timeout: 5s
       retries: 20
       start_period: 5s
-    attach: false
 
   influxdb:
     image: influxdb:2.7.5
@@ -134,7 +131,6 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     ports:
       - "${INFLUX_PORT}:8086"
-    attach: false
 
   grafana:
     image: ghcr.io/dqualizer/dqcockpit
@@ -150,4 +146,3 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     depends_on:
       - influxdb
-    attach: false
