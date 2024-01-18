@@ -87,10 +87,116 @@ Thirdly and finally, the section 1.3 <<Stakeholders>> provides an overview of th
 
 === 1.1. Requirements Overview
 
-To gather and refine user stories and requirements for a potential dqualizer tool, the team conducted a workshop. The results of said workshop will be documented in this section. 
+To gather and refine user stories and requirements for a potential tool, the dqualizer team conducted a workshop. The results of said workshop is documented below in a tabular use-case format. 
 
-// -> User Stories als gelbe Zettel auf Miro: https://miro.com/app/board/uXjVP_qJ4rU=/
+// -> User Stories sind als gelbe UC-Zettel auf Miro gesammelt: https://miro.com/app/board/uXjVP_qJ4rU=/
+//If requirements documents exist this overview should refer to these documents.
 
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|As a domain expert who is interested in the results of the quality analysis at runtime, I would like to have a display that shows the analysis results obtained in order to be able to interpret the results obtained.
+|Domain expert
+
+|As a domain expert, I would like to know what the response time is between two endpoints to ensure that my SLA remains guaranteed.
+|Domain expert
+
+|As a technical expert interested in the results of the runtime quality analysis, I would like to include the response times in the results of a runtime quality analysis in order to draw a concise conclusion.
+|Technical expert
+
+|As a domain-based dqualizer user, I would like to define an expected response time for a load test to verify that my measurement point meets the SLO/SLA.
+|Domain-based dqualizer user
+
+|As a domain expert, I would like to define a static load for a load test.
+|Domain expert
+
+|As a domain expert, I would like to be able to define a (stimulus of a) load test in order to estimate whether my system shows the desired functions under load. 
+|Domain expert
+
+|===
+
+
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|As a domain expert, I would also like to be able to ask questions about a story as a whole, e.g. frequency of occurrence.
+|Domain expert
+
+|As a domain expert interested in resilience, I would like to specify the expected response for a resilience scenario in order to check whether my system is responding correctly. 
+|Domain expert
+
+|As a domain expert interested in monitoring, I want to specify a response time threshold to see if my subsystems and components are responding within the acceptable threshold.
+|Domain expert
+
+|As a domain expert, I want to be able to define multiple response metrics in a question. 
+|Domain expert
+
+|As a domain expert interested in monitoring, I want to define multiple measurement endpoints to monitor different interfaces within my application. 
+|Domain expert
+
+|As a domain expert, I want to know the performance of my application under high load. 
+|Domain expert
+
+|===
+
+////
+Orginaltext: 
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|Als Fachexperte möchte ich auch Fragestellungen auf eine Story als Gesamtes machen können, z.B. Häufigkeit des Vorkommens.
+|Fachexperte
+
+|Als Domänenexperte, der sich für Resilienz interessiert, möchte ich die erwartete Reaktion für ein Resilienzszenario spezifizieren, um zu überprüfen, ob mein System korrekt reagiert. 
+|Domänenexperte
+
+|Als Fachexperte, der an der Überwachung interessiert ist, möchte ich einen Schwellenwert für die Reaktionszeit festlegen, um zu sehen, ob meine Subsysteme und Komponenten innerhalb des zulässigen Schwellenwerts reagieren.
+|Fachexperte
+
+|Als Fachexperte möchte ich in einer Fragestellung mehrere Response-Metriken definieren können. 
+|Fachexperte
+
+|Als Domänenexperte, der an der Überwachung interessiert ist, möchte ich mehrere Messendpunkte festlegen, um verschiedene Schnittstellen innerhalb meiner Anwendung zu überwachen. 
+|Domänenexperte
+
+|Als Fachexperte möchte ich die Performance meiner Anwendung bei hoher Last kennen. 
+|Fachexperte
+
+|===
+
+
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|Als Fachexperte, der sich für die Ergebnisse der Qualitätsanalyse zur Laufzeit interessiert, würde ich gerne eine Ansicht haben, die die erhaltenen Analyseergebnisse anzeigt, um eine Interpretation der erhaltenen Ergebnisse vornehmen zu können.
+|Fachexperte
+
+|Als Domänenexperte möchte ich wissen, wie die Reaktionszeit zwischen zwei Endpunkten ist, um sicher zustellen das meine SLA garantiert bleibt.
+|Domänenexperte
+
+|Als technischer Experte, der an den Ergebnissen der Laufzeitqualitätsanalyse interessiert ist, würde ich gerne die Antwortzeiten in die Ergebnisse einer Laufzeitqualitätsanalyse einbeziehen, um eine prägnante Schlussfolgerung zu ziehen.
+|Technischer Experte
+
+|Als fachlicher Dqualizer-Nutzer möchte ich eine erwartete Antwortzeit für einen Lasttest definieren, um zu überprüfen, dass mein Messpunkt die SLO/SLA erfüllt.
+|Fachlicher dqualizer-Nutzer 
+
+|Als Fachexperte möchte ich eine statische Last für einen Lasttest definieren.
+|Fachexperte
+
+|Als Fachexperte möchte ich einen (Stimulus eines) Lasttest-Test definieren können, um abzuschätzen ob mein System unter Last die gewünschte Funktionen zeigt. 
+|Fachexperte
+
+|===
+
+////
 
 
 === 1.2. Quality goals
