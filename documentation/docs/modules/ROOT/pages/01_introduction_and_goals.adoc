@@ -8,9 +8,7 @@ A multi-line comment.
 
 Orginaltext:
 Das Vorhaben „dqualizer“ ist ein Beispiel für die Förderung des innovativen Mittelstandes. Der Träger der Initiative mit dem Namen „KMU-innovativ“ ist das Bundesministerium für Bildung und Forschung (BMBF) Mit der Initiative „KMU-innovativ“ hat das BMBF eine „Überholspur“ für kleine und mittlere Unternehmen (KMU) eingerichtet. 
-KMU können ihre Projektideen im Bereich der Informations- und Kommunikationstechnologien jederzeit einreichen und werden durch vereinfachte Förder- und beschleunigte Bewilligungsverfahren bevorzugt gefördert. 
-
-Ziel ist es, Innovationsrisiken für die KMU abzufedern und KMU mit Spitzenleistungen im Hightech-Bereich zu unterstützen.
+KMU können ihre Projektideen im Bereich der Informations- und Kommunikationstechnologien jederzeit einreichen und werden durch vereinfachte Förder- und beschleunigte Bewilligungsverfahren bevorzugt gefördert. Ziel ist es, Innovationsrisiken für die KMU abzufedern und KMU mit Spitzenleistungen im Hightech-Bereich zu unterstützen.
 
 ////
 
@@ -30,12 +28,13 @@ In recent years, such suitable analysis measures like load tests or monitoring h
 At the same time, sophisticated commercial and open source tools have been developed. 
 However, these measures are all based on a technical level or perspective. 
 They are not being interpreted at a functional domain level or perspective. 
-
-At the same time, software architecture and software development approaches such as Domain-Driven Design (DDD) are becoming increasingly widespread. 
+Also at the same time, software architecture and software development approaches such as Domain-Driven Design (DDD) are becoming increasingly widespread. 
 However these do not essentially consider the issues of runtime quality, despite the topics criticality. 
 
-So practicioners in the field lack access to 
+So practicioners in the field lack access to
+
 a) sophisticated commercial and / or open source tools to analyze runtime quality of an application system without a strictly technical perspective
+
 b) software architecture and software development approaches that essentially consider the issues of runtime quality. 
 
 The **dqualizer** research project aims to close this gap between the domain expertise of the application systems and the (technical) measures and findings of quality assurance. 
@@ -47,10 +46,8 @@ Um die Aufgabenstellung für dqualizer zu erläutern wird im Folgenden die Vorha
 
 Die Laufzeitqualität von Anwendungssystemen – z.B. bezüglich Performanz, Zuverlässigkeitund Resilienz – hat einen direkten Einfluss auf den geschäftlichen Erfolg von Unternehmen inunterschiedlichsten fachlichen Domänen. 
 Infolgedessen ist es wichtig, die Laufzeitqualität durchAnalysemaßnahmen kontinuierlich zu überwachen, zu bewerten und ggf. zu verbessern. 
-Im Laufe der letzten Jahre haben sich entsprechende Analysemaßnahmen wie Lasttests oderMonitoring in der Praxis verbreitet und ausgereifte kommerzielle und quelloffene Werkzeugewurden entwickelt. 
-Allerdings sind diese Maßnahmen allesamt auf technischer Ebeneangesiedelt und werden nicht auf fachlicher Domänenebene interpretiert. 
+Im Laufe der letzten Jahre haben sich entsprechende Analysemaßnahmen wie Lasttests oderMonitoring in der Praxis verbreitet und ausgereifte kommerzielle und quelloffene Werkzeugewurden entwickelt. Allerdings sind diese Maßnahmen allesamt auf technischer Ebeneangesiedelt und werden nicht auf fachlicher Domänenebene interpretiert. 
 Gleichzeitig werden bei Softwarearchitektur- und Softwareentwicklungsansätzen wie Domain-Driven Design (DDD),die zunehmend Verbreitung finden, Belange der Laufzeitqualität trotz ihrer Kritikalität im Wesentlichen nicht betrachtet.
-
 Das Forschungvorhaben dqualizer hat das Ziel, diese Kluft zwischen der Fachlichkeit der Anwendungssysteme und den (technischen) Maßnahmen und Erkenntnissen der Qualitätssicherung durch einen domänenzentrierten Ansatz zu schließen. 
 
 ////
@@ -60,15 +57,10 @@ _How does **dqualizer** intend to assist practitioners in SMEs?_
 To this end, possibilities for modeling and monitoring runtime quality issues are to be integrated into DDD-based techniques. 
 From a technical perspective, **dqualizer** can be used to automatically generate and interpret meaningful load and resilience tests and establish links to technical monitoring. 
 
-The innovative concepts developed are to be implemented in an open source tool and made available and accessible in connection with existing tools.
-
-The practical applicability of the **dqualizer** approach will be evaluated in real case studies. 
-Those will take place in the complex technical domains of insurance and payroll/tax accounting as well as the corresponding technical environments. 
-
-To this end, multiple case studies are provided by the two associated application partners, DATEV eG and VHV Solutions GmbH. 
+The innovative concepts developed are to be implemented in an open source tool and made available and accessible in connection with existing tools. The practical applicability of the **dqualizer** approach will be evaluated in real case studies. 
+Those will take place in the complex technical domains of insurance and payroll/tax accounting as well as the corresponding technical environments. To this end, multiple case studies are provided by the two associated application partners, DATEV eG and VHV Solutions GmbH. 
 
 As a result, employees with responsibilities in the specialist departments and employees with management responsibilities can be involved in the quality management of a company's software. 
-
 This can take place throughout the entire software life cycle, from requirements gathering to the operation and maintenance of the running software. 
 Such a broad applicability means a higher level of software quality in terms of non-functional properties, which is particularly beneficial for business-critical applications in Germany.
 
@@ -86,12 +78,11 @@ Im Ergebnis können die Fachbereiche und das Management in das Qualitätsmanagem
 Dies bedeutet ein höheres Maß an Softwarequalität hinsichtlich nicht-funktionaler Eigenschaften, was sich insbesondere für geschäftskritische Anwendungen am Standort Deutschland auszahlt.
 ////
 
-The rest of this chapter is divided into three sections. Firstly, a brief description of the requirements in section 1.1 <<Requirements overview>>. 
+The rest of this chapter is divided into three sections. 
 
+Firstly, a brief description of the requirements in section 1.1 <<Requirements overview>>. 
 Secondly a list of the most relevant quality goals for the architecture in 1.2 <<Quality goals>>, the achievement of which is critical for the most important stakeholders.
-
 Thirdly and finally, the section 1.3 <<Stakeholders>> provides an overview of the most important stakeholders and their expectations regarding the architecture.
-
 
 
 === 1.1. Requirements Overview
@@ -104,18 +95,17 @@ To gather and refine user stories and requirements for a potential dqualizer too
 
 === 1.2. Quality goals
 
-Dieser Abschnitt erläutert die Qualitätsziele der Architektur des dqualizer Projektvorhabens.
-Das arc42 Template empfiehlt, an dieser Stelle die drei bis max. fünf wichtigsten Qualitätsziele für die Architektur zu listen, deren Erfüllung für die wichtigsten Stakeholder von größter Bedeutung ist.
+The arc42 template recommends listing in the Quality Goals section the three to a maximum of five most important quality objectives for the architecture. The fulfillment of those objectives will be seen as of the utmost importance for the most critical stakeholders. 
+Architectural quality objectives should not be confused with or equated with project objectives.
 
-Qualitätsziele der Architektur sind dabei nicht mit den Projektzielen zu verwechseln oder gleichzusetzen.
-
-In unserem Kontext ist die Unterscheidung in dqualizer als Projekt und als Werkzeug zu beachten.
-
-* Das Projekt dqualizer zielt darauf, die zuvor motivierte Lücke zwischen Fachlichkeit und Technik durch einen innovativen Ansatz zur domänenzentrierten Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme zu schließen.
-
-* Das dqualizer Werkzeug ist das softwaretechnische Ergebnisartefakt der Forschungsarbeit, welches unter einer Open- Source-Lizenz veröffentlicht wird.
+In our context, the distinction between dqualizer as a project and as a tool should also be noted.
 
 Als Einsteig in die Architektur des dqualizer Werkzeuges dient die Abbildung 1b in der Vorhabenskurzbeschreibungfootnote:[Dokument: "Domänenzentrierte Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme"], welche die dqualizer-Architektur mit den dq-Teilkomponenten und die Anbindung existierender Laufzeitqualitätsanalysewerkzeuge darstellt.
+
+**Abbildung 1b**
+
+Table A 
+3 -5 Quality objectives of the dqualizer tool
 
 [cols="1,2" options="header"]
 |===
@@ -132,6 +122,19 @@ Als Einsteig in die Architektur des dqualizer Werkzeuges dient die Abbildung 1b 
 
 |===
 
+////
+Orginaltext: 
+
+Dieser Abschnitt erläutert die Qualitätsziele der Architektur des dqualizer Projektvorhabens. Das arc42 Template empfiehlt, an dieser Stelle die drei bis max. fünf wichtigsten Qualitätsziele für die Architektur zu listen, deren Erfüllung für die wichtigsten Stakeholder von größter Bedeutung ist.
+
+Qualitätsziele der Architektur sind dabei nicht mit den Projektzielen zu verwechseln oder gleichzusetzen.
+
+In unserem Kontext ist die Unterscheidung in dqualizer als Projekt und als Werkzeug zu beachten.
+
+* Das Projekt dqualizer zielt darauf, die zuvor motivierte Lücke zwischen Fachlichkeit und Technik durch einen innovativen Ansatz zur domänenzentrierten Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme zu schließen.
+
+* Das dqualizer Werkzeug ist das softwaretechnische Ergebnisartefakt der Forschungsarbeit, welches unter einer Open- Source-Lizenz veröffentlicht wird.
+
 Als Referenz für (weitere) denkbare Qualitätsziele bietet sich der ISO 25010 Standard an, welcher die folgenden Themen für Qualitätsziele nennt:
 
 * Functional Suitability
@@ -142,12 +145,17 @@ Als Referenz für (weitere) denkbare Qualitätsziele bietet sich der ISO 25010 S
 * Security
 * Maintainability
 * Portability
+////
 
 === 1.3. Stakeholder
 
-//Kommentar: Assoziierte Anwendungs- und Transferpartner. Die DATEV eG und die VHV solutions GmbH.
+////
+Orginaltext: 
+
+Assoziierte Anwendungs- und Transferpartner sind die DATEV eG und die VHV solutions GmbH.
 Es folgt eine Übersicht über die wichtigsten Stakeholder mit deren Erwartungen bezüglich der Architektur.
 Die Stakeholder sind dabei einem Workshop Miro Board.footnote:[https://miro.com/app/board/uXjVOAAmeeo=/] entnommen.
+////
 
 An overview of business and (IT) technological stakeholders is provided, as well as a description of the respective expectations regarding the architecture.
 
@@ -187,7 +195,41 @@ b) perform quality analyses based on my modeled processes.
 c) always have an insight into the historical development or the current state of the quality of my modeled processes.
 |===
 
-IT (-technische) Stakeholder
+
+IT (-technical) stakeholder
+
+[cols="1,2" options="header"]
+|===
+|Role |Expectation
+| DevOps professional | As a DevOps professional or DevOps'ler I would like to
+
+a) check what impact a failure of X% of my services will have on the end users.
+
+b) know how I need to configure my system to ensure cost-optimized, error-free operation.
+
+c) know whether my system can cope with the expected load so that I can react in good time.
+
+| Operations professional | As an operations professional or operator, I want 
+
+a) the maximum functionality with the minimum use of resources.
+
+| Development professional | As a development professional or developer, I want 
+
+a) to know which parts of the code are worth optimizing in order to use my time wisely.
+
+| Software architect | As a software architect, I want to
+
+a) compare the actual architecture with the DDD model (as the target).
+
+b) know which quality property is important for my service in order to be able to select the appropriate resilience mechanisms.
+
+| Technical tester | As a technical tester, I want 
+
+a) to cover the user stories of the given domain with my tests.
+|===
+
+////
+Orginaltext: 
 
 [cols="1,2" options="header"]
 |===
@@ -209,4 +251,4 @@ a) die Ist-Architektur mit dem DDD-Modell (Soll) abgleichen.
 b) wissen welche Qualitätseigenschaft für meinen Service wichtig ist, um die passenden Resilienz-Mechanismen auswählen zu können.
 | Fachlicher Tester | Als fachlicher Tester möchte ich mit meinen Tests die User Stories des Fachbereiches abdecken.
 |===
-
+////
