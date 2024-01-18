@@ -1,11 +1,7 @@
 [[section-introduction-and-goals]]
 ==	Introduction and Goals
 
-The "dqualizer" project is an example of the promotion of innovative SMEs. The sponsor of the initiative called "KMU-innovativ" is the Federal Ministry of Education and Research (BMBF).
-With the "KMU-innovativ" initiative, the BMBF has set up a "fast lane" for small and medium-sized enterprises (SMEs). 
-SMEs can submit their project ideas in the field of information and communication technologies at any time and receive preferential support through simplified funding and accelerated approval procedures. 
-
-The aim is to cushion innovation risks for SMEs and to support SMEs with top performance in the high-tech sector.
+The **dqualizer** project is an example of the promotion of innovative small and medium-sized enterprises (SMEs). The sponsor of the initiative called "KMU-innovativ" is the Federal Ministry of Education and Research (BMBF). With the "KMU-innovativ" initiative, the BMBF has set up a "fast lane" for small and medium-sized enterprises. SMEs can submit their project ideas in the field of information and communication technologies at any time and receive preferential support through simplified funding and accelerated approval procedures. The aim is to cushion innovation risks for SMEs and to support SMEs with top performance in the high-tech sector.
 
 ////
 A multi-line comment.
@@ -18,7 +14,7 @@ Ziel ist es, Innovationsrisiken für die KMU abzufedern und KMU mit Spitzenleis
 
 ////
 
-_How does dqualizer intend to be a driver of innovation for SMEs?_
+_How does the dqualizer project intend to be a driver of innovation for SMEs?_
 
 In order to outline the objective of dqualizer, the project specification document (german: Vorhabenskurzbeschreibung) footnote:[Document: "Domain-centered runtime quality analysis of business-critical application systems"] is quoted and commented below:
 
