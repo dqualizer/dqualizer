@@ -12,18 +12,18 @@ A more detailed description of this component's architecture is provided in
 the [arc42 document](https://dqualizer.github.io/dqualizer).
 
 ## Services
-| Service           | Address                  |
-| ----------------- | ------------------------ |
-| dqanalyzer        | `http://localhost:9090`  |
-| dqedit            | `http://localhost:8070`  |
-| dqapi             | `http://localhost:8099`  |
-| dqexec            | `http://localhost:8090`  |
-| dqtanslator       | `http://localhost:8080`  |
-| dqcockpit         | `http://localhost:3030`  |
-| influxdb          | `http://localhost:8086`  |
-| mongo-management  | `http://localhost:8081`  |
-| rabbit-management | `http://localhost:15672` |
-| dqanalyzer        | `http://localhost:9090`  |
+| Service           | Address                |
+| ----------------- | ---------------------- |
+| dqanalyzer        | http://localhost:9090  |
+| dqedit            | http://localhost:8070  |
+| dqapi             | http://localhost:8099  |
+| dqexec            | http://localhost:8090  |
+| dqtanslator       | http://localhost:8080  |
+| dqcockpit         | http://localhost:3030  |
+| influxdb          | http://localhost:8086  |
+| mongo-management  | http://localhost:8081  |
+| rabbit-management | http://localhost:15672 |
+| dqanalyzer        | http://localhost:9090  |
 
 ## Passwords
 | Service   | Username | Password |
@@ -31,8 +31,8 @@ the [arc42 document](https://dqualizer.github.io/dqualizer).
 | dqcockpit | admin    | demo     |
 | influxdb  | k6       | telegraf |
 
-## How to build
-### Docker
+## How to build and run
+### Docker compose
 * `docker compose up` - attacted to terminal
 * `docker compose up -d` - detatched from terminal
 * `docker compose pull` - pull latest images
