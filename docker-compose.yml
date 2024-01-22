@@ -7,7 +7,7 @@ services:
       - "${SAMPLE_APPLICATION_PORT}:9000"
 
   dqAnalyzer:
-    image: ghcr.io/dqualizer/dqanalyzer2:main
+    image: ghcr.io/dqualizer/dqanalyzer2:dqlang3.0
     container_name: 02_dqanalyzer
     ports:
       - "${DQANALYZER_PORT}:80"
@@ -18,7 +18,7 @@ services:
         condition: service_healthy
 
   dqApi:
-    image: ghcr.io/dqualizer/dqapi:main
+    image: ghcr.io/dqualizer/dqapi:dqlang3.0
     container_name: 03_dqapi
     ports:
       - "${DQAPI_PORT}:8099"
@@ -38,7 +38,7 @@ services:
       timeout: 10s
 
   dqTranslator:
-    image: ghcr.io/dqualizer/dqtranslator:main
+    image: ghcr.io/dqualizer/dqtranslator:dqlang3.0
     container_name: 04_dqtranslator
     ports:
       - "${DQTRANSLATOR_PORT}:8080"
@@ -51,7 +51,7 @@ services:
         condition: service_healthy
 
   dqExec:
-    image: ghcr.io/dqualizer/dqexec:main
+    image: ghcr.io/dqualizer/dqexec:dqlang3.0
     container_name: 05_dqexec
     ports:
       - "${DQEXEC_PORT}:8090"
