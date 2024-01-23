@@ -46,6 +46,7 @@ services:
       - SPRING_RABBITMQ_HOST=rabbit
       - DQUALIZER_DQAPI_HOST=dqApi
       - DQUALIZER_DQAPI_PORT=$DQAPI_PORT
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
     depends_on:
       rabbit:
         condition: service_healthy
@@ -65,6 +66,7 @@ services:
       - K6_INFLUXDB_ORGANIZATION=${DOCKER_INFLUXDB_INIT_ORG}
       - K6_INFLUXDB_BUCKET=${DOCKER_INFLUXDB_INIT_BUCKET}
       - K6_INFLUXDB_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
     depends_on:
       rabbit:
         condition: service_healthy
@@ -141,31 +143,32 @@ services:
       - influxdb
 
   prometheus:
-    container_name: prometheus
+    container_name: 11_prometheus
     image: prom/prometheus:v2.44.0
     restart: always
     volumes:
       - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
     ports:
-      - "9090:9090"
+      - "${PROMETHEUS_PORT}:9090"
 
   jaeger:
+    container_name: 12_jaeger
     image: jaegertracing/all-in-one:1.45
     restart: always
     ports:
-      - "16686:16686"
-      - "14250"
+      - "${JAEGER_PORT}:16686"
 
   otel-collector:
+    container_name: 13_otel_collector
     image: otel/opentelemetry-collector:0.67.0
     restart: always
     command: [ "--config=/etc/otel-collector-config.yaml" ]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml
     ports:
-      - "8888:8888"   # Prometheus' metrics exposed by the collector
-      - "8889:8889"   # Prometheus exporter metrics
-      - "13133:13133" # health_check extension
+      - "${OTEL_SELFMETRICS_PORT}:8888"
+      - "${OTEL_METRICS_PORT}:8889" 
+      - "${OTEL_HEALTH_PORT}:13133"
     depends_on:
       jaeger:
         condition: service_started
