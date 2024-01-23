@@ -1,0 +1,20 @@
+site:
+  title: dqualizer documentation
+  # the 404 page and sitemap files only get generated when the url property is set
+  url: https://dqualizer.github.io/docs
+  start_page: dqualizer-main::landingpage.adoc
+content:
+  sources:
+    #url = path to the main dir of the repo
+    - url: ./local-repos/dqualizer
+      branches: docs
+      #start_path in which folder you can find the antora.yml (for each repo...)
+      start_path: docs
+    # just an example on how to do it, doc does not exist! :)
+    - url: ./local-repos/dqlang
+      branches: docs
+      start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true

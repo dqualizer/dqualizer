@@ -1,0 +1,44 @@
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://dqualizer.github.io/">{{site.title}}</a>
+      {{#if env.SITE_SEARCH_PROVIDER}}
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs"{{#if page.home}} autofocus{{/if}}>
+          </div>
+        </div>
+      {{/if}}
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://dqualizer.github.io/dqualizer/dqualizer-main/1/landingpage.html">Overview</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">dqualizer components</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/dqualizer/dqanalyzer">dqanalyzer</a>
+            <a class="navbar-item" href="https://github.com/dqualizer/dqcockpit">dqcockpit</a>
+            <a class="navbar-item" href="https://github.com/dqualizer/dqedit">dqedit</a>
+            <a class="navbar-item" href="https://github.com/dqualizer/dqtranslator">dqtranslator</a>
+            <a class="navbar-item" href="https://github.com/dqualizer/dqexec">dqexec</a>
+            <a class="navbar-item" href="https://github.com/dqualizer/dqlang">dqlang</a>
+          </div>
+        </div>
+{{!--         <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Papers</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">link me</a>
+            <a class="navbar-item" href="#">link me</a>
+            <a class="navbar-item" href="#">link me</a>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+  </nav>
+</header>
+

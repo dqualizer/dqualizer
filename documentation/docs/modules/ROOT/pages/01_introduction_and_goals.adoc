@@ -1,0 +1,360 @@
+[[section-introduction-and-goals]]
+==	Introduction and Goals
+
+The **dqualizer** project is an example of the promotion of innovative small and medium-sized enterprises (SMEs). The sponsor of the initiative called "KMU-innovativ" is the Federal Ministry of Education and Research (BMBF). With the "KMU-innovativ" initiative, the BMBF has set up a "fast lane" for small and medium-sized enterprises. SMEs can submit their project ideas in the field of information and communication technologies at any time and receive preferential support through simplified funding and accelerated approval procedures. The aim is to cushion innovation risks for SMEs and to support SMEs with top performance in the high-tech sector.
+
+////
+A multi-line comment.
+
+Orginaltext:
+Das Vorhaben „dqualizer“ ist ein Beispiel für die Förderung des innovativen Mittelstandes. Der Träger der Initiative mit dem Namen „KMU-innovativ“ ist das Bundesministerium für Bildung und Forschung (BMBF) Mit der Initiative „KMU-innovativ“ hat das BMBF eine „Überholspur“ für kleine und mittlere Unternehmen (KMU) eingerichtet. 
+KMU können ihre Projektideen im Bereich der Informations- und Kommunikationstechnologien jederzeit einreichen und werden durch vereinfachte Förder- und beschleunigte Bewilligungsverfahren bevorzugt gefördert. Ziel ist es, Innovationsrisiken für die KMU abzufedern und KMU mit Spitzenleistungen im Hightech-Bereich zu unterstützen.
+
+////
+
+_How does the **dqualizer** project intend to be a driver of innovation for SMEs?_
+
+In order to outline the objective of **dqualizer**, the project specification document (german: Vorhabenskurzbeschreibung) footnote:[Document: "Domain-centered runtime quality analysis of business-critical application systems"] is quoted and commented below:
+
+"The runtime quality of a given application system - e.g. in terms of performance, reliability and resilience - plays a critical role on the usage and usability of said application. 
+Runtime quality therefore has a direct impact on a company's business success. 
+This applies to companies in a wide variety of technical domains. 
+To put it more poetic, one could state that running software is the lifeblood of a running business.
+
+Given this premise it becomes critical to analyse the runtime quality of a given application, e.g. with regards to resiliency. 
+To analyse aspects of runtime quality it is vital to continuously monitor, evaluate and, if necessary, improve runtime quality through analysis measures.   
+In recent years, such suitable analysis measures like load tests or monitoring have become widespread in the field of IT. 
+
+At the same time, sophisticated commercial and open source tools have been developed. 
+However, these measures are all based on a technical level or perspective. 
+They are not being interpreted at a functional domain level or perspective. 
+Also at the same time, software architecture and software development approaches such as Domain-Driven Design (DDD) are becoming increasingly widespread. 
+However these do not essentially consider the issues of runtime quality, despite the topics criticality. 
+
+So practicioners in the field lack access to
+
+a) sophisticated commercial and / or open source tools to analyze runtime quality of an application system without a strictly technical perspective
+
+b) software architecture and software development approaches that essentially consider the issues of runtime quality. 
+
+The **dqualizer** research project aims to close this gap between the domain expertise of the application systems and the (technical) measures and findings of quality assurance. 
+The focus is on a domain-centered solution approach."
+
+////
+Orginaltext: 
+Um die Aufgabenstellung für dqualizer zu erläutern wird im Folgenden die Vorhabenskurzbeschreibungfootnote:[Dokument: "Domänenzentrierte Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme"] zitiert:
+
+Die Laufzeitqualität von Anwendungssystemen – z.B. bezüglich Performanz, Zuverlässigkeitund Resilienz – hat einen direkten Einfluss auf den geschäftlichen Erfolg von Unternehmen inunterschiedlichsten fachlichen Domänen. 
+Infolgedessen ist es wichtig, die Laufzeitqualität durchAnalysemaßnahmen kontinuierlich zu überwachen, zu bewerten und ggf. zu verbessern. 
+Im Laufe der letzten Jahre haben sich entsprechende Analysemaßnahmen wie Lasttests oderMonitoring in der Praxis verbreitet und ausgereifte kommerzielle und quelloffene Werkzeugewurden entwickelt. Allerdings sind diese Maßnahmen allesamt auf technischer Ebeneangesiedelt und werden nicht auf fachlicher Domänenebene interpretiert. 
+Gleichzeitig werden bei Softwarearchitektur- und Softwareentwicklungsansätzen wie Domain-Driven Design (DDD),die zunehmend Verbreitung finden, Belange der Laufzeitqualität trotz ihrer Kritikalität im Wesentlichen nicht betrachtet.
+Das Forschungvorhaben dqualizer hat das Ziel, diese Kluft zwischen der Fachlichkeit der Anwendungssysteme und den (technischen) Maßnahmen und Erkenntnissen der Qualitätssicherung durch einen domänenzentrierten Ansatz zu schließen. 
+
+////
+
+_How does **dqualizer** intend to assist practitioners in SMEs?_
+
+To this end, possibilities for modeling and monitoring runtime quality issues are to be integrated into DDD-based techniques. 
+From a technical perspective, **dqualizer** can be used to automatically generate and interpret meaningful load and resilience tests and establish links to technical monitoring. 
+
+The innovative concepts developed are to be implemented in an open source tool and made available and accessible in connection with existing tools. The practical applicability of the **dqualizer** approach will be evaluated in real case studies. 
+Those will take place in the complex technical domains of insurance and payroll/tax accounting as well as the corresponding technical environments. To this end, multiple case studies are provided by the two associated application partners, DATEV eG and VHV Solutions GmbH. 
+
+As a result, employees with responsibilities in the specialist departments and employees with management responsibilities can be involved in the quality management of a company's software. 
+This can take place throughout the entire software life cycle, from requirements gathering to the operation and maintenance of the running software. 
+Such a broad applicability means a higher level of software quality in terms of non-functional properties, which is particularly beneficial for business-critical applications in Germany.
+
+////
+Orginaltext: 
+
+Hierzu sollen Möglichkeiten zur Modellierung und Überwachung von Belangen der Laufzeitqualität in DDD basierte Techniken integriert werden. 
+Aus fachlicher Perspektive lassen sich durch dqualizer automatisiert aussagekräftige Last- und Resilienztests erzeugen und interpretieren sowie die Verbindungen zum technischen Monitoring herstellen. 
+Die entwickelten innovativen Konzepte sollen in einem Open-Source-Werkzeug umgesetzt und in Anbindung an existierende Werkzeuge verfügbar und nutzbar gemacht werden.
+Die praktische Anwendbarkeit des dqualizer-Ansatzes werden in realen Fallstudien in denkomplexen fachlichen Domänen Versicherungen und Lohn-/Steuerabrechnung sowie denentsprechenden technischen Umgebungen evaluiert. 
+
+Die Fallstudien werden von den beiden assoziierten Anwendungspartnern, DATEV eG und VHV Solutions GmbH, bereitgestellt. 
+Im Ergebnis können die Fachbereiche und das Management in das Qualitätsmanagement einerUnternehmenssoftware während des gesamten Lebenszyklus eingebunden werden, von der Anforderungserhebung bis zu Betrieb und Wartung der laufenden Software. 
+
+Dies bedeutet ein höheres Maß an Softwarequalität hinsichtlich nicht-funktionaler Eigenschaften, was sich insbesondere für geschäftskritische Anwendungen am Standort Deutschland auszahlt.
+////
+
+The rest of this chapter is divided into three sections. 
+
+Firstly, a brief description of the requirements in section 1.1 <<Requirements overview>>. 
+Secondly a list of the most relevant quality goals for the architecture in 1.2 <<Quality goals>>, the achievement of which is critical for the most important stakeholders.
+Thirdly and finally, the section 1.3 <<Stakeholders>> provides an overview of the most important stakeholders and their expectations regarding the architecture.
+
+
+=== 1.1. Requirements Overview
+
+To gather and refine user stories and requirements for a potential tool, the dqualizer team conducted a workshop. The results of said workshop is documented below in a tabular use-case format. 
+
+// -> User Stories sind als gelbe UC-Zettel auf Miro gesammelt: https://miro.com/app/board/uXjVP_qJ4rU=/
+//If requirements documents exist this overview should refer to these documents.
+
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|As a domain expert who is interested in the results of the quality analysis at runtime, I would like to have a display that shows the analysis results obtained in order to be able to interpret the results obtained.
+|Domain expert
+
+|As a domain expert, I would like to know what the response time is between two endpoints to ensure that my SLA remains guaranteed.
+|Domain expert
+
+|As a technical expert interested in the results of the runtime quality analysis, I would like to include the response times in the results of a runtime quality analysis in order to draw a concise conclusion.
+|Technical expert
+
+|As a domain-based dqualizer user, I would like to define an expected response time for a load test to verify that my measurement point meets the SLO/SLA.
+|Domain-based dqualizer user
+
+|As a domain expert, I would like to define a static load for a load test.
+|Domain expert
+
+|As a domain expert, I would like to be able to define a (stimulus of a) load test in order to estimate whether my system shows the desired functions under load. 
+|Domain expert
+
+|===
+
+
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|As a domain expert, I would also like to be able to ask questions about a story as a whole, e.g. frequency of occurrence.
+|Domain expert
+
+|As a domain expert interested in resilience, I would like to specify the expected response for a resilience scenario in order to check whether my system is responding correctly. 
+|Domain expert
+
+|As a domain expert interested in monitoring, I want to specify a response time threshold to see if my subsystems and components are responding within the acceptable threshold.
+|Domain expert
+
+|As a domain expert, I want to be able to define multiple response metrics in a question. 
+|Domain expert
+
+|As a domain expert interested in monitoring, I want to define multiple measurement endpoints to monitor different interfaces within my application. 
+|Domain expert
+
+|As a domain expert, I want to know the performance of my application under high load. 
+|Domain expert
+
+|===
+
+////
+Orginaltext: 
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|Als Fachexperte möchte ich auch Fragestellungen auf eine Story als Gesamtes machen können, z.B. Häufigkeit des Vorkommens.
+|Fachexperte
+
+|Als Domänenexperte, der sich für Resilienz interessiert, möchte ich die erwartete Reaktion für ein Resilienzszenario spezifizieren, um zu überprüfen, ob mein System korrekt reagiert. 
+|Domänenexperte
+
+|Als Fachexperte, der an der Überwachung interessiert ist, möchte ich einen Schwellenwert für die Reaktionszeit festlegen, um zu sehen, ob meine Subsysteme und Komponenten innerhalb des zulässigen Schwellenwerts reagieren.
+|Fachexperte
+
+|Als Fachexperte möchte ich in einer Fragestellung mehrere Response-Metriken definieren können. 
+|Fachexperte
+
+|Als Domänenexperte, der an der Überwachung interessiert ist, möchte ich mehrere Messendpunkte festlegen, um verschiedene Schnittstellen innerhalb meiner Anwendung zu überwachen. 
+|Domänenexperte
+
+|Als Fachexperte möchte ich die Performance meiner Anwendung bei hoher Last kennen. 
+|Fachexperte
+
+|===
+
+
+
+[cols="1,2" options="header"]
+|===
+|Use Case |Notes
+
+|Als Fachexperte, der sich für die Ergebnisse der Qualitätsanalyse zur Laufzeit interessiert, würde ich gerne eine Ansicht haben, die die erhaltenen Analyseergebnisse anzeigt, um eine Interpretation der erhaltenen Ergebnisse vornehmen zu können.
+|Fachexperte
+
+|Als Domänenexperte möchte ich wissen, wie die Reaktionszeit zwischen zwei Endpunkten ist, um sicher zustellen das meine SLA garantiert bleibt.
+|Domänenexperte
+
+|Als technischer Experte, der an den Ergebnissen der Laufzeitqualitätsanalyse interessiert ist, würde ich gerne die Antwortzeiten in die Ergebnisse einer Laufzeitqualitätsanalyse einbeziehen, um eine prägnante Schlussfolgerung zu ziehen.
+|Technischer Experte
+
+|Als fachlicher Dqualizer-Nutzer möchte ich eine erwartete Antwortzeit für einen Lasttest definieren, um zu überprüfen, dass mein Messpunkt die SLO/SLA erfüllt.
+|Fachlicher dqualizer-Nutzer 
+
+|Als Fachexperte möchte ich eine statische Last für einen Lasttest definieren.
+|Fachexperte
+
+|Als Fachexperte möchte ich einen (Stimulus eines) Lasttest-Test definieren können, um abzuschätzen ob mein System unter Last die gewünschte Funktionen zeigt. 
+|Fachexperte
+
+|===
+
+////
+
+
+=== 1.2. Quality goals
+
+The arc42 template recommends listing in the Quality Goals section the three to a maximum of five most important quality objectives for the architecture. The fulfillment of those objectives will be seen as of the utmost importance for the most critical stakeholders. 
+Architectural quality objectives should not be confused with or equated with project objectives.
+
+In our context, the distinction between dqualizer as a project and as a tool should also be noted.
+
+Als Einsteig in die Architektur des dqualizer Werkzeuges dient die Abbildung 1b in der Vorhabenskurzbeschreibungfootnote:[Dokument: "Domänenzentrierte Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme"], welche die dqualizer-Architektur mit den dq-Teilkomponenten und die Anbindung existierender Laufzeitqualitätsanalysewerkzeuge darstellt.
+
+**Abbildung 1b**
+
+Table A 
+3 -5 Quality objectives of the dqualizer tool
+
+[cols="1,2" options="header"]
+|===
+|Qualitätsziel |Beschreibung
+
+|dq-Teilkomponenten als interagierende Subsysteme
+|Qualitätsziel 1 formuliert als Text
+
+|Anbindung existierender Laufzeitqualitätsanalysewerkzeuge
+|Qualitätsziel 2 formuliert als Text
+
+|Erweiterbarkeit
+|Qualitätsziel 3 formuliert als Text
+
+|===
+
+////
+Orginaltext: 
+
+Dieser Abschnitt erläutert die Qualitätsziele der Architektur des dqualizer Projektvorhabens. Das arc42 Template empfiehlt, an dieser Stelle die drei bis max. fünf wichtigsten Qualitätsziele für die Architektur zu listen, deren Erfüllung für die wichtigsten Stakeholder von größter Bedeutung ist.
+
+Qualitätsziele der Architektur sind dabei nicht mit den Projektzielen zu verwechseln oder gleichzusetzen.
+
+In unserem Kontext ist die Unterscheidung in dqualizer als Projekt und als Werkzeug zu beachten.
+
+* Das Projekt dqualizer zielt darauf, die zuvor motivierte Lücke zwischen Fachlichkeit und Technik durch einen innovativen Ansatz zur domänenzentrierten Laufzeitqualitätsanalyse geschäftskritischer Anwendungssysteme zu schließen.
+
+* Das dqualizer Werkzeug ist das softwaretechnische Ergebnisartefakt der Forschungsarbeit, welches unter einer Open- Source-Lizenz veröffentlicht wird.
+
+Als Referenz für (weitere) denkbare Qualitätsziele bietet sich der ISO 25010 Standard an, welcher die folgenden Themen für Qualitätsziele nennt:
+
+* Functional Suitability
+* Performance Efficiency
+* Compatibility
+* Usability
+* Reliability
+* Security
+* Maintainability
+* Portability
+////
+
+=== 1.3. Stakeholder
+
+////
+Orginaltext: 
+
+Assoziierte Anwendungs- und Transferpartner sind die DATEV eG und die VHV solutions GmbH.
+Es folgt eine Übersicht über die wichtigsten Stakeholder mit deren Erwartungen bezüglich der Architektur.
+Die Stakeholder sind dabei einem Workshop Miro Board.footnote:[https://miro.com/app/board/uXjVOAAmeeo=/] entnommen.
+////
+
+An overview of business and (IT) technological stakeholders is provided, as well as a description of the respective expectations regarding the architecture.
+
+// Fachliche Stakeholder
+
+Business stakeholders
+
+[cols="1,2" options="header"]
+|===
+|Role |Expectations
+| Manager | As a manager, I would like to know
+
+a) what impact a changing number of customers has on IT resources in order to better estimate costs.
+
+b) what effects technical failures have on business processes in order to estimate possible SLA violations.
+
+c) how I can save IT resources to make my system more efficient. 
+
+d) how much individual domains (or processes) cost me.
+
+e) how much it would cost to improve a quality property in order to increase the quality of the system.
+
+
+|(Domain) Product Owner | As a specialist product owner, I would like to
+
+a) record and evaluate the quality requirements of the business expert with little effort.
+
+b) communicate the effects of technical issues on IT resources to the technical expert with little translation effort.
+
+
+|Domain expert | As a domain expert, I would like to
+
+a) define quality requirements and scenarios based on my modeled processes.
+
+b) perform quality analyses based on my modeled processes.
+
+c) always have an insight into the historical development or the current state of the quality of my modeled processes.
+|===
+
+
+IT (-technical) stakeholder
+
+[cols="1,2" options="header"]
+|===
+|Role |Expectation
+| DevOps professional | As a DevOps professional or DevOps'ler I would like to
+
+a) check what impact a failure of X% of my services will have on the end users.
+
+b) know how I need to configure my system to ensure cost-optimized, error-free operation.
+
+c) know whether my system can cope with the expected load so that I can react in good time.
+
+| Operations professional | As an operations professional or operator, I want 
+
+a) the maximum functionality with the minimum use of resources.
+
+| Development professional | As a development professional or developer, I want 
+
+a) to know which parts of the code are worth optimizing in order to use my time wisely.
+
+| Software architect | As a software architect, I want to
+
+a) compare the actual architecture with the DDD model (as the target).
+
+b) know which quality property is important for my service in order to be able to select the appropriate resilience mechanisms.
+
+| Technical tester | As a technical tester, I want 
+
+a) to cover the user stories of the given domain with my tests.
+|===
+
+////
+Orginaltext: 
+
+[cols="1,2" options="header"]
+|===
+|Rolle |Erwartungshaltung
+| DevOps Fachkraft | Als DevOps Fachkraft bzw. DevOps'ler möchte ich
+
+a) prüfen, welche Auswirkung ein Ausfall von X% meiner Services auf die Endnutzer hat.
+
+b) wissen, wie ich mein System konfigurieren muss, um kostenoptimiert einen fehlerfreien Betrieb zu gewährleisten.
+
+c) wissen, ob mein System die zu erwartende Last aushält, um frühzeitig reagieren zu können.
+
+| Operations Fachkraft | Als Operations Fachkraft bzw. Operator möchte ich 100 % Funktionalität mit minimalem Ressourcenaufwand.
+| Development Fachkraft | Als Development Fachkraft bzw. Entwickler möchte ich wissen, bei welchen Code-Stellen es sich lohnt, sie zu optimieren, um meine Zeit sinnvoll einzusetzen.
+| Software Architekt | Als Software Architekt möchte ich
+
+a) die Ist-Architektur mit dem DDD-Modell (Soll) abgleichen.
+
+b) wissen welche Qualitätseigenschaft für meinen Service wichtig ist, um die passenden Resilienz-Mechanismen auswählen zu können.
+| Fachlicher Tester | Als fachlicher Tester möchte ich mit meinen Tests die User Stories des Fachbereiches abdecken.
+|===
+////
