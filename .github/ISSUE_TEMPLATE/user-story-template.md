@@ -1,14 +1,14 @@
 ---
 name: User Story Template
 about: Add a user story that is associated with an epic.
-title: "[User-Story] - *ENTER TITLE*"
+title: "*ENTER TITLE*"
 labels: "user-story"
 assignees: ""
 ---
 
 ## Story
 
-As a USER who PRECONDITIONS, I want to DO_THING so I can ACCOMPLISH_GOAL.
+As a <type of user/ WHO>, I want to <goal / WHAT> so that <reason, value / WHY>
 
 ## Acceptance Criteria
 
@@ -16,7 +16,7 @@ As a USER who PRECONDITIONS, I want to DO_THING so I can ACCOMPLISH_GOAL.
 - [ ] Criteria 2
 - [ ] Criteria 3
 
-## Dependencies
+## Blocker
 
 - [ ] Blocked by issue one
 - [ ] Blocked by issue two
