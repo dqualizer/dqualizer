@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.ADD_ISSUES_TO_PROJECTS_PAT }}
       - name: actions-template-sync
-        uses: AndreasAugustin/actions-template-sync@v1.1.8
+        uses: AndreasAugustin/actions-template-sync@v1
         with:
           github_token: ${{ secrets.ADD_ISSUES_TO_PROJECTS_PAT }}
           source_repo_path: dqualizer/template
