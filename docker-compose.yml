@@ -100,6 +100,7 @@ services:
       - ./docker-output/scripts:/app/scripts
       # Has to correspond to "generated_experiments_volume_path" variable in Hosts Python setup
       - ./docker-output/generated_experiments:/app/generated_experiments
+      - ./docker-input/input_ressources:/app/input_ressources
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
       - dqualizer.dqexec.influx.host=influxdb
