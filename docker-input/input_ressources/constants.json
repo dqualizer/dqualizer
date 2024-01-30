@@ -1,0 +1,40 @@
+{
+  "accuracy": {
+    "repetition": {
+      "min": 1,
+      "max": 3
+    }
+  },
+  "load_profile": {
+    "load_peak": {
+      "high": 10,
+      "very_high": 15,
+      "extremely_high": 30,
+      "slow": "20s",
+      "fast": "15s",
+      "very_fast": "10s",
+      "cool_down_duration": "5s"
+    },
+    "load_increase": {
+      "start_target": 10,
+      "end_target": 200,
+      "test_duration": "30s",
+      "stages": 10,
+      "linear": 1,
+      "quadratic": 2,
+      "cubic": 3
+    },
+    "constant_load": {
+      "low": 4,
+      "medium": 20,
+      "high": 30,
+      "min_duration": 1000,
+      "max_duration": 10000
+    }
+  },
+  "response_time": {
+    "satisfied": 1200,
+    "tolerated": 2400,
+    "frustrated": 4800
+  }
+}
