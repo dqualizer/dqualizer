@@ -93,6 +93,8 @@ services:
 
   dqexec:
     image: ghcr.io/dqualizer/dqexec:resilience-exec
+    stdin_open: true
+    tty: true
     ports:
       - "8090:8090"
     volumes:
@@ -105,6 +107,8 @@ services:
       - SPRING_RABBITMQ_HOST=rabbit
       - dqualizer.dqexec.influx.host=influxdb
       - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+      - dqualizer.dqexec.mysql.host=mysql
+      - dqualizer.dqexec.mysql.port=3306
       - K6_INFLUXDB_ORGANIZATION=${DOCKER_INFLUXDB_INIT_ORG}
       - K6_INFLUXDB_BUCKET=${DOCKER_INFLUXDB_INIT_BUCKET}
       - K6_INFLUXDB_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
@@ -112,6 +116,8 @@ services:
       rabbit:
         condition: service_healthy
       influxdb:
+        condition: service_started
+      mysql:
         condition: service_started
 #      ddd-autohaus:
 #        condition: service_started
@@ -154,6 +160,23 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     depends_on:
       - influxdb
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+
+    # For confidentiality in real use cases define corresponding environment variables in the runtime environment / terminal
+    environment:
+      MYSQL_ROOT_PASSWORD: "aRootPw"  #${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: "authentication"
+      MYSQL_USER: "aDBUser" #${MYSQL_USER}
+      MYSQL_PASSWORD: "aDBPw" #${MYSQL_PASSWORD}
+
+    # For confidentiality in real use cases delete the volume and setup DB manually
+    volumes:
+      - ./docker-input/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   data: {}
