@@ -9,10 +9,6 @@ services:
 #      - "3001:3001"
 #    restart: unless-stopped
 
-#  ddd-autohaus:
-#    image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
-#    ports:
-#      - "9000:9000"
 
 #  dqanalyzer-react:
 #    image: ghcr.io/dqualizer/dqanalyzer-react
