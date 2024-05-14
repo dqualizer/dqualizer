@@ -167,14 +167,14 @@ services:
     ports:
       - "3306:3306"
 
-    # For confidentiality in real use cases define corresponding environment variables in the runtime environment / terminal
+    # For real confidentiality define corresponding environment variables in the runtime environment / terminal
     environment:
       MYSQL_ROOT_PASSWORD: "aRootPw"  #${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: "authentication"
       MYSQL_USER: "aDBUser" #${MYSQL_USER}
       MYSQL_PASSWORD: "aDBPw" #${MYSQL_PASSWORD}
 
-    # For confidentiality in real use cases delete the volume and setup DB manually
+    # For real confidentiality delete the volume and setup dqualizer user manually
     volumes:
       - ./docker-input/init.sql:/docker-entrypoint-initdb.d/init.sql
 
