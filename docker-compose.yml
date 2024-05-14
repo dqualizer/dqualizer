@@ -1,24 +1,24 @@
 version: "3.9"
 services:
-#  dashboard:
-#    image: louislam/uptime-kuma:1
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      - ./uptime-kuma-data:/app/data
-#    ports:
-#      - "3001:3001"
-#    restart: unless-stopped
+  dashboard:
+    image: louislam/uptime-kuma:1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./uptime-kuma-data:/app/data
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
 
 
-#  dqanalyzer-react:
-#    image: ghcr.io/dqualizer/dqanalyzer-react
-#    ports:
-#      - "9090:80"
-#    environment:
-#      - VITE_BACKEND_URL=http://localhost:8099
-#    depends_on:
-#      dqApi:
-#        condition: service_healthy
+  dqanalyzer-react:
+    image: ghcr.io/dqualizer/dqanalyzer2:dummy-loadtest
+    ports:
+      - "9090:80"
+    environment:
+      - VITE_BACKEND_URL=http://localhost:8099
+    depends_on:
+      dqApi:
+        condition: service_healthy
 
 #  dqanalyzer-backend:
 #    image: ghcr.io/dqualizer/dqanalyzer-backend
