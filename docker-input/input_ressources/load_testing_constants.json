@@ -25,11 +25,11 @@
       "cubic": 3
     },
     "constant_load": {
-      "low": 4,
+      "low": 60,
       "medium": 20,
       "high": 30,
       "min_duration": 1000,
-      "max_duration": 10000
+      "max_duration": 100000
     }
   },
   "response_time": {
