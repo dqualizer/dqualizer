@@ -9,17 +9,23 @@ services:
       - "3001:3001"
     restart: unless-stopped
 
-
-  dqanalyzer-react:
-    image: ghcr.io/dqualizer/dqanalyzer2:dummy-loadtest
+# Note that running leasingNinja in Docker does NOT allow the application of the unavailability stimulus,
+# as the unavailability stimulus was implemented for host system processes
+  leasingNinja:
+    image: ghcr.io/dqualizer/leasing-ninja:resilience_testing
     ports:
-      - "9090:80"
-    environment:
-      - VITE_BACKEND_URL=http://localhost:8099
-    depends_on:
-      dqApi:
-        condition: service_healthy
-
+      - "7080:7080"
+      - "7081:7081"
+  #  dqanalyzer-react:
+#    image: ghcr.io/dqualizer/dqanalyzer2:dummy-loadtest
+#    ports:
+#      - "9090:80"
+#    environment:
+#      - VITE_BACKEND_URL=http://localhost:8099
+#    depends_on:
+#      dqApi:
+#        condition: service_healthy
+#
 #  dqanalyzer-backend:
 #    image: ghcr.io/dqualizer/dqanalyzer-backend
 #    ports:
@@ -31,8 +37,6 @@ services:
 #      rabbit:
 #        condition: service_healthy
 #      dqtranslator:
-#        condition: service_started
-#      ddd-autohaus:
 #        condition: service_started
 
   dqApi:
@@ -100,7 +104,7 @@ services:
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
       - dqualizer.dqexec.influx.host=influxdb
-      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+      - dqualizer.dqexec.docker.localhost_replacement=leasingNinja
       - dqualizer.dqexec.mysql.host=mysql
       - dqualizer.dqexec.mysql.port=3306
       - K6_INFLUXDB_ORGANIZATION=${DOCKER_INFLUXDB_INIT_ORG}
