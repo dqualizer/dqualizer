@@ -11,10 +11,14 @@ services:
 
 # Note that running leasingNinja in Docker does NOT allow the application of the unavailability stimulus,
 # as the unavailability stimulus was implemented for host system processes
-  leasingNinja:
-    image: ghcr.io/dqualizer/leasing-ninja:resilience_testing
+  leasingNinja-webapp:
+    image: ghcr.io/dqualizer/leasing-ninja-webapp:resilience_testing
     ports:
       - "7080:7080"
+
+  leasingNinja-riskapi:
+    image: ghcr.io/dqualizer/leasing-ninja-riskapi:resilience_testing
+    ports:
       - "7081:7081"
   #  dqanalyzer-react:
 #    image: ghcr.io/dqualizer/dqanalyzer2:dummy-loadtest
@@ -116,6 +120,10 @@ services:
       influxdb:
         condition: service_started
       mysql:
+        condition: service_started
+      leasingNinja-webapp:
+        condition: service_started
+      leasingNinja-riskapi:
         condition: service_started
 #      ddd-autohaus:
 #        condition: service_started
