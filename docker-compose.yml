@@ -92,7 +92,7 @@ services:
     environment:
       - SPRING_RABBITMQ_HOST=rabbit
       - dqualizer.dqexec.influx.host=influxdb
-      - dqualizer.dqexec.docker.localhost_replacement=leasingNinja
+      - dqualizer.dqexec.docker.localhost_replacement=leasingNinja-webapp
       - dqualizer.dqexec.mysql.host=mysql
       - dqualizer.dqexec.mysql.port=3306
       - K6_INFLUXDB_ORGANIZATION=${DOCKER_INFLUXDB_INIT_ORG}
