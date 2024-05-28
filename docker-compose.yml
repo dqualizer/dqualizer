@@ -21,7 +21,7 @@ services:
     ports:
       - "7081:7081"
   dqanalyzer-react:
-    image: ghcr.io/dqualizer/dqanalyzer2:dummy-loadtest
+    image: ghcr.io/dqualizer/dqanalyzer2:leasingNinja-resilience
     ports:
       - "9090:80"
     environment:
