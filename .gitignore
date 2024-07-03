@@ -34,3 +34,11 @@ build/
 
 ### Documentation
 *.cache
+
+### nix ###
+.devenv
+.direnv
+
+.env
+
+**/.DS_Store
