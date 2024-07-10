@@ -7,14 +7,18 @@ services:
     ports:
       - "${SAMPLE_APPLICATION_PORT}:9000"
 
-  dqanalyzer:
-    image: ghcr.io/dqualizer/dqanalyzer2:nextjs
-    restart: unless-stopped
-    ports:
-      - "${DQANALYZER_PORT}:3000"
-    environment:
-      - DQAPI_HOST=dqapi:8099
-      - DQTRANSLATOR_HOST=dqtranslator:8080
+  # dqanalyzer:
+  #   image: ghcr.io/dqualizer/dqanalyzer2:nextjs
+  #   build:
+  #     context: dqanalyzer2/.
+  #     dockerfile: Dockerfile
+  #     target: runtime
+  #   restart: unless-stopped
+  #   ports:
+  #     - "${DQANALYZER_PORT}:3000"
+  #   environment:
+  #     - DQAPI_HOST=dqapi:8099
+  #     - DQTRANSLATOR_HOST=dqtranslator:8080
 
   dqapi:
     image: ghcr.io/dqualizer/dqapi:kotlin
@@ -31,6 +35,8 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=${DATABASE_NAME}
       - SPRING_DATA_MONGODB_USERNAME=${DEMO_USER}
       - SPRING_DATA_MONGODB_PASSWORD=${DEMO_PASS}
+    ports:
+      - "${DQAPI_PORT}:8099"
 
   # dqEdit:
   #   image: ghcr.io/dqualizer/dqedit-react:react-dev
@@ -54,6 +60,8 @@ services:
     depends_on:
       dqapi:
         condition: service_healthy
+    ports:
+      - "${DQTRANSLATOR_PORT}:8080"
 
   dqExec:
     image: ghcr.io/dqualizer/dqexec:instrumentation
@@ -75,6 +83,9 @@ services:
         condition: service_started
       ddd-autohaus:
         condition: service_started
+    volumes:
+      - ./docker-output/logging:/app/logs
+      - ./docker-output/scripts:/app/loadtest_configurations
 
   dqdatabase:
     image: mongo
