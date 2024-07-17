@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:cachix/devenv-nixpkgs/rolling";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,8 +32,8 @@
               modules = [
                 {
                   name = "dqualizer development shell";
+                  dotenv.disableHint = true;
 
-		              dotenv.disableHint = true;
                   languages = with pkgs; {
                     java = {
                       enable = true;
@@ -42,16 +42,26 @@
                       gradle.enable = true;
                     };
                     kotlin.enable = true;
+                    javascript = {
+                      enable = true;
+                      package = nodePackages_latest.nodejs;
+                      corepack.enable = true;
+                      npm.enable = true;
+                      pnpm.enable = true;
+                    };
+
+                    typescript.enable = true;
                   };
 
                   packages = with pkgs;
                     [
                       nushell
-                      nodePackages_latest.nodejs
                       biome
                       kotlin-language-server
                       ktfmt
                       ktlint
+                      nil
+                      nixfmt-rfc-style
                     ] ++ lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [
                       Cocoa
                       CoreFoundation

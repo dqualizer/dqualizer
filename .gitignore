@@ -42,3 +42,8 @@ build/
 .env
 
 **/.DS_Store
+
+### dqualizer ###
+dqedit/
+dqanalyzer2/
+dqapi
