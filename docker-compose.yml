@@ -1,176 +1,175 @@
-version: "3.9"
+volumes:
+  dqdatabase:
+
 services:
   ddd-autohaus:
-    image: ghcr.io/dqualizer/dqsamples-ddd-autohaus
-    container_name: 01_sample-application
+    image: ghcr.io/dqualizer/ddd-autohaus:main
     ports:
       - "${SAMPLE_APPLICATION_PORT}:9000"
 
-  dqAnalyzer:
+  dqanalyzer:
     image: ghcr.io/dqualizer/dqanalyzer2:main
-    container_name: 02_dqanalyzer
+    restart: unless-stopped
     ports:
-      - "${DQANALYZER_PORT}:80"
+      - "${DQANALYZER_PORT}:3000"
     environment:
-      - VITE_BACKEND_URL=http://localhost:${DQAPI_PORT}
-    depends_on:
-      dqApi:
-        condition: service_healthy
+      - DQAPI_HOST=dqapi:8099
+      - DQTRANSLATOR_HOST=dqtranslator:8080
 
-  dqApi:
+  dqapi:
     image: ghcr.io/dqualizer/dqapi:main
-    container_name: 03_dqapi
-    ports:
-      - "${DQAPI_PORT}:8099"
+    restart: unless-stopped
+    depends_on:
+      dqdatabase:
+        condition: service_healthy
+      rabbit:
+        condition: service_healthy
     environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
+      - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
+      - SPRING_DATA_MONGODB_URI=mongodb://${DEMO_USER}:${DEMO_PASS}@dqdatabase:27017/${DATABASE_NAME}?authSource=admin
       - SPRING_DATA_MONGODB_HOST=dqdatabase
-      - SPRING_DATA_MONGODB_PORT=${MONGO_PORT}
-      - SPRING_DATA_MONGODB_USERNAME=root
-      - SPRING_DATA_MONGODB_PASSWORD=example
-      - SPRING_DATA_MONGODB_DATABASE=dqualizer
-    healthcheck:
-      test: wget --no-verbose --tries=1 --spider localhost:${DQAPI_PORT}/actuator/health || exit 1
-      interval: 60s
-      start_period: 5s
-      retries: 5
-      timeout: 10s
+      - SPRING_DATA_MONGODB_DATABASE=${DATABASE_NAME}
+      - SPRING_DATA_MONGODB_USERNAME=${DEMO_USER}
+      - SPRING_DATA_MONGODB_PASSWORD=${DEMO_PASS}
 
   dqTranslator:
     image: ghcr.io/dqualizer/dqtranslator:main
-    container_name: 04_dqtranslator
-    ports:
-      - "${DQTRANSLATOR_PORT}:8080"
+    restart: unless-stopped
     environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-      - DQUALIZER_DQAPI_HOST=dqApi
-      - DQUALIZER_DQAPI_PORT=$DQAPI_PORT
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
+      - SPRING_DATA_MONGODB_URI=mongodb://${DEMO_USER}:${DEMO_PASS}@dqdatabase:27017/${DATABASE_NAME}?authSource=admin
+      - DQUALIZER_DQAPI_HOST=dqapi
+      - DQUALIZER_DQAPI_PORT=8099
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - INFLUXDB_URL=http://influxdb:8086
+      - DOCKER_INFLUXDB_INIT_ORG
+      - DOCKER_INFLUXDB_INIT_BUCKET
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     depends_on:
-      rabbit:
+      dqapi:
         condition: service_healthy
 
   dqExec:
     image: ghcr.io/dqualizer/dqexec:main
-    container_name: 05_dqexec
-    ports:
-      - "${DQEXEC_PORT}:8090"
-    volumes:
-      - ./docker-output/logging:/app/logging
-      - ./docker-output/scripts:/app/scripts
+    restart: unless-stopped
     environment:
-      - SPRING_RABBITMQ_HOST=rabbit
-      - dqualizer.dqexec.influx.host=influxdb
-      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+      - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
+      - SPRING_DATA_MONGODB_URI=mongodb://${DEMO_USER}:${DEMO_PASS}@dqdatabase:27017/${DATABASE_NAME}?authSource=admin
+      - INFLUX_HOST=http://influxdb:8086
       - K6_INFLUXDB_ORGANIZATION=${DOCKER_INFLUXDB_INIT_ORG}
       - K6_INFLUXDB_BUCKET=${DOCKER_INFLUXDB_INIT_BUCKET}
       - K6_INFLUXDB_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+      - DQUALIZER_DQEXEC_INFLUX_URL=http://influxdb:8086
     depends_on:
-      rabbit:
+      dqapi:
         condition: service_healthy
       influxdb:
         condition: service_started
       ddd-autohaus:
         condition: service_started
-
-  dqDatabase:
-    image: mongo
-    container_name: 07_dqdatabase
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    ports:
-      - "${MONGO_PORT}:27017"
     volumes:
-      - ./data:/data
+      - ./docker-output/logging:/app/logs
+      - ./docker-output/scripts:/app/loadtest_configurations
+
+  dqdatabase:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DEMO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DEMO_PASS}
+      MONGO_INITDB_DATABASE: ${DATABASE_NAME}
+    volumes:
+      - dqdatabase:/data
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://${DEMO_USER}:${DEMO_PASS}@localhost:27017/?authSource=admin --quiet
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
+    attach: false
 
   mongo-express:
     image: mongo-express
-    container_name: 08_dqdatabase_management
     restart: always
     ports:
       - "${MONGO_MANAGEMENT_PORT}:8081"
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
-      - ME_CONFIG_MONGODB_URL=mongodb://root:example@dqDatabase:${MONGO_PORT}/
-      - ME_CONFIG_MONGODB_PORT=$MONGO_PORT
-      - ME_CONFIG_MONGODB_SERVER=dqDatabase
+      - ME_CONFIG_BASICAUTH_USERNAME=${DEMO_USER}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${DEMO_PASS}
+      - ME_CONFIG_MONGODB_URL=mongodb://${DEMO_USER}:${DEMO_PASS}@dqdatabase:27017/
+    attach: false
 
   rabbit:
-    image: rabbitmq:3-management
-    container_name: 09_dqrabbit
+    image: rabbitmq:3-management-alpine
     user: rabbitmq
     ports:
-      - "${RABBIT_PORT}:15672"
-      - "${RABBIT_MANAGEMENT_PORT}:5672"
+      - "${RABBIT_MANAGEMENT_PORT}:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${DEMO_USER}
+      - RABBITMQ_DEFAULT_PASS=${DEMO_PASS}
     healthcheck:
       test: rabbitmq-diagnostics check_port_connectivity
       interval: 2s
       timeout: 5s
       retries: 20
       start_period: 5s
+    attach: false
 
   influxdb:
-    image: influxdb:2.7.5
-    container_name: 10_dqinflux
+    image: influxdb:2.7-alpine
     environment:
       - DOCKER_INFLUXDB_INIT_MODE
-      - DOCKER_INFLUXDB_INIT_USERNAME
-      - DOCKER_INFLUXDB_INIT_PASSWORD
+      - DOCKER_INFLUXDB_INIT_USERNAME=${DEMO_USER}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${DEMO_PASS}
       - DOCKER_INFLUXDB_INIT_ORG
       - DOCKER_INFLUXDB_INIT_BUCKET
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
-    ports:
-      - "${INFLUX_PORT}:8086"
+    attach: false
 
   grafana:
-    image: ghcr.io/dqualizer/dqcockpit
-    container_name: 06_dqcockpit
+    image: ghcr.io/dqualizer/dqcockpit:main
     ports:
       - "${GRAFANA_PORT}:3000"
     environment:
       - GF_PANELS_DISABLE_SANITIZE_HTML=TRUE
-      - GF_SECURITY_ADMIN_PASSWORD=demo
+      - GF_SECURITY_ADMIN_PASSWORD=${DEMO_PASS}
       - GF_PATHS_PROVISIONING=/usr/share/grafana/custom/
       - DOCKER_INFLUXDB_INIT_ORG
       - DOCKER_INFLUXDB_INIT_BUCKET
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     depends_on:
       - influxdb
+    attach: false
 
   prometheus:
-    container_name: 11_prometheus
-    image: prom/prometheus:v2.44.0
+    image: prom/prometheus:v2.53.1
     restart: always
     volumes:
       - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
     ports:
       - "${PROMETHEUS_PORT}:9090"
+    attach: false
 
   jaeger:
-    container_name: 12_jaeger
-    image: jaegertracing/all-in-one:1.45
+    image: jaegertracing/all-in-one:1
     restart: always
     ports:
       - "${JAEGER_PORT}:16686"
+    attach: false
 
   otel-collector:
-    container_name: 13_otel_collector
-    image: otel/opentelemetry-collector:0.67.0
+    image: otel/opentelemetry-collector:0.105.0
     restart: always
     command: [ "--config=/etc/otel-collector-config.yaml" ]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml
     ports:
-      - "${OTEL_SELFMETRICS_PORT}:8888"
-      - "${OTEL_METRICS_PORT}:8889" 
       - "${OTEL_HEALTH_PORT}:13133"
     depends_on:
       jaeger:
         condition: service_started
       prometheus:
         condition: service_started
+    attach: false

@@ -34,3 +34,17 @@ build/
 
 ### Documentation
 *.cache
+
+### nix ###
+.devenv
+.direnv
+
+.env
+
+**/.DS_Store
+
+### dqualizer ###
+dqedit/
+dqanalyzer2/
+dqapi
+dqedit/

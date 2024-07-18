@@ -2,6 +2,9 @@ receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
 
 exporters:
   prometheus:
@@ -9,8 +12,8 @@ exporters:
 
   logging:
 
-  jaeger:
-    endpoint: jaeger:14250
+  otlp/jaeger:
+    endpoint: http://jaeger:4317
     tls:
       insecure: true
 
@@ -21,13 +24,17 @@ extensions:
   health_check:
 
 service:
-  extensions: [ health_check ]
+  extensions: [health_check]
   pipelines:
     traces:
-      receivers: [ otlp ]
-      processors: [ batch ]
-      exporters: [ logging, jaeger ]
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, otlp/jaeger]
     metrics:
-      receivers: [ otlp ]
-      processors: [ batch ]
-      exporters: [ logging, prometheus ]
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, prometheus]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]
