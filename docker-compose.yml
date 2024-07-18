@@ -8,7 +8,7 @@ services:
       - "${SAMPLE_APPLICATION_PORT}:9000"
 
   dqanalyzer:
-    image: ghcr.io/dqualizer/dqanalyzer2:nextjs
+    image: ghcr.io/dqualizer/dqanalyzer2:main
     restart: unless-stopped
     ports:
       - "${DQANALYZER_PORT}:3000"
@@ -17,7 +17,7 @@ services:
       - DQTRANSLATOR_HOST=dqtranslator:8080
 
   dqapi:
-    image: ghcr.io/dqualizer/dqapi:kotlin
+    image: ghcr.io/dqualizer/dqapi:main
     restart: unless-stopped
     depends_on:
       dqdatabase:
@@ -32,14 +32,8 @@ services:
       - SPRING_DATA_MONGODB_USERNAME=${DEMO_USER}
       - SPRING_DATA_MONGODB_PASSWORD=${DEMO_PASS}
 
-  # dqEdit:
-  #   image: ghcr.io/dqualizer/dqedit-react:react-dev
-  #   restart: unless-stopped
-  #   ports:
-  #     - "${DQEDIT_PORT}:3000"
-
   dqTranslator:
-    image: ghcr.io/dqualizer/dqtranslator:instrumentation
+    image: ghcr.io/dqualizer/dqtranslator:main
     restart: unless-stopped
     environment:
       - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
@@ -56,7 +50,7 @@ services:
         condition: service_healthy
 
   dqExec:
-    image: ghcr.io/dqualizer/dqexec:instrumentation
+    image: ghcr.io/dqualizer/dqexec:main
     restart: unless-stopped
     environment:
       - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
@@ -86,8 +80,8 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${DEMO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DEMO_PASS}
       MONGO_INITDB_DATABASE: ${DATABASE_NAME}
-    # volumes:
-      # - dqdatabase:/data
+    volumes:
+      - dqdatabase:/data
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh mongodb://${DEMO_USER}:${DEMO_PASS}@localhost:27017/?authSource=admin --quiet
       interval: 5s
@@ -108,7 +102,7 @@ services:
     attach: false
 
   rabbit:
-    image: rabbitmq:3-management
+    image: rabbitmq:3-management-alpine
     user: rabbitmq
     ports:
       - "${RABBIT_MANAGEMENT_PORT}:15672"
@@ -124,7 +118,7 @@ services:
     attach: false
 
   influxdb:
-    image: influxdb:2.7.5
+    image: influxdb:2.7-alpine
     environment:
       - DOCKER_INFLUXDB_INIT_MODE
       - DOCKER_INFLUXDB_INIT_USERNAME=${DEMO_USER}
@@ -135,7 +129,7 @@ services:
     attach: false
 
   grafana:
-    image: ghcr.io/dqualizer/dqcockpit:update-cd
+    image: ghcr.io/dqualizer/dqcockpit:main
     ports:
       - "${GRAFANA_PORT}:3000"
     environment:
@@ -150,7 +144,7 @@ services:
     attach: false
 
   prometheus:
-    image: prom/prometheus:v2.44.0
+    image: prom/prometheus:v2.53.1
     restart: always
     volumes:
       - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
@@ -166,7 +160,7 @@ services:
     attach: false
 
   otel-collector:
-    image: otel/opentelemetry-collector:0.101.0
+    image: otel/opentelemetry-collector:0.105.0
     restart: always
     command: [ "--config=/etc/otel-collector-config.yaml" ]
     volumes:
