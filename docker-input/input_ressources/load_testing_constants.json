@@ -2,34 +2,44 @@
   "accuracy": {
     "repetition": {
       "min": 1,
-      "max": 3
+      "max": 1
     }
   },
-  "load_profile": {
-    "load_peak": {
-      "high": 10,
-      "very_high": 15,
-      "extremely_high": 30,
-      "slow": "20s",
-      "fast": "15s",
-      "very_fast": "10s",
-      "cool_down_duration": "5s"
+  "technical_constants": {
+    "warm_up_duration": 5,
+    "cool_down_duration": 5,
+    "think_time": 5
+  },
+  "symbolics": {
+    "load": {
+      "integer": {
+        "low": 2,
+        "medium": 10,
+        "high": 30,
+        "very_high": 40.0,
+        "extremely_high": 50.0
+      },
+      "decimal": {
+        "low": 2.0,
+        "medium": 10.0,
+        "high": 30.0,
+        "very_high": 40.0,
+        "extremely_high": 50.0
+      },
+      "time_unit": "SECONDS"
     },
-    "load_increase": {
-      "start_target": 10,
-      "end_target": 200,
-      "test_duration": "30s",
-      "stages": 10,
-      "linear": 1,
-      "quadratic": 2,
-      "cubic": 3
-    },
-    "constant_load": {
-      "low": 60,
-      "medium": 20,
-      "high": 30,
-      "min_duration": 1000,
-      "max_duration": 100000
+    "duration": {
+      "integer": {
+        "slow": 30,
+        "fast": 20,
+        "very_fast": 10
+      },
+      "decimal": {
+        "slow": 30.0,
+        "fast": 20.0,
+        "very_fast": 10.0
+      },
+      "time_unit": "SECONDS"
     }
   },
   "response_time": {
