@@ -8,7 +8,7 @@ services:
       - "${SAMPLE_APPLICATION_PORT}:9000"
 
   dqanalyzer:
-    image: ghcr.io/dqualizer/dqanalyzer2:main
+    image: ghcr.io/dqualizer/dqanalyzer2:dqlang4.0
     restart: unless-stopped
     ports:
       - "${DQANALYZER_PORT}:3000"
@@ -17,7 +17,7 @@ services:
       - DQTRANSLATOR_HOST=dqtranslator:8080
 
   dqapi:
-    image: ghcr.io/dqualizer/dqapi:main
+    image: ghcr.io/dqualizer/dqapi:dqlang4.0
     restart: unless-stopped
     depends_on:
       dqdatabase:
@@ -33,7 +33,7 @@ services:
       - SPRING_DATA_MONGODB_PASSWORD=${DEMO_PASS}
 
   dqTranslator:
-    image: ghcr.io/dqualizer/dqtranslator:main
+    image: ghcr.io/dqualizer/dqtranslator:dqlang4.0
     restart: unless-stopped
     environment:
       - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
@@ -50,7 +50,7 @@ services:
         condition: service_healthy
 
   dqExec:
-    image: ghcr.io/dqualizer/dqexec:main
+    image: ghcr.io/dqualizer/dqexec:dqlang4.0
     restart: unless-stopped
     environment:
       - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
@@ -60,7 +60,8 @@ services:
       - K6_INFLUXDB_BUCKET=${DOCKER_INFLUXDB_INIT_BUCKET}
       - K6_INFLUXDB_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
-      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+      #- dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+      - dqualizer.dqexec.docker.localhost_replacement=host.docker.internal
       - DQUALIZER_DQEXEC_INFLUX_URL=http://influxdb:8086
     depends_on:
       dqapi:
@@ -69,9 +70,12 @@ services:
         condition: service_started
       ddd-autohaus:
         condition: service_started
+      mysql:
+        condition: service_started
     volumes:
       - ./docker-output/logging:/app/logs
       - ./docker-output/scripts:/app/loadtest_configurations
+      - ./docker-input/input_ressources:/app/input_ressources
 
   dqdatabase:
     image: mongo
@@ -173,3 +177,20 @@ services:
       prometheus:
         condition: service_started
     attach: false
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+
+    # For real confidentiality define corresponding environment variables in the runtime environment / terminal
+    environment:
+      MYSQL_ROOT_PASSWORD: "aRootPw"  #${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: "authentication"
+      MYSQL_USER: "aDBUser" #${MYSQL_USER}
+      MYSQL_PASSWORD: "aDBPw" #${MYSQL_PASSWORD}
+
+    # For real confidentiality delete the volume and setup dqualizer user manually
+    volumes:
+      - ./docker-input/init.sql:/docker-entrypoint-initdb.d/init.sql
