@@ -5,7 +5,7 @@ maintained on the [organization site](https://github.com/dqualizer).
 
 This repository currently comprises:
 
-* A docker compose project with all dqualizer components as Docker-Images pulled from [ghcr.io](https://github.com/orgs/dqualizer/packages)
+* Two docker compose projects with all dqualizer components as Docker-Images pulled from [ghcr.io](https://github.com/orgs/dqualizer/packages)
 * the arc42 documentation
 
 A more detailed description of this component's architecture is provided in
@@ -31,11 +31,20 @@ the [arc42 document](https://dqualizer.github.io/dqualizer).
 | dqcockpit | admin    | demo     |
 | influxdb  | k6       | telegraf |
 
+## Additional services
+
+To run chaos tests, you also have to start the [dqualizer chaos-toolkit repository](https://github.com/dqualizer/dqualizer-CTK) 
+locally.
+
 ## How to build and run
 ### Docker compose
-* `docker compose up` - attacted to terminal
-* `docker compose up -d` - detatched from terminal
+* `docker compose up` - attached to terminal
+* `docker compose up -d` - detached from terminal
 * `docker compose pull` - pull latest images
+
+### Docker compose (including LeasingNinja)
+* `docker compose -f docker-compose-leasingNinja.yml up` - attached to terminal
+* `docker compose -f docker-compose-leasingNinja.yml up -d` - detached to terminal
 
 ## Local development
 * Clone a dqualizer repo of your choice, e.g. `https://https://github.com/dqualizer/dqapi.git`
