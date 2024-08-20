@@ -1,11 +1,26 @@
 volumes:
   dqdatabase:
+  ocelot-config:
+  agent-vol:
 
 services:
   ddd-autohaus:
     image: ghcr.io/dqualizer/ddd-autohaus:main
     ports:
       - "${SAMPLE_APPLICATION_PORT}:9000"
+    volumes:
+      - ocelot-config:/app/configuration
+      - agent-vol:/agent
+    environment:
+      - INSPECTIT_CONFIG_FILE_BASED_PATH=/app/configuration
+    entrypoint:
+      [
+        "java",
+        "-javaagent:/agent/inspectit-ocelot-agent.jar",
+        "-cp",
+        "app:app/lib/*",
+        "ddd.autohaus.tactical.design.WerkstattauftragApplication",
+      ]
 
   dqanalyzer:
     image: ghcr.io/dqualizer/dqanalyzer2:main
@@ -24,6 +39,8 @@ services:
         condition: service_healthy
       rabbit:
         condition: service_healthy
+    ports:
+      - 8099:8099
     environment:
       - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
       - SPRING_DATA_MONGODB_URI=mongodb://${DEMO_USER}:${DEMO_PASS}@dqdatabase:27017/${DATABASE_NAME}?authSource=admin
@@ -45,12 +62,14 @@ services:
       - DOCKER_INFLUXDB_INIT_ORG
       - DOCKER_INFLUXDB_INIT_BUCKET
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+    ports:
+      - 8080:8080
     depends_on:
       dqapi:
         condition: service_healthy
 
   dqExec:
-    image: ghcr.io/dqualizer/dqexec:main
+    image: ghcr.io/dqualizer/dqexec:feature-monitoring
     restart: unless-stopped
     environment:
       - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
@@ -72,6 +91,7 @@ services:
     volumes:
       - ./docker-output/logging:/app/logs
       - ./docker-output/scripts:/app/loadtest_configurations
+      - ocelot-config:/app/configuration
 
   dqdatabase:
     image: mongo
@@ -89,6 +109,8 @@ services:
       retries: 10
       start_period: 10s
     attach: false
+    ports:
+      - 27017:27017
 
   mongo-express:
     image: mongo-express
@@ -106,6 +128,8 @@ services:
     user: rabbitmq
     ports:
       - "${RABBIT_MANAGEMENT_PORT}:15672"
+      - 5672:5672
+
     environment:
       - RABBITMQ_DEFAULT_USER=${DEMO_USER}
       - RABBITMQ_DEFAULT_PASS=${DEMO_PASS}
@@ -162,7 +186,7 @@ services:
   otel-collector:
     image: otel/opentelemetry-collector:0.105.0
     restart: always
-    command: [ "--config=/etc/otel-collector-config.yaml" ]
+    command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml
     ports:
@@ -173,3 +197,12 @@ services:
       prometheus:
         condition: service_started
     attach: false
+  agent:
+    image: inspectit/inspectit-ocelot-agent:2.6.5
+    container_name: agent
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    volumes:
+      - agent-vol:/agent
