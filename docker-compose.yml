@@ -138,7 +138,7 @@ services:
       - 8086:8086 # expose port for chaos toolkit
 
   grafana:
-    image: ghcr.io/dqualizer/dqcockpit:dqlang4.0
+    image: ghcr.io/dqualizer/dqcockpit:main
     attach: false
     restart: unless-stopped
     ports:
