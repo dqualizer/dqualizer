@@ -13,6 +13,12 @@ services:
       - agent-vol:/agent
     environment:
       - INSPECTIT_CONFIG_FILE_BASED_PATH=/app/configuration
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_PROTOCOL=grpc
     entrypoint:
       [
         "java",
@@ -21,6 +27,9 @@ services:
         "app:app/lib/*",
         "ddd.autohaus.tactical.design.WerkstattauftragApplication",
       ]
+    depends_on:
+      agent:
+        condition: service_started
 
   dqanalyzer:
     image: ghcr.io/dqualizer/dqanalyzer2:main
@@ -79,7 +88,7 @@ services:
       - K6_INFLUXDB_BUCKET=${DOCKER_INFLUXDB_INIT_BUCKET}
       - K6_INFLUXDB_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
-      - dqualizer.dqexec.docker.localhost_replacement=ddd-autohaus
+      - DQUALIZER_DQEXEC_DOCKER_LOCALHOST_REPLACEMENT=host.docker.internal
       - DQUALIZER_DQEXEC_INFLUX_URL=http://influxdb:8086
     depends_on:
       dqapi:
@@ -151,6 +160,8 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     attach: false
+    ports:
+      - "${INFLUX_PORT}:8086"
 
   grafana:
     image: ghcr.io/dqualizer/dqcockpit:main
@@ -184,22 +195,29 @@ services:
     attach: false
 
   otel-collector:
-    image: otel/opentelemetry-collector:0.105.0
+    image: otel/opentelemetry-collector-contrib:0.105.0
     restart: always
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml
     ports:
       - "${OTEL_HEALTH_PORT}:13133"
+    environment:
+      - DOCKER_INFLUXDB_INIT_ORG
+      - DOCKER_INFLUXDB_INIT_BUCKET
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     depends_on:
       jaeger:
         condition: service_started
       prometheus:
         condition: service_started
+      influxdb:
+        condition: service_started
     attach: false
+
   agent:
     image: inspectit/inspectit-ocelot-agent:2.6.5
-    container_name: agent
+    container_name: dqualizer-ocelot-agent
     deploy:
       resources:
         limits:

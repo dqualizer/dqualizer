@@ -9,6 +9,12 @@ receivers:
 exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
+  influxdb:
+    endpoint: "http://influxdb:8086"
+    org: "${DOCKER_INFLUXDB_INIT_ORG}"
+    bucket: "${DOCKER_INFLUXDB_INIT_BUCKET}"
+    token: "${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}"
+    metrics_schema: telegraf-prometheus-v1
 
   logging:
 
@@ -33,7 +39,7 @@ service:
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, prometheus]
+      exporters: [logging, prometheus, influxdb]
     logs:
       receivers: [otlp]
       processors: [batch]
