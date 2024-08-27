@@ -1,6 +1,6 @@
 volumes:
   dqdatabase:
-  ocelot-config:
+  autohaus-ocelot-config:
   agent-vol:
 
 services:
@@ -9,7 +9,7 @@ services:
     ports:
       - "${SAMPLE_APPLICATION_PORT}:9000"
     volumes:
-      - ocelot-config:/app/configuration
+      - autohaus-ocelot-config:/app/configuration
       - agent-vol:/agent
     environment:
       - INSPECTIT_CONFIG_FILE_BASED_PATH=/app/configuration
@@ -19,6 +19,7 @@ services:
       - INSPECTIT_EXPORTERS_TRACING_OTLP_ENABLED=true
       - INSPECTIT_EXPORTERS_TRACING_OTLP_ENDPOINT=http://otel-collector:4317
       - INSPECTIT_EXPORTERS_TRACING_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_SERVICE_NAME=autohaus
     entrypoint:
       [
         "java",
@@ -60,7 +61,7 @@ services:
       # configure absolute process paths of your local machine to enable resilience unavailability-stimulus
 #      - DQUALIZER_WERKSTATT_PROCESS_PATH=<path>
 #      - DQUALIZER_LEASINGNINJA_WEBAPP_PROCESS_PATH=<path>
-#      - DQUALIZER_LEASINGNINJA_RISKAPI_PROCESS_PATH=<path>      
+#      - DQUALIZER_LEASINGNINJA_RISKAPI_PROCESS_PATH=<path>
 
   dqTranslator:
     image: ghcr.io/dqualizer/dqtranslator:main
@@ -82,7 +83,7 @@ services:
         condition: service_healthy
 
   dqExec:
-    image: ghcr.io/dqualizer/dqexec:feature-monitoring
+    image: ghcr.io/dqualizer/dqexec:main
     restart: unless-stopped
     environment:
       - SPRING_RABBITMQ_ADDRESSES=amqp://${DEMO_USER}:${DEMO_PASS}@rabbit:5672
@@ -106,7 +107,7 @@ services:
     volumes:
       - ./docker-output/logging:/app/logs
       - ./docker-output/scripts:/app/loadtest_configurations
-      - ocelot-config:/app/configuration
+      - autohaus-ocelot-config:/app/configuration/autohaus
 
   dqdatabase:
     image: mongo
@@ -143,7 +144,6 @@ services:
     ports:
       - "${RABBIT_MANAGEMENT_PORT}:15672"
       - 5672:5672
-
     environment:
       - RABBITMQ_DEFAULT_USER=${DEMO_USER}
       - RABBITMQ_DEFAULT_PASS=${DEMO_PASS}
@@ -183,6 +183,7 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     depends_on:
       - influxdb
+      - prometheus
 
   prometheus:
     image: prom/prometheus:v2.53.1
@@ -201,7 +202,7 @@ services:
       - "${JAEGER_PORT}:16686"
 
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.105.
+    image: otel/opentelemetry-collector-contrib:0.105.0
     attach: false
     restart: always
     command: ["--config=/etc/otel-collector-config.yaml"]
