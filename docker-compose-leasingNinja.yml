@@ -1,11 +1,38 @@
 volumes:
   dqdatabase:
+  autohaus-ocelot-config:
+  webapp-ocelot-config:
+  riskapi-ocelot-config:
+  agent-vol:
 
 services:
   ddd-autohaus:
     image: ghcr.io/dqualizer/ddd-autohaus:main
     ports:
       - "${SAMPLE_APPLICATION_PORT}:9000"
+    volumes:
+      - autohaus-ocelot-config:/app/configuration
+      - agent-vol:/agent
+    environment:
+      - INSPECTIT_CONFIG_FILE_BASED_PATH=/app/configuration
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_SERVICE_NAME=autohaus
+    entrypoint:
+      [
+        "java",
+        "-javaagent:/agent/inspectit-ocelot-agent.jar",
+        "-cp",
+        "app:app/lib/*",
+        "ddd.autohaus.tactical.design.WerkstattauftragApplication",
+      ]
+    depends_on:
+      agent:
+        condition: service_started
 
   # Note that running leasingNinja in Docker does NOT allow the application of the unavailability stimulus,
   # as the unavailability stimulus was implemented for host system processes
@@ -13,12 +40,60 @@ services:
     image: ghcr.io/dqualizer/leasing-ninja-webapp:resilience_testing
     ports:
       - "7080:7080"
+    volumes:
+      - webapp-ocelot-config:/app/configuration
+      - agent-vol:/agent
+    environment:
+      - INSPECTIT_CONFIG_FILE_BASED_PATH=/app/configuration
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_SERVICE_NAME=leasingNinja-webapp
+    entrypoint:
+      [
+        "java",
+        "-javaagent:/agent/inspectit-ocelot-agent.jar",
+        "-jar",
+        "leasingninja-webapp-0.0.1-SNAPSHOT.jar",
+        "-Dspring-boot.run.jvmArguments=-enableassertions",
+        "-Dspring-boot.run.arguments=--logging.level.io.leasingninja=TRACE"
+      ]
+    depends_on:
+      agent:
+        condition: service_started
 
   # Don't rename this service! It's hardcoded in LeasingNinja-webapp
   leasingNinja-riskapi:
     image: ghcr.io/dqualizer/leasing-ninja-riskapi:resilience_testing
     ports:
       - "7081:7081"
+    volumes:
+      - riskapi-ocelot-config:/app/configuration
+      - agent-vol:/agent
+    environment:
+      - INSPECTIT_CONFIG_FILE_BASED_PATH=/app/configuration
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_METRICS_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENABLED=true
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_ENDPOINT=http://otel-collector:4317
+      - INSPECTIT_EXPORTERS_TRACING_OTLP_PROTOCOL=grpc
+      - INSPECTIT_EXPORTERS_TRACING_SERVICE_NAME=leasingNinja-riskApi
+    entrypoint:
+      [
+        "java",
+        "-javaagent:/agent/inspectit-ocelot-agent.jar",
+        "-jar",
+        "leasingninja-riskApi-0.0.1-SNAPSHOT.jar",
+        "-Dspring-boot.run.jvmArguments=-enableassertions",
+        "-Dspring-boot.run.arguments=--logging.level.io.leasingninja=TRACE"
+      ]
+    depends_on:
+      agent:
+        condition: service_started
 
   dqanalyzer:
     image: ghcr.io/dqualizer/dqanalyzer2:main
@@ -77,7 +152,7 @@ services:
       - K6_INFLUXDB_BUCKET=${DOCKER_INFLUXDB_INIT_BUCKET}
       - K6_INFLUXDB_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
-      - dqualizer.dqexec.docker.localhost_replacement=host.docker.internal
+      - DQUALIZER_DQEXEC_DOCKER_LOCALHOST_REPLACEMENT=host.docker.internal
       - DQUALIZER_DQEXEC_INFLUX_URL=http://influxdb:8086
     depends_on:
       dqapi:
@@ -95,6 +170,9 @@ services:
     volumes:
       - ./docker-output/logging:/app/logs
       - ./docker-output/scripts:/app/loadtest_configurations
+      - autohaus-ocelot-config:/app/configuration/autohaus
+      - webapp-ocelot-config:/app/configuration/leasingNinja-webapp
+      - riskapi-ocelot-config:/app/configuration/leasingNinja-riskApi
 
   dqdatabase:
     image: mongo
@@ -152,7 +230,7 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
     ports:
-      - 8086:8086 # expose port for chaos toolkit
+      - "${INFLUX_PORT}:8086"
 
   grafana:
     image: ghcr.io/dqualizer/dqcockpit:main
@@ -187,7 +265,7 @@ services:
       - "${JAEGER_PORT}:16686"
 
   otel-collector:
-    image: otel/opentelemetry-collector:0.105.0
+    image: otel/opentelemetry-collector-contrib:0.105.0
     attach: false
     restart: unless-stopped
     command: [ "--config=/etc/otel-collector-config.yaml" ]
@@ -200,6 +278,18 @@ services:
         condition: service_started
       prometheus:
         condition: service_started
+      influxdb:
+        condition: service_started
+
+  agent:
+    image: inspectit/inspectit-ocelot-agent:2.6.5
+    container_name: dqualizer-ocelot-agent
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    volumes:
+      - agent-vol:/agent
 
   mysql:
     image: mysql:latest
