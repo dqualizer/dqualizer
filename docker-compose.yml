@@ -204,7 +204,7 @@ services:
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.105.0
     attach: false
-    restart: always
+    restart: unless-stopped
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml
